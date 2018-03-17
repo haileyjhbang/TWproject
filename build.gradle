@@ -28,6 +28,9 @@ dependencies {
 	// lombok
 	compileOnly('org.projectlombok:lombok')
 
+	// log : slf4j
+	compile('org.slf4j:slf4j-api:1.7.25')
+
 	// mvc
 	compile("javax.servlet:jstl")
 	compile("org.apache.tomcat.embed:tomcat-embed-jasper")
