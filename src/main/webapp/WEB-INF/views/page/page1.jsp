@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>주소 검색 / 면적 확인.</title>
+    <title>주소 검색 / 면적 확인</title>
     <style>
         /*면적표시구역*/
         .info {
