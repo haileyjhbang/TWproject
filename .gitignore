@@ -1,6 +1,9 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+out/
+*.class
+bin/
 
 ### STS ###
 .apt_generated
@@ -20,6 +23,8 @@
 nbproject/private/
 build/
 nbbuild/
-dist/
 nbdist/
 .nb-gradle/
+
+### Test Code ###
+src/test/
