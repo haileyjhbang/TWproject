@@ -10,5 +10,7 @@
 <body>
 <a href="/page1">Map... </a>
 <br/>
-<a href="/page2">API... </a>
+<a href="/page2/areaCd/1">API(육지)... </a>
+<br/>
+<a href="/page2/areaCd/9">API(제주)... </a>
 </body>

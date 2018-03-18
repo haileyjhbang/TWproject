@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -32,10 +33,13 @@ public class PageController {
         return "page/page1";
     }
 
-    @GetMapping("/page2")
-    public String page2(Model model) {
+    @GetMapping("/page2/areaCd/{areaCd}")
+    public String page2(
+            @PathVariable String areaCd,
+            Model model
+    ) {
         try {
-            String res = externalAPIService.smp1hToday();
+            String res = externalAPIService.smp1hToday(areaCd);
 
             org.json.JSONObject xmlJSONObj = XML.toJSONObject(res);
             String xmlJSONObjString = xmlJSONObj.toString();
