@@ -35,6 +35,9 @@ dependencies {
 	compile("javax.servlet:jstl")
 	compile("org.apache.tomcat.embed:tomcat-embed-jasper")
 
+	// json
+	compile group: 'org.json', name: 'json', version: '20180130'
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
