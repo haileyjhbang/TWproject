@@ -81,7 +81,7 @@
 <input type="text" id="smpUnit" value="${smpUnit}">smpUnit
 <input type="text" id="recUnit" value="${recUnit}">recUnit
 <input type="text" id="weight" value="${weight}">weight
-<input type="text" id="smpRate" value="${weight}">weight
+<input type="text" id="smpRate" value="${smpRate}">smpRate
 <input type="text" id="smpInclination" value="${smpInclination}">smpInclination
 <input type="text" id="unitPrice" value="${unitPrice}">unitPrice
 <input type="text" id="totalInvestment" value="${totalInvestment}">totalInvestment
@@ -117,16 +117,29 @@
     });
 
     function calculateCostTable() {
-        var total = 0;
+        var duration = 20;
         var annualPower = 0;
-        for (var i = 0; i < 20; i++) {
-            if (i = 0) {
+        var totalAnnualPower = 0;
+        var annualProfit = 0;
+        var totalAnnualProfit = 0;
+        var smpUnit = 0;
+        var maintanence = 0;
+        var tatalMaintanence = 0;
+        for (var i = 0; i < duration; i++) {
+            maintanence = $('#scale').val() * $('#maintanenceUnit').val();
+            tatalMaintanence += maintanence;
+            if (i == 0) {
                 annualPower = $('#scale').val() * $('#powerTime').val() * $('#powerDay').val();
+                totalAnnualPower += annualPower;
+                smpUnit = $('#smpUnit').val() * 1;
+                //(K10+(E4*F4))*B10
+                annualProfit = (smpUnit + ($('#recUnit').val() * $('#weight').val())) * annualPower;
+                totalAnnualProfit += annualProfit;
                 $("#calculateCostTable").append("<tr>" +
                     "<td>" + (i + 1) + "</td>" +
-                    "<td>" + annualPower + "</td>" +
-                    "<td></td>" +
-                    "<td></td>" +
+                    "<td>" + numberWithCommas(annualPower) + "</td>" +
+                    "<td>" + numberWithCommas(annualProfit) + "</td>" +
+                    "<td>" + numberWithCommas(maintanence) + "</td>" +
                     "<td></td>" +
                     "<td></td>" +
                     "<td></td>" +
@@ -135,11 +148,15 @@
                     "</tr>");
             } else {
                 annualPower = annualPower * 0.995;
+                totalAnnualPower += annualPower;
+                smpUnit = smpUnit + (smpUnit * $('#smpRate').val() / 100);
+                annualProfit = (smpUnit + ($('#recUnit').val() * $('#weight').val())) * annualPower;
+                totalAnnualProfit += annualProfit;
                 $("#calculateCostTable").append("<tr>" +
                     "<td>" + (i + 1) + "</td>" +
-                    "<td>" + annualPower + "</td>" +
-                    "<td></td>" +
-                    "<td></td>" +
+                    "<td>" + numberWithCommas(Math.round(annualPower)) + "</td>" +
+                    "<td>" + numberWithCommas(Math.round(annualProfit)) + "</td>" +
+                    "<td>" + numberWithCommas(maintanence) + "</td>" +
                     "<td></td>" +
                     "<td></td>" +
                     "<td></td>" +
@@ -149,9 +166,10 @@
             }
         }
         $("#calculateCostTable").append("<tr>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
+            "<td>연평균</td>" +
+            "<td>" + numberWithCommas(Math.round(totalAnnualPower / duration)) + "</td>" +
+            "<td>" + numberWithCommas(Math.round(totalAnnualProfit / duration)) + "</td>" +
+            "<td>" + numberWithCommas(Math.round(tatalMaintanence / duration)) + "</td>" +
             "<td></td>" +
             "<td></td>" +
             "<td></td>" +
@@ -159,9 +177,10 @@
             "<td></td>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
+            "<td>누계합계</td>" +
+            "<td>" + numberWithCommas(Math.round(totalAnnualPower)) + "</td>" +
+            "<td>" + numberWithCommas(Math.round(totalAnnualProfit)) + "</td>" +
+            "<td>" + numberWithCommas(Math.round(tatalMaintanence)) + "</td>" +
             "<td></td>" +
             "<td></td>" +
             "<td></td>" +
@@ -169,7 +188,7 @@
             "<td></td>" +
             "</tr>");
 
-        $("#calculateCostTable").append("<tr><td colspan='9'></td></tr>");
+        $("#calculateCostTable").append("<tr><td colspan='9'>&nbsp;</td></tr>");
 
 
         $("#calculateCostTable").append("<tr>" +
@@ -184,26 +203,45 @@
             "<th>수익율</th>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
-            "<th>&nbsp;</th>" +
-            "<th>매출액</th>" +
-            "<th>원금상환</th>" +
-            "<th>유지보수비</th>" +
-            "<th>&nbsp;</th>" +
-            "<th>이자</th>" +
-            "<th>&nbsp;</th>" +
-            "<th>순수익</th>" +
-            "<th>수익율</th>" +
+            "<td>1달</td>" +
+            "<td>" + numberWithCommas(Math.round(totalAnnualProfit / duration / 12)) + "</td>" +
+            "<td></td>" +
+            "<td>" + numberWithCommas(Math.round(tatalMaintanence / duration / 12)) + "</td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
-            "<td>" + (i + 1) + "</td>" +
-            "<td colspan='8'>" + i + " test</td>" +
+            "<td>1년</td>" +
+            "<td>" + numberWithCommas(Math.round(totalAnnualProfit / duration)) + "</td>" +
+            "<td></td>" +
+            "<td>" + numberWithCommas(Math.round(tatalMaintanence / duration)) + "</td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
-            "<td>" + (i + 1) + "</td>" +
-            "<td colspan='8'>" + i + " test</td>" +
+            "<td>20년</td>" +
+            "<td>" + numberWithCommas(Math.round(totalAnnualProfit)) + "</td>" +
+            "<td></td>" +
+            "<td>" + numberWithCommas(Math.round(tatalMaintanence)) + "</td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
+            "<td></td>" +
             "</tr>");
-
     }
+
+    function numberWithCommas(cellValue) {
+        if (cellValue == null || cellValue === '' || cellValue === 'undefined') return 0;
+        return cellValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
 </script>
 </body>
 </html>
