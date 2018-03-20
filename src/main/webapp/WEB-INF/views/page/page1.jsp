@@ -19,10 +19,12 @@
             list-style: none;
             margin: 0;
         }
+
         .info:nth-of-type(n) {
             border: 0;
             box-shadow: 0px 1px 2px #888;
         }
+
         .info .label {
             display: inline-block;
             width: 50px;
@@ -38,11 +40,12 @@
         body {
             font-size: 12px;
         }
+
         table {
             text-align: center;
-            width:100%;
-            background: #E7E5E6;
+            width: 100%;
         }
+
         input {
             font-size: 12px;
             text-align: right;
@@ -50,118 +53,153 @@
             margin: 0px;
             padding: 0px;
         }
+
         tr, td {
             padding: 0;
-            margin:0;
-        }
-        .w90 {
-            width:90%;
-            border:none;
+            margin: 0;
             background: #E7E5E6;
         }
+
+        .w80 {
+            width: 100%;
+            height: 100% !important;
+            border: none;
+            background-color: transparent;
+        }
+
+        .changeField {
+            background: yellow !important;
+        }
     </style>
+
 </head>
 <body>
-<input type="hidden" id="sample5_address" placeholder="주소" readonly>
-<input type="hidden" name="sigunguCode" id="sigunguCode">
-<input type="hidden" name="liCode" id="liCode">
-<input type="hidden" name="emdCode" id="emdCode">
-<input type="hidden" name="dongliNm" id="dongliNm">
-<input type="hidden" name="lang" id="lang">
-<input type="hidden" name="long" id="long">
 
-<table>
-    <tr>
-        <td><input type="text" id="address" value="" onclick="sample5_execDaumPostcode()" readonly style="width:100%;text-align: left;"></td>
-        <td width="150px"><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="width:100%;height:24px;text-align: center;"></td>
-    </tr>
-</table>
+<form action="/page2" id="basicValues">
+    <br>
+    <input type="hidden" name="sample5_address" id="sample5_address" placeholder="주소" readonly>
+    <input type="hidden" name="sigunguCode" id="sigunguCode">
+    <input type="hidden" name="liCode" id="liCode">
+    <input type="hidden" name="emdCode" id="emdCode">
+    <input type="hidden" name="dongliNm" id="dongliNm">
+    <input type="hidden" name="lang" id="lang">
+    <input type="hidden" name="long" id="long">
 
-<table>
-    <tr>
-        <td>&nbsp;</td>
-        <td width="150px" align="right">면적 기준 :</td>
-        <td width="200px">
-            <input type="radio" name="type" value="sgg" onclick="getType(this)"> 시/군/구
-            <input type="radio" name="type" value="emd" onclick="getType(this)"> 읍/면/동
-            <input type="radio" name="type" value="li" id="typeLi" onclick="getType(this)"> 리
-        </td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td><input type="text" name="address" id="address" value="" onclick="sample5_execDaumPostcode()" readonly style="width:100%;text-align: left;"></td>
+            <td width="150px"><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="width:100%;height:24px;text-align: center;"></td>
+        </tr>
+    </table>
 
-<br/>
+    <table>
+        <tr>
+            <td>&nbsp;</td>
+            <td width="150px" align="right">면적 기준 :</td>
+            <td width="200px">
+                <input type="radio" name="type" value="sgg" onclick="getType(this)"> 시/군/구
+                <input type="radio" name="type" value="emd" onclick="getType(this)"> 읍/면/동
+                <input type="radio" name="type" value="li" id="typeLi" onclick="getType(this)"> 리
+            </td>
+        </tr>
+    </table>
 
-<div id="map" style="width:100%;height:400px;"></div>
+    <br/>
 
-<br/>
+    <div id="map" style="width:100%;height:400px;"></div>
 
-<table>
-    <tr>
-        <td>&nbsp;</td>
-        <td align="right">행정구역 면적 :</td>
-        <td width="250px">
-            <input text="text" id="polyAreaMiterPeang" style="width:200px">평
-        </td>
-        <td width="250px">
-            <input type="text" id="polyAreaMiter" style="width:200px">㎡
-        </td>
-    </tr>
-    <tr>
-        <td>&nbsp;</td>
-        <td align="right">마우스 선택 면적 :</td>
-        <td>
-            <input text="text" id="polyPathPeang" style="width:200px">평
-        </td>
-        <td>
-            <input type="text" id="polyPathMiter" style="width:200px">㎡
-        </td>
-    </tr>
-</table>
+    <br/>
 
-<br/>
+    <table>
+        <tr>
+            <td>&nbsp;</td>
+            <td align="right">행정구역 면적 :</td>
+            <td width="250px">
+                <input text="text" id="polyAreaMiterPeang" style="width:200px">평
+            </td>
+            <td width="250px">
+                <input type="text" id="polyAreaMiter" style="width:200px">㎡
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td align="right">마우스 선택 면적 :</td>
+            <td>
+                <input text="text" id="polyPathPeang" style="width:200px">평
+            </td>
+            <td>
+                <input type="text" id="polyPathMiter" style="width:200px">㎡
+            </td>
+        </tr>
+    </table>
 
-<table cellspacing="0" cellpadding="0" border="1px">
-    <tr>
-        <th rowspan="5">사업조건</th>
-        <th width="12%">설치용량(kw)</th>
-        <th width="12%">설치단가</th>
-        <th width="12%">총 투자비</th>
-        <th width="12%">금융대출(%)</th>
-        <td width="12%"><input type="text" value="90" class="w90"></td>
-        <th width="24%" colspan="2">자기자본</th>
-    </tr>
-    <tr>
-        <td><input type="text" value="100" class="w90"></td>
-        <td><input type="text" value="1,500,000" class="w90"></td>
-        <td><input type="text" value="150,000,000" class="w90"></td>
-        <td colspan="2"><input type="text" value="135,000,000" class="w90"></td>
-        <td colspan="2"><input type="text" value="150,000,000" class="w90"></td>
-    </tr>
-    <tr>
-        <th rowspan="2">SMP(원)</th>
-        <th rowspan="2">REC(원)</th>
-        <th rowspan="2">가중치</th>
-        <th rowspan="2" colspan="2">이율(%)</th>
-        <th colspan="2">상환조건</th>
-    </tr>
-    <tr>
-        <th width="12%">거치</th>
-        <th width="12%">상환</th>
-    </tr>
-    <tr>
-        <td><input type="text" value="97.00" class="w90"></td>
-        <td><input type="text" value="129.00" class="w90"></td>
-        <td><input type="text" value="1.2" class="w90"></td>
-        <td colspan="2"><input type="text" value="4.7" class="w90"></td>
-        <td><input type="text" value="1" class="w90"></td>
-        <td><input type="text" value="15" class="w90"></td>
-    </tr>
-</table>
+    <br/>
 
+    <table cellspacing="0" cellpadding="0" border="1px">
+        <tr>
+            <th width="5%">설치용량(kw)</th>
+            <th width="5%">발전시간</th>
+            <th width="5%">발전일</th>
+            <th width="5%">SMP단가</th>
+            <th width="5%">REC단가</th>
+            <th width="5%">가중치</th>
+            <th width="5%">SMP상승률(%)</th>
+            <th width="5%">이율(%)</th>
+            <th width="5%">설치단가</th>
+            <th width="5%">총 투자비</th>
+            <th width="5%">자기자본</th>
+            <th colspan="2" width="10%">금융대출(%)</th>
+            <th width="5%">상환기간</th>
+            <th width="5%">유지보수비</th>
+        </tr>
+        <tr>
+            <td class="changeField"><input type="text" name="scale" id="scale" value="100" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="powerTime" value="3.6" class="w80" readonly></td>
+            <td><input type="text" name="powerDay" value="365" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="smpUnit" value="95" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="recUnit" value="115" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="weight" value="1.2" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="smpRate" value="2" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="smpInclination" value="4.7" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000" class="w80" readonly></td>
+            <td><input type="text" name="myCapital" id="myCapital" value="15,000,000" class="w80" readonly></td>
+            <td><input type="text" name="loan" id="loan" value="135,000,000" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="loanPercent" id="loanPercent" value="90" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="repayPeriod" value="15" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="maintanenceUnit" value="12,000" class="w80" readonly></td>
+
+        </tr>
+    </table>
+    </br>
+    <input type="submit" style="width: 100%;text-align: center" value="수익성 계산"/>
+</form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
 <script>
+    $('#basicValues').submit
+
+    ////////////
+    function replaceAllComma(value) {
+        return value.split(',').join('');
+    }
+
+    function numberWithCommas(cellValue) {
+        if (cellValue == null || cellValue === '' || cellValue === 'undefined') return 0;
+        return cellValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function calculateTable() {
+        //총투자비 = 설치용량 * 설치단가
+        $('#totalInvestment').val(numberWithCommas(replaceAllComma($('#scale').val()) * replaceAllComma($('#unitPrice').val())));
+        //자기자본 = 총투자비 - 금융대출
+        $('#loan').val(numberWithCommas(replaceAllComma($('#totalInvestment').val()) * replaceAllComma($('#loanPercent').val()) / 100));
+        //금융대출 = 총투자비 * 대출비율
+        $('#myCapital').val(numberWithCommas(replaceAllComma($('#totalInvestment').val()) - replaceAllComma($('#loan').val())));
+    };
+
+    /////////////
     $('#polyAreaMiter').val("");
     $('#polyAreaMiterPeang').val("");
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -254,7 +292,7 @@
     var url = "";
 
     function getType(that) {
-        if($('#address').val().length > 0)  console.log('Get Polipath'); else return;
+        if ($('#address').val().length > 0) console.log('Get Polipath'); else return;
         var url_gu = 'http://api.vworld.kr/req/data?service=data&version=2.0&request=getfeature&key=' + key + '&format=json&errorformat=json&size=10&page=1&data=LT_C_ADSIGG_INFO&attrfilter=sig_cd%3Alike%3A' + $('#sigunguCode').val() + '&columns=sig_cd%2Cfull_nm%2Csig_kor_nm%2Csig_eng_nm%2Cag_geom&geometry=true&attribute=true&crs=epsg%3A4326&domain=' + domain;
         var url_dong = 'http://api.vworld.kr/req/data?service=data&version=2.0&request=getfeature&key=' + key + '&format=json&errorformat=json&size=10&page=1&data=LT_C_ADEMD_INFO&attrfilter=emdcd%3Alike%3A' + $('#emdCode').val() + '%7Cemd_cd%3Alike%3A' + $('#emdCode').val() + '&columns=emd_cd%2Cfull_nm%2Cemd_kor_nm%2Cemd_eng_nm%2Cag_geom&geometry=true&attribute=true&crs=epsg%3A4326&domain=' + domain;
         var url_li = 'http://api.vworld.kr/req/data?service=data&version=2.0&request=getfeature&key=' + key + '&format=json&errorformat=json&size=10&page=1&data=LT_C_ADRI_INFO&attrfilter=emdcd%3Alike%3A' + $('#emdCode').val() + '%7Cli_cd%3Alike%3A' + $('#liCode').val() + '&columns=li_cd%2Cfull_nm%2Cli_kor_nm%2Cli_eng_nm%2Cag_geom&geometry=true&attribute=true&crs=epsg%3A4326&domain=' + domain;

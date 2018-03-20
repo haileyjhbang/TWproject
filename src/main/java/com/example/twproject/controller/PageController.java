@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -33,8 +34,8 @@ public class PageController {
         return "page/page1";
     }
 
-    @GetMapping("/page2/areaCd/{areaCd}")
-    public String page2(
+    @GetMapping("/smp/areaCd/{areaCd}")
+    public String smp(
             @PathVariable String areaCd,
             Model model
     ) {
@@ -65,6 +66,29 @@ public class PageController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return "page/smp";
+    }
+
+    @GetMapping("/page2")
+    public String page2(
+            HttpServletRequest request,
+            Model model
+    ) {
+        model.addAttribute("scale", request.getParameter("scale").replaceAll(",",""));
+        model.addAttribute("powerTime", request.getParameter("powerTime").replaceAll(",",""));
+        model.addAttribute("powerDay", request.getParameter("powerDay").replaceAll(",",""));
+        model.addAttribute("smpUnit", request.getParameter("smpUnit").replaceAll(",",""));
+        model.addAttribute("recUnit", request.getParameter("recUnit").replaceAll(",",""));
+        model.addAttribute("weight", request.getParameter("weight").replaceAll(",",""));
+        model.addAttribute("smpRate", request.getParameter("smpRate").replaceAll(",",""));
+        model.addAttribute("smpInclination", request.getParameter("smpInclination").replaceAll(",",""));
+        model.addAttribute("unitPrice", request.getParameter("unitPrice").replaceAll(",",""));
+        model.addAttribute("totalInvestment", request.getParameter("totalInvestment").replaceAll(",",""));
+        model.addAttribute("myCapital", request.getParameter("myCapital").replaceAll(",",""));
+        model.addAttribute("loan", request.getParameter("loan").replaceAll(",",""));
+        model.addAttribute("loanPercent", request.getParameter("loanPercent").replaceAll(",",""));
+        model.addAttribute("repayPeriod", request.getParameter("repayPeriod").replaceAll(",",""));
+        model.addAttribute("maintanenceUnit", request.getParameter("maintanenceUnit").replaceAll(",",""));
         return "page/page2";
     }
 }
