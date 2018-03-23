@@ -4,74 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>주소 검색 / 면적 확인</title>
-    <style>
-        /*면적표시구역*/
-        .info {
-            position: relative;
-            top: 5px;
-            left: 5px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            border-bottom: 2px solid #ddd;
-            font-size: 12px;
-            padding: 5px;
-            background: #fff;
-            list-style: none;
-            margin: 0;
-        }
-
-        .info:nth-of-type(n) {
-            border: 0;
-            box-shadow: 0px 1px 2px #888;
-        }
-
-        .info .label {
-            display: inline-block;
-            width: 50px;
-        }
-
-        /*면적표시숫자*/
-        .number {
-            font-weight: bold;
-            color: #00a0e9;
-        }
-
-        /*화면구성*/
-        body {
-            font-size: 12px;
-        }
-
-        table {
-            text-align: center;
-            width: 100%;
-        }
-
-        input {
-            font-size: 12px;
-            text-align: right;
-            height: 20px;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        tr, td {
-            padding: 0;
-            margin: 0;
-            background: #E7E5E6;
-        }
-
-        .w80 {
-            width: 100%;
-            height: 100% !important;
-            border: none;
-            background-color: transparent;
-        }
-
-        .changeField {
-            background: yellow !important;
-        }
-    </style>
-
+    <link rel="stylesheet" href="common.css">
 </head>
 <body>
 
