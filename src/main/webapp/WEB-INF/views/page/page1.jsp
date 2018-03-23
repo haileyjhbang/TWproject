@@ -68,7 +68,7 @@
 
     <br/>
 
-    <table cellspacing="0" cellpadding="0" border="1px">
+    <table>
         <tr>
             <th width="5%">설치용량(kw)</th>
             <th width="5%">효율저감률(%)</th>
@@ -86,7 +86,6 @@
             <th width="5%">자기자본</th>
             <th colspan="2" width="10%">금융대출(%)</th>
             <th width="5%">상환기간</th>
-
         </tr>
         <tr>
             <td class="changeField"><input type="text" name="scale" id="scale" value="100" class="w80" onchange="calculateTable()"></td>
@@ -106,8 +105,6 @@
             <td><input type="text" name="loan" id="loan" value="135,000,000" class="w80" readonly></td>
             <td class="changeField"><input type="text" name="loanPercent" id="loanPercent" value="90" class="w80" onchange="calculateTable()"></td>
             <td class="changeField"><input type="text" name="repayPeriod" value="15" class="w80" onchange="calculateTable()"></td>
-
-
         </tr>
     </table>
     </br>
