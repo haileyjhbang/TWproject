@@ -118,7 +118,7 @@
                     "<td rowspan='2'>" + numberWithCommas(interest) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(leftBalance) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(netIncome) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(profitRate) + "</td>" +
+                    "<td rowspan='2'>" + numberWithCommas(profitRate) + "%</td>" +
                     "</tr>");
                 $("#calculateCostTable").append("<tr>" +
                     "<td>" + numberWithCommas(rec) + "</td>" +

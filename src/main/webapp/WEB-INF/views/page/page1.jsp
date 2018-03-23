@@ -19,7 +19,7 @@
     <input type="hidden" name="long" id="long">
 
     <table>
-        <tr>
+        <tr class="tHead">
             <td><input type="text" name="address" id="address" value="" onclick="sample5_execDaumPostcode()" readonly style="width:100%;text-align: left;"></td>
             <td width="150px"><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="width:100%;height:24px;text-align: center;"></td>
         </tr>
@@ -44,7 +44,7 @@
     <br/>
 
     <table>
-        <tr>
+        <tr class="tHead">
             <td>&nbsp;</td>
             <td align="right">행정구역 면적 :</td>
             <td width="250px">
@@ -54,7 +54,7 @@
                 <input type="text" id="polyAreaMiter" style="width:200px">㎡
             </td>
         </tr>
-        <tr>
+        <tr class="tHead">
             <td>&nbsp;</td>
             <td align="right">마우스 선택 면적 :</td>
             <td>
@@ -69,7 +69,7 @@
     <br/>
 
     <table>
-        <tr>
+        <tr class="tHead">
             <th width="5%">설치용량(kw)</th>
             <th width="5%">효율저감률(%)</th>
             <th width="5%">발전시간</th>
