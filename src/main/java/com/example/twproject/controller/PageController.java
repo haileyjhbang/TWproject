@@ -75,20 +75,23 @@ public class PageController {
             Model model
     ) {
         model.addAttribute("scale", request.getParameter("scale").replaceAll(",",""));
+        model.addAttribute("efficiencyRate", request.getParameter("efficiencyRate").replaceAll(",",""));
         model.addAttribute("powerTime", request.getParameter("powerTime").replaceAll(",",""));
         model.addAttribute("powerDay", request.getParameter("powerDay").replaceAll(",",""));
         model.addAttribute("smpUnit", request.getParameter("smpUnit").replaceAll(",",""));
         model.addAttribute("recUnit", request.getParameter("recUnit").replaceAll(",",""));
         model.addAttribute("weight", request.getParameter("weight").replaceAll(",",""));
         model.addAttribute("smpRate", request.getParameter("smpRate").replaceAll(",",""));
-        model.addAttribute("smpInclination", request.getParameter("smpInclination").replaceAll(",",""));
+        model.addAttribute("insuranceRate", request.getParameter("insuranceRate").replaceAll(",",""));
+        model.addAttribute("maintenanceUnit", request.getParameter("maintenanceUnit").replaceAll(",",""));
+        model.addAttribute("profit", request.getParameter("profit").replaceAll(",",""));
         model.addAttribute("unitPrice", request.getParameter("unitPrice").replaceAll(",",""));
         model.addAttribute("totalInvestment", request.getParameter("totalInvestment").replaceAll(",",""));
         model.addAttribute("myCapital", request.getParameter("myCapital").replaceAll(",",""));
         model.addAttribute("loan", request.getParameter("loan").replaceAll(",",""));
         model.addAttribute("loanPercent", request.getParameter("loanPercent").replaceAll(",",""));
         model.addAttribute("repayPeriod", request.getParameter("repayPeriod").replaceAll(",",""));
-        model.addAttribute("maintanenceUnit", request.getParameter("maintanenceUnit").replaceAll(",",""));
+
         return "page/page2";
     }
 }

@@ -138,36 +138,42 @@
     <table cellspacing="0" cellpadding="0" border="1px">
         <tr>
             <th width="5%">설치용량(kw)</th>
+            <th width="5%">효율저감률(%)</th>
             <th width="5%">발전시간</th>
             <th width="5%">발전일</th>
             <th width="5%">SMP단가</th>
             <th width="5%">REC단가</th>
             <th width="5%">가중치</th>
             <th width="5%">SMP상승률(%)</th>
+            <th width="5%">보험료(%)</th>
+            <th width="5%">유지보수비(%)</th>
             <th width="5%">이율(%)</th>
             <th width="5%">설치단가</th>
             <th width="5%">총 투자비</th>
             <th width="5%">자기자본</th>
             <th colspan="2" width="10%">금융대출(%)</th>
             <th width="5%">상환기간</th>
-            <th width="5%">유지보수비</th>
+
         </tr>
         <tr>
             <td class="changeField"><input type="text" name="scale" id="scale" value="100" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="efficiencyRate" id="efficiencyRate" value="0.50" class="w80" onchange="calculateTable()"></td>
             <td><input type="text" name="powerTime" value="3.6" class="w80" readonly></td>
             <td><input type="text" name="powerDay" value="365" class="w80" readonly></td>
             <td class="changeField"><input type="text" name="smpUnit" value="95" class="w80" onchange="calculateTable()"></td>
             <td class="changeField"><input type="text" name="recUnit" value="115" class="w80" onchange="calculateTable()"></td>
             <td class="changeField"><input type="text" name="weight" value="1.2" class="w80" onchange="calculateTable()"></td>
-            <td><input type="text" name="smpRate" value="2" class="w80" readonly></td>
-            <td class="changeField"><input type="text" name="smpInclination" value="4.7" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="smpRate" value="1" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="insuranceRate" id="insuranceRate" value="0.23" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="maintenanceUnit" value="0.30" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="profit" value="4.1" class="w80" onchange="calculateTable()"></td>
             <td class="changeField"><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" class="w80" onchange="calculateTable()"></td>
             <td><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000" class="w80" readonly></td>
             <td><input type="text" name="myCapital" id="myCapital" value="15,000,000" class="w80" readonly></td>
             <td><input type="text" name="loan" id="loan" value="135,000,000" class="w80" readonly></td>
             <td class="changeField"><input type="text" name="loanPercent" id="loanPercent" value="90" class="w80" onchange="calculateTable()"></td>
             <td class="changeField"><input type="text" name="repayPeriod" value="15" class="w80" onchange="calculateTable()"></td>
-            <td><input type="text" name="maintanenceUnit" value="12,000" class="w80" readonly></td>
+
 
         </tr>
     </table>
