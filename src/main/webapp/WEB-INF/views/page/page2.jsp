@@ -244,11 +244,13 @@
             "</tr>");
     }
 
+    // 천단위 콤마(,) 표시 및 소숫점 이하 반올림 처리
     function numberWithCommas(cellValue) {
         if (cellValue == null || cellValue === '' || cellValue === 'undefined') return 0;
         return Math.round(cellValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    // Value가 0 이하일 경우 0으로 처리
     function checkNumber(value) {
         if (isNaN(value)) return 0; else return value;
     }
