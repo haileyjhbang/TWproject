@@ -74,7 +74,6 @@
 
 </head>
 <body>
-<br>
 <input type="hidden" id="scale" value="${scale}">
 <input type="hidden" id="efficiencyRate" value="${efficiencyRate}">
 <input type="hidden" id="powerTime" value="${powerTime}">
