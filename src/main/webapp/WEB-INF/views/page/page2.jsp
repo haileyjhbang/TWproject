@@ -166,7 +166,7 @@
         $("#calculateCostTable").append("<tr class='tHead'>" +
             "<th>연평균</th>" +
             "<td>" + numberWithCommas(totalAnnualPower / duration) + "</td>" +
-            "<td></td>" +
+            "<td>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
             "<td>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
             "<td>" + numberWithCommas(totalMaintenance / duration) + "</td>" +
             "<td>" + numberWithCommas(totalInsuranceFee / duration) + "</td>" +
@@ -179,7 +179,7 @@
         $("#calculateCostTable").append("<tr class='tHead'>" +
             "<th>누계합계</th>" +
             "<td>" + numberWithCommas(totalAnnualPower) + "</td>" +
-            "<td></td>" +
+            "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
             "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
             "<td>" + numberWithCommas(totalMaintenance) + "</td>" +
             "<td>" + numberWithCommas(totalInsuranceFee) + "</td>" +
