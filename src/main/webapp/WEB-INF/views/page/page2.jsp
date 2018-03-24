@@ -4,74 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>주소 검색 / 면적 확인</title>
-    <style>
-        /*면적표시구역*/
-        .info {
-            position: relative;
-            top: 5px;
-            left: 5px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            border-bottom: 2px solid #ddd;
-            font-size: 12px;
-            padding: 5px;
-            background: #fff;
-            list-style: none;
-            margin: 0;
-        }
-
-        .info:nth-of-type(n) {
-            border: 0;
-            box-shadow: 0px 1px 2px #888;
-        }
-
-        .info .label {
-            display: inline-block;
-            width: 50px;
-        }
-
-        /*면적표시숫자*/
-        .number {
-            font-weight: bold;
-            color: #00a0e9;
-        }
-
-        /*화면구성*/
-        body {
-            font-size: 12px;
-        }
-
-        table {
-            text-align: center;
-            width: 100%;
-        }
-
-        input {
-            font-size: 12px;
-            text-align: right;
-            height: 20px;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        tr, td {
-            padding: 0;
-            margin: 0;
-            background: #E7E5E6;
-        }
-
-        .w80 {
-            width: 100%;
-            height: 100% !important;
-            border: none;
-            background-color: transparent;
-        }
-
-        .changeField {
-            background: yellow !important;
-        }
-    </style>
-
+    <link rel="stylesheet" href="common.css">
 </head>
 <body>
 <input type="hidden" id="scale" value="${scale}">
@@ -92,16 +25,15 @@
 <input type="hidden" id="loanPercent" value="${loanPercent}">
 <input type="hidden" id="repayPeriod" value="${repayPeriod}">
 
-
-<table cellspacing="0" cellpadding="0" border="1px" id="calculateCostTable">
-    <tr>
+<table id="calculateCostTable">
+    <tr class="tHead">
         <th>구분</th>
         <th colspan="3">수입</th>
         <th colspan="4">지출</th>
         <th></th>
         <th colspan="2">수익총계</th>
     </tr>
-    <tr>
+    <tr class="tHead">
         <th rowspan="2">연차</th>
         <th rowspan="2">연간전력생산량</th>
         <th>SMP</th>
@@ -114,7 +46,7 @@
         <th rowspan="2">순수익</th>
         <th rowspan="2">수익률(%)</th>
     </tr>
-    <tr>
+    <tr class="tHead">
         <th>REC</th>
     </tr>
 </table>
@@ -146,11 +78,13 @@
         var repayPeriod2 = repayPeriod;
         var payback = 0;
         var totalPayback = loan;
+        var interestCount = 1;
         var leftBalance = loan;
         var profit = $('#profit').val();
         var interest = 0;
         var totalInterest = 0;
         var netIncome = 0;
+        var totalNetIncome = 0;
         var totalInvestment = $('#totalInvestment').val();
         var profitRate = 0;
 
@@ -171,9 +105,10 @@
                 interest = loan * profit / 100;
                 totalInterest += interest;
                 netIncome = annualProfit - maintenance - interest;
+                totalNetIncome += netIncome;
                 profitRate = netIncome / totalInvestment * 100;
                 $("#calculateCostTable").append("<tr>" +
-                    "<td rowspan='2'>" + (i + 1) + "</td>" +
+                    "<th rowspan='2'>" + (i + 1) + "</th>" +
                     "<td rowspan='2'>" + numberWithCommas(annualPower) + "</td>" +
                     "<td>" + numberWithCommas(smp) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(annualProfit) + "</td>" +
@@ -183,7 +118,7 @@
                     "<td rowspan='2'>" + numberWithCommas(interest) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(leftBalance) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(netIncome) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(profitRate) + "</td>" +
+                    "<td rowspan='2'>" + numberWithCommas(profitRate) + "%</td>" +
                     "</tr>");
                 $("#calculateCostTable").append("<tr>" +
                     "<td>" + numberWithCommas(rec) + "</td>" +
@@ -200,16 +135,18 @@
                 totalMaintenance += maintenance;
                 insuranceFee = annualProfit * insuranceRate / 100 * 12;
                 totalInsuranceFee += insuranceFee;
-                payback = loan / repayPeriod;
-                repayPeriod --;
+                payback = checkNumber(loan / repayPeriod);
+                repayPeriod--;
                 loan -= payback;
                 leftBalance -= payback;
-                interest = (leftBalance + payback) * profit /100;
+                interest = checkNumber((leftBalance + payback) * profit / 100);
                 totalInterest += interest;
+                if (interest > 0) interestCount++;
                 netIncome = annualProfit - maintenance - payback - interest;
+                totalNetIncome += netIncome;
                 profitRate = netIncome / totalInvestment * 100;
                 $("#calculateCostTable").append("<tr>" +
-                    "<td rowspan='2'>" + (i + 1) + "</td>" +
+                    "<th rowspan='2'>" + (i + 1) + "</th>" +
                     "<td rowspan='2'>" + numberWithCommas(annualPower) + "</td>" +
                     "<td>" + numberWithCommas(smp) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(annualProfit) + "</td>" +
@@ -219,44 +156,43 @@
                     "<td rowspan='2'>" + numberWithCommas(interest) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(leftBalance) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(netIncome) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(profitRate) + "</td>" +
+                    "<td rowspan='2'>" + numberWithCommas(profitRate) + "%</td>" +
                     "</tr>");
                 $("#calculateCostTable").append("<tr>" +
                     "<td>" + numberWithCommas(rec) + "</td>" +
                     "</tr>");
             }
         }
-        $("#calculateCostTable").append("<tr>" +
-            "<td>연평균</td>" +
+        $("#calculateCostTable").append("<tr class='tHead'>" +
+            "<th>연평균</th>" +
             "<td>" + numberWithCommas(totalAnnualPower / duration) + "</td>" +
             "<td></td>" +
             "<td>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
             "<td>" + numberWithCommas(totalMaintenance / duration) + "</td>" +
             "<td>" + numberWithCommas(totalInsuranceFee / duration) + "</td>" +
             "<td>" + numberWithCommas(totalPayback / repayPeriod2) + "</td>" +
-            "<td>" + numberWithCommas(0 / duration) + "</td>" +
-            "<td>" + numberWithCommas(0 / duration) + "</td>" +
-            "<td>" + numberWithCommas(0 / duration) + "</td>" +
-            "<td>" + numberWithCommas(0 / duration) + "</td>" +
+            "<td>" + numberWithCommas(totalInterest / interestCount) + "</td>" +
+            "<td></td>" +
+            "<td>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
+            "<td>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) + "%</td>" +
             "</tr>");
-        $("#calculateCostTable").append("<tr>" +
-            "<td>누계합계</td>" +
+        $("#calculateCostTable").append("<tr class='tHead'>" +
+            "<th>누계합계</th>" +
             "<td>" + numberWithCommas(totalAnnualPower) + "</td>" +
             "<td></td>" +
             "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
             "<td>" + numberWithCommas(totalMaintenance) + "</td>" +
             "<td>" + numberWithCommas(totalInsuranceFee) + "</td>" +
             "<td>" + numberWithCommas(totalPayback) + "</td>" +
-            "<td>" + numberWithCommas(0) + "</td>" +
-            "<td>" + numberWithCommas(0) + "</td>" +
-            "<td>" + numberWithCommas(0) + "</td>" +
-            "<td>" + numberWithCommas(0) + "</td>" +
+            "<td>" + numberWithCommas(totalInterest) + "</td>" +
+            "<td></td>" +
+            "<td>" + numberWithCommas(totalNetIncome) + "</td>" +
+            "<td></td>" +
             "</tr>");
 
         $("#calculateCostTable").append("<tr><td colspan='11'>&nbsp;</td></tr>");
 
-
-        $("#calculateCostTable").append("<tr>" +
+        $("#calculateCostTable").append("<tr class='tHead'>" +
             "<th>&nbsp;</th>" +
             "<th>매출액</th>" +
             "<th>원금상환</th>" +
@@ -270,50 +206,52 @@
             "<th>수익율</th>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
-            "<td>1달</td>" +
-            "<td>" + numberWithCommas(0 / duration / 12) + "</td>" +
-            "<td>" + numberWithCommas(0 / duration / 12) + "</td>" +
+            "<th>1달</th>" +
+            "<td>" + numberWithCommas(totalAnnualProfit / duration / 12) + "</td>" +
+            "<td>" + numberWithCommas(totalPayback / duration / 12) + "</td>" +
             "<td></td>" +
+            "<td>" + numberWithCommas(totalMaintenance / duration / 12) + "</td>" +
+            "<td>" + numberWithCommas(totalInsuranceFee / duration / 12) + "</td>" +
             "<td></td>" +
+            "<td>" + numberWithCommas(totalInterest / duration / 12) + "</td>" +
             "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td rowspan='3'>%</td>" +
+            "<td>" + numberWithCommas(totalNetIncome / duration / 12) + "</td>" +
+            "<td rowspan='3'>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) +"%</td>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
-            "<td>1년</td>" +
-            "<td>" + numberWithCommas(0 / duration) + "</td>" +
-            "<td>" + numberWithCommas(0 / duration) + "</td>" +
+            "<th>1년</th>" +
+            "<td>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
+            "<td>" + numberWithCommas(totalPayback / duration) + "</td>" +
             "<td></td>" +
+            "<td>" + numberWithCommas(totalMaintenance / duration) + "</td>" +
+            "<td>" + numberWithCommas(totalInsuranceFee / duration) + "</td>" +
             "<td></td>" +
+            "<td>" + numberWithCommas(totalInterest / duration) + "</td>" +
             "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
+            "<td>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
-            "<td>20년</td>" +
-            "<td>" + numberWithCommas(0) + "</td>" +
-            "<td>" + numberWithCommas(0) + "</td>" +
+            "<th>20년</th>" +
+            "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
+            "<td>" + numberWithCommas(totalPayback) + "</td>" +
             "<td></td>" +
+            "<td>" + numberWithCommas(totalMaintenance) + "</td>" +
+            "<td>" + numberWithCommas(totalInsuranceFee) + "</td>" +
             "<td></td>" +
+            "<td>" + numberWithCommas(totalInterest) + "</td>" +
             "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
-            "<td></td>" +
+            "<td>" + numberWithCommas(totalNetIncome) + "</td>" +
             "</tr>");
     }
 
     function numberWithCommas(cellValue) {
-        if (cellValue == null || cellValue === '' || cellValue === 'undefined' || isNaN(cellValue) ) return 0;
-        cellValue = Math.round(cellValue);
-        return cellValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        if (cellValue == null || cellValue === '' || cellValue === 'undefined') return 0;
+        return Math.round(cellValue).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
+    function checkNumber(value) {
+        if (isNaN(value)) return 0; else return value;
+    }
 </script>
 </body>
 </html>

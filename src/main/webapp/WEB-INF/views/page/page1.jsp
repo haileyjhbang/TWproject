@@ -4,74 +4,7 @@
 <head>
     <meta charset="utf-8">
     <title>주소 검색 / 면적 확인</title>
-    <style>
-        /*면적표시구역*/
-        .info {
-            position: relative;
-            top: 5px;
-            left: 5px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            border-bottom: 2px solid #ddd;
-            font-size: 12px;
-            padding: 5px;
-            background: #fff;
-            list-style: none;
-            margin: 0;
-        }
-
-        .info:nth-of-type(n) {
-            border: 0;
-            box-shadow: 0px 1px 2px #888;
-        }
-
-        .info .label {
-            display: inline-block;
-            width: 50px;
-        }
-
-        /*면적표시숫자*/
-        .number {
-            font-weight: bold;
-            color: #00a0e9;
-        }
-
-        /*화면구성*/
-        body {
-            font-size: 12px;
-        }
-
-        table {
-            text-align: center;
-            width: 100%;
-        }
-
-        input {
-            font-size: 12px;
-            text-align: right;
-            height: 20px;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        tr, td {
-            padding: 0;
-            margin: 0;
-            background: #E7E5E6;
-        }
-
-        .w80 {
-            width: 100%;
-            height: 100% !important;
-            border: none;
-            background-color: transparent;
-        }
-
-        .changeField {
-            background: yellow !important;
-        }
-    </style>
-
+    <link rel="stylesheet" href="common.css">
 </head>
 <body>
 
@@ -86,7 +19,7 @@
     <input type="hidden" name="long" id="long">
 
     <table>
-        <tr>
+        <tr class="tHead">
             <td><input type="text" name="address" id="address" value="" onclick="sample5_execDaumPostcode()" readonly style="width:100%;text-align: left;"></td>
             <td width="150px"><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="width:100%;height:24px;text-align: center;"></td>
         </tr>
@@ -111,7 +44,7 @@
     <br/>
 
     <table>
-        <tr>
+        <tr class="tHead">
             <td>&nbsp;</td>
             <td align="right">행정구역 면적 :</td>
             <td width="250px">
@@ -121,7 +54,7 @@
                 <input type="text" id="polyAreaMiter" style="width:200px">㎡
             </td>
         </tr>
-        <tr>
+        <tr class="tHead">
             <td>&nbsp;</td>
             <td align="right">마우스 선택 면적 :</td>
             <td>
@@ -135,8 +68,8 @@
 
     <br/>
 
-    <table cellspacing="0" cellpadding="0" border="1px">
-        <tr>
+    <table>
+        <tr class="tHead">
             <th width="5%">설치용량(kw)</th>
             <th width="5%">효율저감률(%)</th>
             <th width="5%">발전시간</th>
@@ -153,7 +86,6 @@
             <th width="5%">자기자본</th>
             <th colspan="2" width="10%">금융대출(%)</th>
             <th width="5%">상환기간</th>
-
         </tr>
         <tr>
             <td class="changeField"><input type="text" name="scale" id="scale" value="100" class="w80" onchange="calculateTable()"></td>
@@ -173,8 +105,6 @@
             <td><input type="text" name="loan" id="loan" value="135,000,000" class="w80" readonly></td>
             <td class="changeField"><input type="text" name="loanPercent" id="loanPercent" value="90" class="w80" onchange="calculateTable()"></td>
             <td class="changeField"><input type="text" name="repayPeriod" value="15" class="w80" onchange="calculateTable()"></td>
-
-
         </tr>
     </table>
     </br>
