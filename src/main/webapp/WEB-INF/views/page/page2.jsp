@@ -367,10 +367,32 @@
                 }]
             },
             "options": {
+                tooltips: {
+                    mode: 'label',
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            return tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }, },
+                },
                 "scales": {
+                    "xAxes":[{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '연차(년)'
+                        }
+                    }],
                     "yAxes": [{
-                        "ticks": {
-                            "beginAtZero": true
+                        scaleLabel: {
+                            display: true,
+                            labelString: '매출액(원)'
+                        },
+                        ticks: {
+                            beginAtZero:true,
+                            userCallback: function(value, index, values) {
+                                value = value.toString();
+                                value = value.split(/(?=(?:...)*$)/);
+                                value = value.join(',');
+                                return value;
+                            }
                         }
                     }]
                 }
