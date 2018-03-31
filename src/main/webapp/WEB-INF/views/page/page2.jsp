@@ -46,7 +46,7 @@
     </tr>
 </table>
 <br/>
-<button type="button" onclick="culationBasis(this.value)" value="show">산출근거</button>
+<button type="button" onclick="calculationBasis(this.value)" value="show">산출근거</button>
 <button type="button" onclick="window.print()">인쇄하기</button>
 <p/>
 
@@ -95,20 +95,13 @@
         var centerLat = 0;
         var centerLng = 0;
         var polygonPath = new Array();
-        //(37.530985606308725, 126.9218906440176),(37.52319607757935, 126.91483979084819),(37.52414702559075, 126.93701141290298)
-        // var drawingPolygonData = $('#drawingPolygon').val().split(' ').join('').split('(').join('').split(')').join('').split(',');
-        // $.each(drawingPolygonData, function (i) {
-        //     console.log(drawingPolygonData[i].toString());
-        // });
         var drawingPolygonData = $('#drawingPolygon').val().split('),(');
         var point;
         $.each(drawingPolygonData, function (i) {
             point = drawingPolygonData[i].split(' ').join('').split('(').join('').split(')').join('').split(',');
 
-            var centerLatTemp = point[0]*1;
-            var centerLngTemp = point[1]*1;
-
-            polygonPath[i] = new daum.maps.LatLng(centerLatTemp, centerLngTemp);
+            // 다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다
+            polygonPath[i] = new daum.maps.LatLng(point[0]*1, point[1]*1);
 
             centerLat += point[0]*1;
             centerLng += point[1]*1;
@@ -119,7 +112,6 @@
 
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
-                // center: new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
                 center: new daum.maps.LatLng(centerLat, centerLng), // 지도의 중심좌표
                 level: 6 // 지도의 확대 레벨
             };
@@ -127,18 +119,9 @@
         //지도를 미리 생성
         var map = new daum.maps.Map(mapContainer, mapOption);
 
-        // 다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다
-        // var polygonPath = [
-        //     new daum.maps.LatLng(33.45133510810506, 126.57159381623066),
-        //     new daum.maps.LatLng(33.44955812811862, 126.5713551811832),
-        //     new daum.maps.LatLng(33.449986291544086, 126.57263296172184),
-        //     new daum.maps.LatLng(33.450682513554554, 126.57321034054742),
-        //     new daum.maps.LatLng(33.451346760004206, 126.57235740081413)
-        // ];
-
         // 지도에 표시할 다각형을 생성합니다
         var polygon = new daum.maps.Polygon({
-            path:polygonPath, // 그려질 다각형의 좌표 배열입니다
+            path: polygonPath, // 그려질 다각형의 좌표 배열입니다
             strokeWeight: 2, // 선의 두께입니다
             strokeColor: '#39DE2A', // 선의 색깔입니다
             strokeOpacity: 0.8, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
@@ -358,7 +341,7 @@
         if (isNaN(value)) return 0; else return value;
     }
 
-    function culationBasis(type) {
+    function calculationBasis(type) {
         $('#calculateCostTable').toggle();
     }
 
