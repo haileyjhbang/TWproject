@@ -17,6 +17,7 @@
     <input type="hidden" name="dongliNm" id="dongliNm">
     <input type="hidden" name="lang" id="lang">
     <input type="hidden" name="long" id="long">
+    <input type="hidden" name="drawingPolygon" id="drawingPolygon" value="">
 
     <table>
         <tr class="tHead">
@@ -388,7 +389,8 @@
                 drawingPolygon = null;
                 // 클릭된 죄표로 그릴 다각형의 좌표배열을 얻어옵니다
                 var path = polygon.getPath();
-                // 다각형을 구성하는 좌표의 개수가 3개 이상이면
+                // 다각형을 구성하는 좌표의 개수가 3개 이상 이면
+                getDrawingPolygon(path);
                 if (path.length > 2) {
                     // 지도에 다각형을 표시합니다
                     polygon.setMap(map);
@@ -414,6 +416,11 @@
                 drawingFlag = false;
             }
         });
+    }
+
+    // 다각형 지도의 포인트 위치 가져오기
+    function getDrawingPolygon(polygonPath) {
+        $('#drawingPolygon').val(polygonPath);
     }
 </script>
 </body>

@@ -91,6 +91,7 @@ public class PageController {
         model.addAttribute("loan", request.getParameter("loan").replaceAll(",",""));
         model.addAttribute("loanPercent", request.getParameter("loanPercent").replaceAll(",",""));
         model.addAttribute("repayPeriod", request.getParameter("repayPeriod").replaceAll(",",""));
+        model.addAttribute("drawingPolygon", request.getParameter("drawingPolygon"));
 
         return "page/page2";
     }

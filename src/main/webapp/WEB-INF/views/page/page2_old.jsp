@@ -24,31 +24,8 @@
 <input type="hidden" id="loan" value="${loan}">
 <input type="hidden" id="loanPercent" value="${loanPercent}">
 <input type="hidden" id="repayPeriod" value="${repayPeriod}">
-<input type="hidden" id="drawingPolygon" value="${drawingPolygon}">
 
-<table class="layoutTable">
-    <tr>
-        <td rowspan="2" width="200px">
-            월평균 수익 : <input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly> <br/>
-            년평균 수익 : <input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly> <br/>
-            평균 수익율 : <input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly>%
-        </td>
-        <td>
-            지도 그리기
-        </td>
-    </tr>
-    <tr>
-        <td>
-            그래프 그리기
-        </td>
-    </tr>
-</table>
-<br/>
-<button type="button" onclick="culationBasis(this.value)" value="show">산출근거</button>
-<button type="button" onclick="window.print()">인쇄하기</button>
-<p/>
-
-<table id="calculateCostTable" style="display:none ">
+<table id="calculateCostTable">
     <tr class="tHead">
         <th>구분</th>
         <th colspan="3">수입</th>
@@ -73,8 +50,6 @@
         <th>REC</th>
     </tr>
 </table>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -241,10 +216,8 @@
             "<td>" + numberWithCommas(totalInterest / duration / 12) + "</td>" +
             "<td></td>" +
             "<td>" + numberWithCommas(totalNetIncome / duration / 12) + "</td>" +
-            "<td rowspan='3'>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) + "%</td>" +
+            "<td rowspan='3'>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) +"%</td>" +
             "</tr>");
-        $('#netIncomeMonthDisplay').val(numberWithCommas(totalNetIncome / duration / 12));
-        $('#netIncomeRaiteDisplay').val(numberWithCommas(totalNetIncome / duration / totalInvestment * 100));
         $("#calculateCostTable").append("<tr>" +
             "<th>1년</th>" +
             "<td>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
@@ -257,7 +230,6 @@
             "<td></td>" +
             "<td>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
             "</tr>");
-        $('#netIncomeYearDisplay').val(numberWithCommas(totalNetIncome / duration));
         $("#calculateCostTable").append("<tr>" +
             "<th>20년</th>" +
             "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
@@ -282,11 +254,6 @@
     function checkNumber(value) {
         if (isNaN(value)) return 0; else return value;
     }
-
-    function culationBasis(type) {
-        $('#calculateCostTable').toggle();
-    }
-
 </script>
 </body>
 </html>
