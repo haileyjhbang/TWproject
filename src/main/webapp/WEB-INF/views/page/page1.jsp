@@ -108,7 +108,7 @@
         </tr>
     </table>
     </br>
-    <input type="submit" style="width: 100%;text-align: center" value="수익성 계산"/>
+    <input type="button" id="nextPage" style="width: 100%;text-align: center" value="수익성 계산"/>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -418,6 +418,14 @@
     function getDrawingPolygon(polygonPath) {
         $('#drawingPolygon').val(polygonPath);
     }
+
+    $( "#nextPage" ).click(function() {
+        if(!$('#drawingPolygon').val()) {
+            alert( "What?" );
+            return;
+        }
+        $( "#basicValues" ).submit();
+    });
 </script>
 </body>
 </html>

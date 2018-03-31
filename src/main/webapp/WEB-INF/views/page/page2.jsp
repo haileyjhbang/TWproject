@@ -92,6 +92,8 @@
     });
 
     function setMap() {
+        if(!$('#drawingPolygon').val()) $('#drawingPolygon').val('(36.503296, 127.271260)');
+
         var centerLat = 0;
         var centerLng = 0;
         var polygonPath = new Array();
