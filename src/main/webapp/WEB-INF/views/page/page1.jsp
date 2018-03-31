@@ -9,7 +9,6 @@
 <body>
 
 <form action="/page2" id="basicValues">
-    <br>
     <input type="hidden" name="sample5_address" id="sample5_address" placeholder="주소" readonly>
     <input type="hidden" name="sigunguCode" id="sigunguCode">
     <input type="hidden" name="liCode" id="liCode">
@@ -115,9 +114,6 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
 <script>
-    $('#basicValues').submit
-
-    ////////////
     function replaceAllComma(value) {
         return value.split(',').join('');
     }

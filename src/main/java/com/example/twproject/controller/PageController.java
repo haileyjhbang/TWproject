@@ -74,6 +74,9 @@ public class PageController {
             HttpServletRequest request,
             Model model
     ) {
+        model.addAttribute("apiKeyDaum", "e12af9afb1526adcd0f898407bb25bfb");
+        model.addAttribute("apiKeyVworld", "E60BEDC5-C3EE-3B5F-98D5-9166F94EB492");
+
         model.addAttribute("scale", request.getParameter("scale").replaceAll(",",""));
         model.addAttribute("efficiencyRate", request.getParameter("efficiencyRate").replaceAll(",",""));
         model.addAttribute("powerTime", request.getParameter("powerTime").replaceAll(",",""));

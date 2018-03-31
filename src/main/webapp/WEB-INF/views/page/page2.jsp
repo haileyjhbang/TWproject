@@ -28,18 +28,22 @@
 
 <table class="layoutTable">
     <tr>
-        <td rowspan="2" width="200px">
+        <td rowspan="2" width="220px">
             월평균 수익 : <input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly> <br/>
             년평균 수익 : <input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly> <br/>
             평균 수익율 : <input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly>%
         </td>
         <td>
-            지도 그리기
+            <br/>
+            <div id="map" ></div>
+            <br/>
         </td>
     </tr>
     <tr>
         <td>
-            그래프 그리기
+            <div class="chartjs-wrapper">
+                <canvas id="myChart"></canvas>
+            </div>
         </td>
     </tr>
 </table>
@@ -76,10 +80,37 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
 <script>
+    var labels = new Array();
+    var barDataset = new Array();
+    var lineDataset = new Array();
+
     $(document).ready(function () {
         calculateCostTable();
+        drawChart();
+        setMap();
     });
+    function setMap() {
+        var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+            mapOption = {
+                center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+                level: 6 // 지도의 확대 레벨
+            };
+
+        //지도를 미리 생성
+        var map = new daum.maps.Map(mapContainer, mapOption);
+        //마커를 미리 생성
+        var marker = new daum.maps.Marker({
+            //       position: new daum.maps.LatLng(37.537187, 127.005476),
+            map: map
+        });
+        marker.setMap(map);
+        // 지도를 보여준다.
+        mapContainer.style.display = "block";
+        map.relayout();
+    }
 
     function calculateCostTable() {
         var duration = 20;
@@ -114,6 +145,7 @@
         var profitRate = 0;
 
         for (var i = 0; i < duration; i++) {
+            labels[i] = i + 1;
             if (i == 0) {
                 annualPower = $('#scale').val() * $('#powerTime').val() * $('#powerDay').val();
                 totalAnnualPower += annualPower;
@@ -148,6 +180,8 @@
                 $("#calculateCostTable").append("<tr>" +
                     "<td>" + numberWithCommas(rec) + "</td>" +
                     "</tr>");
+                barDataset[i] = Math.round(netIncome);
+                lineDataset[i] = Math.round(annualProfit);
             } else {
                 annualPower = annualPower * 0.995;
                 totalAnnualPower += annualPower;
@@ -186,6 +220,8 @@
                 $("#calculateCostTable").append("<tr>" +
                     "<td>" + numberWithCommas(rec) + "</td>" +
                     "</tr>");
+                barDataset[i] = Math.round(netIncome);
+                lineDataset[i] = Math.round(annualProfit);
             }
         }
         $("#calculateCostTable").append("<tr class='tHead'>" +
@@ -287,6 +323,36 @@
         $('#calculateCostTable').toggle();
     }
 
+    // 그래프
+    function drawChart() {
+        new Chart($("#myChart"), {
+            "type": "bar",
+            "data": {
+                "labels": labels, // x-axis
+                "datasets": [{
+                    "label": "수익률",
+                    "data": barDataset,
+                    "borderColor": "rgb(255, 99, 132)",
+                    "backgroundColor": "rgba(255, 99, 132, 0.2)"
+                }, {
+                    "label": "수익(매출액)",
+                    "data": lineDataset,
+                    "type": "line",
+                    "fill": false,
+                    "borderColor": "rgb(54, 162, 235)"
+                }]
+            },
+            "options": {
+                "scales": {
+                    "yAxes": [{
+                        "ticks": {
+                            "beginAtZero": true
+                        }
+                    }]
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
