@@ -3,12 +3,14 @@ package com.example.twproject.controller;
 import com.example.twproject.Service.ExternalAPIService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 import org.json.XML;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -34,16 +36,25 @@ public class PageController {
         return "page/page1";
     }
 
-    @GetMapping("/smp/areaCd/{areaCd}")
-    public String smp(
-            @PathVariable String areaCd,
-            Model model
-    ) {
+    @GetMapping("/smp")
+    public String smp(Model model) {
         try {
-            String res = externalAPIService.smp1hToday(areaCd);
+            String resLand = externalAPIService.smp1hToday("1");
+            String resJeju = externalAPIService.smp1hToday("9");
 
-            org.json.JSONObject xmlJSONObj = XML.toJSONObject(res);
-            String xmlJSONObjString = xmlJSONObj.toString();
+            System.out.println("externalAPIService.smp1hToday: " + resLand);
+            System.out.println("externalAPIService.smp1hToday: " + resJeju);
+
+            JSONObject xmlJSONObjLand;
+            JSONObject xmlJSONObjJeju;
+            try {
+                xmlJSONObjLand = XML.toJSONObject(resLand);
+                xmlJSONObjJeju = XML.toJSONObject(resJeju);
+            } catch (Exception e) {
+                return "redirect:smp";
+            }
+
+        /*    String xmlJSONObjString = xmlJSONObj.toString();
 
             ObjectMapper objectMapper = new ObjectMapper();
             Map<String, Object> map = new HashMap<>();
@@ -56,20 +67,21 @@ public class PageController {
 
             items = (Map<String, Object>) body.get("items");
             itemList = (List<Map<String, Object>>) items.get("item");
-
+*/
 //            System.out.println("### dataResponse=" + dataResponse);
 //            System.out.println("### body=" + body);
 //            System.out.println("### items=" + items);
 //            System.out.println("### itemList=" + itemList);
 
-            model.addAttribute("model", itemList);
+            model.addAttribute("modelJeju", formatSmp(xmlJSONObjJeju));
+            model.addAttribute("modelLand", formatSmp(xmlJSONObjLand));
         } catch (IOException e) {
             e.printStackTrace();
         }
         return "page/smp";
     }
 
-    @GetMapping("/page2")
+    @PostMapping("/page2")
     public String page2(
             HttpServletRequest request,
             Model model
@@ -98,4 +110,28 @@ public class PageController {
 
         return "page/page2";
     }
+
+    static List<Map<String, Object>> formatSmp(JSONObject json){
+        List<Map<String, Object>> itemList = null;
+        try{
+       //     org.json.JSONObject xmlJSONObj = XML.toJSONObject(json);
+            String xmlJSONObjString = json.toString();
+
+            ObjectMapper objectMapper = new ObjectMapper();
+            Map<String, Object> map = new HashMap<>();
+            map = objectMapper.readValue(xmlJSONObjString, new TypeReference<Map<String, Object>>() {
+            });
+            Map<String, Object> dataResponse = (Map<String, Object>) map.get("response");
+            Map<String, Object> body = (Map<String, Object>) dataResponse.get("body");
+            Map<String, Object> items = null;
+
+            items = (Map<String, Object>) body.get("items");
+            itemList = (List<Map<String, Object>>) items.get("item");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    return itemList;
+
+    }
+
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form action="/page2" id="basicValues">
+<form action="/page2" id="basicValues" method="post">
     <input type="hidden" name="sample5_address" id="sample5_address" placeholder="주소" readonly>
     <input type="hidden" name="sigunguCode" id="sigunguCode">
     <input type="hidden" name="liCode" id="liCode">
@@ -244,9 +244,9 @@
         }
         getArea();
     }
-
+    var polygonPath = new Array();
     function getArea() {
-        var polygonPath = new Array();
+       // var polygonPath = new Array();
         $.ajax({
             type: 'GET',
             url: url,
@@ -420,9 +420,13 @@
     }
 
     $( "#nextPage" ).click(function() {
-        if(!$('#drawingPolygon').val()) {
-            alert( "What?" );
+        if(polygonPath.length == 0){
+            alert( "구역을 선택해주세요." );
             return;
+        }
+        if(!$('#drawingPolygon').val()) {
+            console.log(polygonPath);
+            $('#drawingPolygon').val(polygonPath);
         }
         $( "#basicValues" ).submit();
     });

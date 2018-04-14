@@ -204,8 +204,8 @@
                 $("#calculateCostTable").append("<tr>" +
                     "<td>" + numberWithCommas(rec) + "</td>" +
                     "</tr>");
-                barDataset[i] = Math.round(netIncome);
-                lineDataset[i] = Math.round(annualProfit);
+                barDataset[i] = Math.round(netIncome); //순수익
+                lineDataset[i] = Math.round(annualProfit); //연수익
             } else {
                 annualPower = annualPower * 0.995;
                 totalAnnualPower += annualPower;
@@ -354,12 +354,12 @@
             "data": {
                 "labels": labels, // x-axis
                 "datasets": [{
-                    "label": "수익률",
+                    "label": "순수익",
                     "data": barDataset,
                     "borderColor": "rgb(255, 99, 132)",
                     "backgroundColor": "rgba(255, 99, 132, 0.2)"
                 }, {
-                    "label": "수익(매출액)",
+                    "label": "연수익",
                     "data": lineDataset,
                     "type": "line",
                     "fill": false,
