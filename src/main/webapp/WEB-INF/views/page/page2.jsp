@@ -7,47 +7,135 @@
     <link rel="stylesheet" href="common.css">
 </head>
 <body>
-<input type="hidden" id="scale" value="${scale}">
-<input type="hidden" id="efficiencyRate" value="${efficiencyRate}">
+
 <input type="hidden" id="powerTime" value="${powerTime}">
 <input type="hidden" id="powerDay" value="${powerDay}">
 <input type="hidden" id="smpUnit" value="${smpUnit}">
 <input type="hidden" id="recUnit" value="${recUnit}">
 <input type="hidden" id="weight" value="${weight}">
 <input type="hidden" id="smpRate" value="${smpRate}">
-<input type="hidden" id="insuranceRate" value="${insuranceRate}">
 <input type="hidden" id="maintenanceUnit" value="${maintenanceUnit}">
 <input type="hidden" id="profit" value="${profit}">
-<input type="hidden" id="unitPrice" value="${unitPrice}">
 <input type="hidden" id="totalInvestment" value="${totalInvestment}">
-<input type="hidden" id="myCapital" value="${myCapital}">
-<input type="hidden" id="loan" value="${loan}">
-<input type="hidden" id="loanPercent" value="${loanPercent}">
 <input type="hidden" id="repayPeriod" value="${repayPeriod}">
 <input type="hidden" id="drawingPolygon" value="${drawingPolygon}">
 
-<table class="layoutTable">
-    <tr>
-        <td rowspan="2" width="220px">
-            월평균 수익 : <input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly> <br/>
-            년평균 수익 : <input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly> <br/>
-            평균 수익율 : <input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly>%
-        </td>
-        <td>
-            <div id="map" style="width:100%;height:400px;"></div>
-        </td>
-    </tr>
-    <tr>
-        <td>
+ <div id="map" style="width:1200px;height:400px;"></div>
+    
+      <div class="contents">
+    <div class="contents1">
+    <div class="areamp">
+    <ul>
+        <li>지번구역 면적</li>
+        <li><input text="text" id="polyAreaMiterPeang" value="${polyAreaMiterPeang}">평</li>
+        <li><input type="text" id="polyAreaMiter" value="${polyAreaMiter}">㎡</li>
+    </ul>
+     
+    <ul>
+        <li>마우스 선택 면적</li>
+        <li><input text="text" id="polyPathPeang" value="${polyPathPeang}">평</li>
+        <li><input type="text" id="polyPathMiter" value="${polyPathMiter}">㎡</li>
+    </ul></div>
+    
+    <div >
+    <ul class="field00">
+        <li>설치용량(kw)</li>
+        <li><input type="text" name="scale" id="scale" value="${scale}" readonly>kw</li>
+    </ul></div>
+
+    <div>
+    <span class="field02">자금조건</span>
+       <ul class="field01"><li>총투자비</li>
+           <li><input type="text" name="myCapital" id="myCapital" value="${myCapital}" readonly>원</li></ul>
+        <ul class="field01">
+            <li>자기자본</li>
+            <li><input type="text" name="loan" id="loan" value="${loan}">원</li></ul>
+        <ul class="field01">
+            <li>금융대출</li>
+            <li><input type="text" name="loanPercent" id="loanPercent" value="${loanPercent}" readonly">%</li></ul>
+        <ul class="field01">
+            <li>이율</li>
+            <li><input type="text" name="unitPrice" id="unitPrice" value="${unitPrice}" readonly>%</li></ul>
+        <ul class="field01">
+            <li>상환기간</li>
+            <li><input type="text" name="repayPeriod" value="15" onchange="calculateTable()">년</li></ul>
+    </div>
+
+    </div>
+
+    <div class="contents2">
+    <div>
+        <span class="field02">발전조건</span>
+        <ul class="field01">
+            <li>일평균 발전시간</li>
+            <li><input type="text" name="powerTime" value="3.6" readonly="">시간</li>
+        </ul>
+
+        <ul class="field01">
+            <li>연간 효율저장률</li>
+            <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}" readonly>%</li>
+        </ul>
+        <ul class="field01">
+            <li>SMP단가</li>
+            <li><input type="text" name="smpUnit" value="95" onchange="calculateTable()">원</li>
+        </ul>
+        <ul class="field01">
+            <li>SMP상승률</li>
+            <li><input type="text" name="smpRate" value="1" readonly="">%</li>
+        </ul>
+        <ul class="field01">
+            <li>REC단가</li>
+            <li><input type="text" name="recUnit" value="115" onchange="calculateTable()">원</li>
+        </ul>
+        <ul class="field01">
+            <li>가중치</li>
+            <li><input type="text" name="weight" value="1.2" onchange="calculateTable()">배</li>
+        </ul>
+
+
+        </div>
+    <div>
+        <span class="field02">지출비용</span>
+        <ul class="field01">
+            <li>보험료</li>
+            <li><input type="text" name="insuranceRate" id="insuranceRate" value="${insuranceRate}">%</li>
+        </ul>
+        <ul class="field01">
+            <li>유지보수비</li>
+            <li><input type="text" name="maintenanceUnit" value="0.30" readonly="">%</li>
+        </ul>
+        
+        </div>
+    </div>
+    
+    </div>
+
+<div class="layoutTable">
+  <div class="content3">
+   <div class="income"> 
+     <ul class="field03">  
+      <li>월평균 수익</li><li><input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly="">원</li></ul>
+      <ul class="field03">  <li>년평균 수익</li><li><input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly=""> 원</li></ul>
+      <ul class="field03">  <li>평균 수익율</li><li><input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly="">% </li></ul>
+   </div>     
+  <div class="incomebutton">    
+   <div class="buttonshow">
+       <button type="button" onclick="calculationBasis(this.value)" value="show">산출근거</button>
+    </div>
+    <div class="buttonprint">
+        <button type="button" onclick="window.print()">인쇄하기</button>
+    </div>
+    </div>
+   </div>
+    
+        
             <div class="chartjs-wrapper">
                 <canvas id="myChart"></canvas>
             </div>
-        </td>
-    </tr>
-</table>
+    </div> 
+           
 <br/>
-<button type="button" onclick="calculationBasis(this.value)" value="show">산출근거</button>
-<button type="button" onclick="window.print()">인쇄하기</button>
+
 <p/>
 
 <table id="calculateCostTable" style="display:none ">
@@ -153,7 +241,7 @@
         var insuranceRate = $('#insuranceRate').val();
         var insuranceFee = 0;
         var totalInsuranceFee = 0;
-        var loan = $('#loan').val();
+        var loan = replaceAllComma($('#loan').val());
         var repayPeriod = $('#repayPeriod').val();
         var repayPeriod2 = repayPeriod;
         var payback = 0;
@@ -171,7 +259,7 @@
         for (var i = 0; i < duration; i++) {
             labels[i] = i + 1;
             if (i == 0) {
-                annualPower = $('#scale').val() * $('#powerTime').val() * $('#powerDay').val();
+                annualPower = replaceAllComma($('#scale').val()) * $('#powerTime').val() * $('#powerDay').val();
                 totalAnnualPower += annualPower;
                 smpUnit = $('#smpUnit').val() * 1;
                 smp = annualPower * smpUnit;
@@ -303,7 +391,7 @@
             "<td>" + numberWithCommas(totalNetIncome / duration / 12) + "</td>" +
             "<td rowspan='3'>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) + "%</td>" +
             "</tr>");
-        $('#netIncomeMonthDisplay').val(numberWithCommas(totalNetIncome / duration / 12));
+        $('#netIncomeMonthDisplay').val(numberWithCommas(Math.floor(totalNetIncome / duration / 12 / 1000) * 1000));
         $('#netIncomeRaiteDisplay').val(numberWithCommas(totalNetIncome / duration / totalInvestment * 100));
         $("#calculateCostTable").append("<tr>" +
             "<th>1년</th>" +
@@ -317,7 +405,7 @@
             "<td></td>" +
             "<td>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
             "</tr>");
-        $('#netIncomeYearDisplay').val(numberWithCommas(totalNetIncome / duration));
+        $('#netIncomeYearDisplay').val(numberWithCommas(Math.floor(totalNetIncome / duration / 1000) * 1000 ));
         $("#calculateCostTable").append("<tr>" +
             "<th>20년</th>" +
             "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
@@ -330,6 +418,10 @@
             "<td></td>" +
             "<td>" + numberWithCommas(totalNetIncome) + "</td>" +
             "</tr>");
+    }
+
+    function replaceAllComma(value) {
+        return value.split(',').join('');
     }
 
     // 천단위 콤마(,) 표시 및 소숫점 이하 반올림 처리

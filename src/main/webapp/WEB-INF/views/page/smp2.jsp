@@ -102,14 +102,16 @@
 
             <fmt:parseDate pattern="yyyyMMdd" value="${modelJeju[0].tradeDay}" var="date"/></li>
     </ul></div>
-
-    
-    <div class="smp">
+  <div class="smp">
     <ul>       
         <li class="todaysmp">오늘의 SMP</li>    
-        <ul class="data"><li class="title1">육지</li> <li class="data1">${meanLand}</li></ul>
-        <ul class="data"><li class="title2">제주</li> <li class="data2">${meanJeju}</li></ul>
+        <li class="day"><fmt:formatDate pattern="yyyy/MM/dd" value="${date}"/></li>
+           <ul class="data">
+        <li class="title1">육지</li> <li class="data1">${meanLand}</li>
+            <li class="title2">제주</li> <li class="data2">${meanJeju}</li></ul>
+        
     </ul></div>
-
+    
+   
 </body>
 </html>

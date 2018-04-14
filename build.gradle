@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '2.0.0.RELEASE'
+		springBootVersion = '1.4.2.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -10,14 +10,22 @@ buildscript {
 	}
 }
 
+apply plugin: 'idea'
 apply plugin: 'java'
-apply plugin: 'eclipse'
+//apply plugin: 'eclipse'
+apply plugin: 'eclipse-wtp'
+apply plugin: 'war'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = 1.7
+
+war {
+	baseName = 'tw'
+	version='0.0.1-SNAPSHOT'
+}
 
 repositories {
 	mavenCentral()
@@ -25,6 +33,9 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
 	// lombok
 	compileOnly('org.projectlombok:lombok')
 
@@ -38,10 +49,16 @@ dependencies {
 	// json
 	compile group: 'org.json', name: 'json', version: '20180130'
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	
+	
+	
+	
+	
 }
 
 task init {
 	def webappDir = "$rootDir/src/main/webapp"
 	file(webappDir + "/WEB-INF/views").mkdirs()
 }
+
+

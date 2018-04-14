@@ -8,140 +8,107 @@
 </head>
 <body>
 
-<form action="./page2" id="basicValues" method="post">
-    <input type="hidden" name="sample5_address" id="sample5_address">
+<form action="/page2" id="basicValues" method="post">
+    <input type="hidden" name="sample5_address" id="sample5_address" placeholder="주소" readonly>
     <input type="hidden" name="sigunguCode" id="sigunguCode">
     <input type="hidden" name="liCode" id="liCode">
     <input type="hidden" name="emdCode" id="emdCode">
     <input type="hidden" name="dongliNm" id="dongliNm">
     <input type="hidden" name="lang" id="lang">
     <input type="hidden" name="long" id="long">
-    <input type="hidden" name="drawingPolygon" id="drawingPolygon">
-    <input type="hidden" name="powerDay" value="365">
-    <input type="hidden" name="profit" value="4.1" onchange="calculateTable()">
-    <input type="hidden" name="totalInvestment" id="totalInvestment" value="150,000,000">
+    <input type="hidden" name="drawingPolygon" id="drawingPolygon" value="">
 
-    <div class="top">
-        <div class="area">
-            <div id="inputtext">
-                <input type="text" name="address" id="address" value="" onclick="sample5_execDaumPostcode()" readonly=""></div>
-            <div id="inputbutton">
-                <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"></div>
-        </div>
+    <table>
+        <tr class="tHead">
+            <td><input type="text" name="address" id="address" value="" onclick="sample5_execDaumPostcode()" readonly style="width:100%;text-align: left;"></td>
+            <td width="150px"><input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색" style="width:100%;height:24px;text-align: center;"></td>
+        </tr>
+    </table>
 
-        <div class="area2">
-            <div id="areatitle">면적기준</div>
-            <div id="arearadio">
+    <table>
+        <tr>
+            <td>&nbsp;</td>
+            <td width="150px" align="right">면적 기준 :</td>
+            <td width="200px">
                 <input type="radio" name="type" value="sgg" onclick="getType(this)"> 시/군/구
                 <input type="radio" name="type" value="emd" onclick="getType(this)"> 읍/면/동
                 <input type="radio" name="type" value="li" id="typeLi" onclick="getType(this)"> 리
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+    </table>
 
     <br/>
 
-    <div id="map" style="width:1200px;height:400px;"></div>
+    <div id="map" style="width:100%;height:400px;"></div>
 
     <br/>
 
-    <div class="contents">
-        <div class="contents1">
-            <div class="areamp">
-                <ul>
-                    <li>지번구역 면적</li>
-                    <li><input text="text" id="polyAreaMiterPeang" name="polyAreaMiterPeang">평</li>
-                    <li><input type="text" id="polyAreaMiter" name="polyAreaMiter">㎡</li>
-                </ul>
+    <table>
+        <tr class="tHead">
+            <td>&nbsp;</td>
+            <td align="right">행정구역 면적 :</td>
+            <td width="250px">
+                <input text="text" id="polyAreaMiterPeang" style="width:200px">평
+            </td>
+            <td width="250px">
+                <input type="text" id="polyAreaMiter" style="width:200px">㎡
+            </td>
+        </tr>
+        <tr class="tHead">
+            <td>&nbsp;</td>
+            <td align="right">마우스 선택 면적 :</td>
+            <td>
+                <input text="text" id="polyPathPeang" style="width:200px">평
+            </td>
+            <td>
+                <input type="text" id="polyPathMiter" style="width:200px">㎡
+            </td>
+        </tr>
+    </table>
 
-                <ul>
-                    <li>마우스 선택 면적</li>
-                    <li><input text="text" id="polyPathPeang" name="polyPathPeang">평</li>
-                    <li><input type="text" id="polyPathMiter" name="polyPathMiter">㎡</li>
-                </ul>
-            </div>
+    <br/>
 
-            <div>
-                <ul class="field00">
-                    <li>설치용량</li>
-                    <li><input type="text" name="scale" id="scale" value="100" readonly>kw</li>
-                </ul>
-            </div>
-
-            <div>
-                <span class="field02">자금조건</span>
-                <ul class="field01">
-                    <li>총투자비</li>
-                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000" readonly="">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>자기자본</li>
-                    <li><input type="text" name="loan" id="loan" value="135,000,000" readonly="">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>금융대출</li>
-                    <li><input type="text" name="loanPercent" id="loanPercent" value="90" onchange="calculateTable()">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>이율</li>
-                    <li><input type="text" name="unitPrice" id="unitPrice" value="4.7" onchange="calculateTable()">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>상환기간</li>
-                    <li><input type="text" name="repayPeriod" value="15" onchange="calculateTable()">년</li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="contents2">
-            <div>
-                <span class="field02">발전조건</span>
-                <ul class="field01">
-                    <li>일평균 발전시간</li>
-                    <li><input type="text" name="powerTime" value="3.6" readonly="">시간</li>
-                </ul>
-
-                <ul class="field01">
-                    <li>연간 효율저장률</li>
-                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="0.50" onchange="calculateTable()">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>SMP단가</li>
-                    <li><input type="text" name="smpUnit" value="95" onchange="calculateTable()">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>SMP상승률</li>
-                    <li><input type="text" name="smpRate" value="1" readonly="">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>REC단가</li>
-                    <li><input type="text" name="recUnit" value="115" onchange="calculateTable()">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>가중치</li>
-                    <li><input type="text" name="weight" value="1.5" onchange="calculateTable()">배</li>
-                </ul>
-
-
-            </div>
-            <div>
-                <span class="field02">지출비용</span>
-                <ul class="field01">
-                    <li>보험료</li>
-                    <li><input type="text" name="insuranceRate" id="insuranceRate" value="0.23" onchange="calculateTable()">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>유지보수비</li>
-                    <li><input type="text" name="maintenanceUnit" value="0.30" readonly="">%</li>
-                </ul>
-
-            </div>
-        </div>
-
-        <div class="nextpage"><input type="button" id="nextPage" value="수익성 계산"></div>
-    </div>
-
+    <table>
+        <tr class="tHead">
+            <th width="5%">설치용량(kw)</th>
+            <th width="5%">효율저감률(%)</th>
+            <th width="5%">발전시간</th>
+            <th width="5%">발전일</th>
+            <th width="5%">SMP단가</th>
+            <th width="5%">REC단가</th>
+            <th width="5%">가중치</th>
+            <th width="5%">SMP상승률(%)</th>
+            <th width="5%">보험료(%)</th>
+            <th width="5%">유지보수비(%)</th>
+            <th width="5%">이율(%)</th>
+            <th width="5%">설치단가</th>
+            <th width="5%">총 투자비</th>
+            <th width="5%">자기자본</th>
+            <th colspan="2" width="10%">금융대출(%)</th>
+            <th width="5%">상환기간</th>
+        </tr>
+        <tr>
+            <td class="changeField"><input type="text" name="scale" id="scale" value="100" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="efficiencyRate" id="efficiencyRate" value="0.50" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="powerTime" value="3.6" class="w80" readonly></td>
+            <td><input type="text" name="powerDay" value="365" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="smpUnit" value="95" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="recUnit" value="115" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="weight" value="1.2" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="smpRate" value="1" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="insuranceRate" id="insuranceRate" value="0.23" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="maintenanceUnit" value="0.30" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="profit" value="4.1" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" class="w80" onchange="calculateTable()"></td>
+            <td><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000" class="w80" readonly></td>
+            <td><input type="text" name="myCapital" id="myCapital" value="15,000,000" class="w80" readonly></td>
+            <td><input type="text" name="loan" id="loan" value="135,000,000" class="w80" readonly></td>
+            <td class="changeField"><input type="text" name="loanPercent" id="loanPercent" value="90" class="w80" onchange="calculateTable()"></td>
+            <td class="changeField"><input type="text" name="repayPeriod" value="15" class="w80" onchange="calculateTable()"></td>
+        </tr>
+    </table>
+    </br>
+    <input type="button" id="nextPage" style="width: 100%;text-align: center" value="수익성 계산"/>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -165,17 +132,6 @@
         $('#myCapital').val(numberWithCommas(replaceAllComma($('#totalInvestment').val()) - replaceAllComma($('#loan').val())));
     };
 
-    function calculateScale() {
-        //설치용량 계산
-        var scale = 0;
-        if(replaceAllComma($('#polyPathPeang').val()) > 0 ) {
-            scale = Math.round(replaceAllComma($('#polyPathPeang').val()) / 5);  //마우스(평) polyPathPeang
-        } else {
-            scale = Math.round(replaceAllComma($('#polyAreaMiterPeang').val()) / 5); //지역(평) polyAreaMiterPeang
-        }
-        $('#scale').val(numberWithCommas(scale));
-    }
-
     /////////////
     $('#polyAreaMiter').val("");
     $('#polyAreaMiterPeang').val("");
@@ -194,7 +150,6 @@
         //       position: new daum.maps.LatLng(37.537187, 127.005476),
         map: map
     });
-    initPolygonPath(map);
 
     function sample5_execDaumPostcode() {
         new daum.Postcode({
@@ -289,9 +244,9 @@
         }
         getArea();
     }
-
+    var polygonPath = new Array();
     function getArea() {
-        var polygonPath = new Array();
+       // var polygonPath = new Array();
         $.ajax({
             type: 'GET',
             url: url,
@@ -318,15 +273,10 @@
                 });
                 // 지도에 다각형을 표시합니다
                 polygon.setMap(map);
-                getDrawingPolygon(polygon.getPath());
-                //마우스 면적 초기화
-                $('#polyPathMiter').val('');
-                $('#polyPathPeang').val('');
                 //면적계산
                 var area = Math.round(polygon.getArea()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 다각형의 총면적을 계산합니다
                 $('#polyAreaMiter').val(area);
                 $('#polyAreaMiterPeang').val((Math.round(polygon.getArea() * 30.25) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                calculateScale();
                 initPolygonPath(map);
             },
             cache: false,
@@ -446,7 +396,6 @@
                     content = '<div class="info">총면적 <span class="number"> ' + polyPathMiter + '</span> m<sup>2</sup> / <span class="number"> ' + polyPathPeang + '</span>평</div>'; // 커스텀오버레이에 추가될 내용입니다
                     $('#polyPathMiter').val(polyPathMiter);
                     $('#polyPathPeang').val(polyPathPeang);
-                    calculateScale();
                     // 면적정보를 지도에 표시합니다
                     areaOverlay = new daum.maps.CustomOverlay({
                         map: map, // 커스텀오버레이를 표시할 지도입니다
@@ -470,12 +419,16 @@
         $('#drawingPolygon').val(polygonPath);
     }
 
-    $("#nextPage").click(function () {
-        //if(!$('#drawingPolygon').val()) {
-        //    alert( "마우스로 구역을 선택해주세요." );
-        //    return;
-        //}
-        $("#basicValues").submit();
+    $( ".nextPage" ).click(function() {
+        if(polygonPath.length == 0){
+            alert( "구역을 선택해주세요." );
+            return;
+        }
+        if(!$('#drawingPolygon').val()) {
+            console.log(polygonPath);
+            $('#drawingPolygon').val(polygonPath);
+        }
+        $( "#basicValues" ).submit();
     });
 </script>
 </body>

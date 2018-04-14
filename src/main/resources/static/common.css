@@ -1,5 +1,6 @@
 @charset "utf-8";
 /*면적표시구역*/
+
 .info {
     position: relative;
     top: 5px;
@@ -50,12 +51,6 @@ table {
     border-top: 1px solid black;
 }
 
-input {
-    text-align: right;
-    height: 20px;
-    margin: 0px;
-    padding: 0px;
-}
 
 tr:hover {
     background: lightgrey;
@@ -70,12 +65,7 @@ td, th {
     border-bottom: 1px solid lightgray;
 }
 
-.w80 {
-    width: 100%;
-    height: 100% !important;
-    border: none;
-    background-color: transparent;
-}
+
 
 .wDisplay {
     width: 100px;
@@ -84,9 +74,7 @@ td, th {
     background-color: transparent;
 }
 
-.changeField {
-    background: yellow !important;
-}
+
 
 table.layoutTable td {
     text-align: left;
@@ -101,3 +89,67 @@ table.layoutTable td {
 .chartjs-wrapper {
 
 }
+
+url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+ul, li, input { font-family: 'Nanum Gothic', sans-serif; list-style: none; border-style: none;}
+*{font-size: 14px;color: #505050;}
+#map {width: 1200px ;}
+ul {padding: 0;}
+form .top{width: 1200px; height: 50px; margin: 15px 0 5px 0 ; }
+.area {display: block; float: left; width: 52%; height:40px;  }
+#inputtext input {display: block; float: left; width: 60%; height: 40px; border-radius: 5px 0 0 5px; border: 1px solid #a0a0a0; padding: 10px;
+    box-sizing: border-box;}
+#inputbutton input {display: block; float: left; width: 30%; height: 40px; background-color:#113359; color: #fff; 
+    border-radius:0 5px 5px 0 ; border: 1px solid #113359 ; text-align:center;}
+.area2 {display: block; float: right; width: 45%; height:40px; border: 1px solid #a0a0a0 ; border-radius: 5px; }
+
+#areatitle {display: block; float: left; width: 130px; height: 40px; line-height: 40px; text-align: center; background-color:#dedede; }
+#arearadio { height: 40px; line-height: 40px;}
+#arearadio input{margin-left: 40px;}
+#map {width: 1220px; height: 400px; position: relative; overflow: hidden; background: url(&quot;http://i1.daumcdn.net/dmaps/apis/loading_n.png&quot;);}
+.contents  {width: 1200px; height:600px; background:#f5f5f5;   border-top: 2px solid #7d7d7d ; }
+.contents1 {width: 49%; display: block; float: left; padding-left: 20px; height: 500px;}
+.contents1 .areamp { width: 100%; height: 100px; font-weight: 600;}
+.contents1 .areamp li {display:block;  float: left; padding-bottom: 5px;}
+.contents1 .areamp li:first-child {width: 150px; margin-left: -5px; }
+.contents1 .areamp li:first-child:before {content: "|"; font-weight: bold; font-size: 20px; color:#00a0e9; padding-right: 5px;}
+.contents1 .areamp li {margin: 0 10px;}
+.contents1 .areamp ul input {text-align: right; width: 140px; height: 34px; border: 1px solid #00a0e9 ; border-radius: 5px; box-sizing: border-box;
+    padding: 5px;}
+.contents1 .field00 {border: 1px solid #a0a0a0 ; border-radius: 5px; width: 500px; height: 30px; background: #e8f1fe; }
+.contents1 .field01 , .contents2 .field01 {border: 1px solid #a0a0a0 ; border-radius: 5px; width: 500px; height: 30px; background: #fff; }
+.contents1 .field01 li:nth-child(1) ,.contents2 .field01 li:nth-child(1),.contents1 .field00 li:nth-child(1) {display: block; float: left; margin-left: 10px; height: 30px; margin-top: 5px; }
+.contents1 .field01 li:nth-child(2) ,.contents2 .field01 li:nth-child(2),.contents1 .field00 li:nth-child(2) {display: block; float: right; margin-right: 10px; height: 30px; margin-top: 5px; }
+.contents1 .field01 input,.contents2 .field01 input ,.contents1 .field00 input { border: none; text-align:right; background:none;}
+.contents1 .field02, .contents2 .field02 {display: block; border-bottom: 2px solid #7d7d7d ; height: 25px; width: 500px; font-weight: 600; }
+
+.contents2{width: 49%; height: 500px; display: block; float:right; margin-top: 10px;}
+.nextpage {width: 300px; height: 40px;margin: 0px auto;}
+.nextpage input {width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#113359; color: #fff;  display: block; border-style: none;}
+
+
+.hidden {display: none;}
+.smp{ width: 225px; height: 63px;
+background: -webkit-linear-gradient(28deg, rgb(0, 111, 182), rgb(74, 165, 77));
+background: linear-gradient(28deg, rgb(0, 111, 182), rgb(74, 165, 77)); border: 2px solid #fff; border-radius: 5px; box-sizing: border-box;overflow: hidden;
+ }
+.smp ul {margin: 0;}
+.smp li {color: #fff; font-family: 'Nanum Gothic', sans-serif; }
+        .smp ul .todaysmp {font-weight: 600; width: 102px; height: 61px;  text-align: center; line-height: 61px; border-right: 1px solid #fff; }
+        .smp ul .data {width: 120px; height: 31px; border-bottom: 1px solid #fff; text-align: center; line-height: 31px; position: relative; top: -63px; left: 103px;}
+        
+        .smp ul .title1,.smp ul .title2 {height: 30px; line-height: 30px; text-align: left; display: block; float: left; margin-left: 5px;}
+        .smp ul .data1,.smp ul .data2 {height: 30px; line-height: 30px; text-align: right; display: block; float: right; margin-right: 5px;}
+   
+.layoutTable {width: 1200px; background:#f5f5f5;  border-bottom: 2px solid #7d7d7d ; display: block;position: relative; top: -130px;}
+.layoutTable .content3 {width:800px; margin: 0 auto; }
+.content3 {height: 200px;}
+.income {display: block; float: left; }
+.income .field03 { margin: 5px 0 ; border: 1px solid #a0a0a0 ; border-radius: 5px; width: 400px; height: 30px; background: #e8f1fe;}
+.income .field03 li:nth-child(1) {display: block; float: left; margin-left: 10px; height: 30px; margin-top: 5px; }
+.income .field03 li:nth-child(2) {display: block; float: right; margin-right: 10px; height: 30px; margin-top: 5px; }
+.income .field03 input { border: none; text-align:right; background:none; }
+
+.incomebutton {display: block; float: left; width: 300px; height:85px; margin: 20px 20px; }
+.incomebutton .buttonshow button {width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#39587a; color: #fff; border-style: none; margin-bottom: 5px;}
+.incomebutton .buttonprint button {width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#76965f; color: #fff; border-style: none;}

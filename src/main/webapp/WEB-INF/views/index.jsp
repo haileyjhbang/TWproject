@@ -8,8 +8,8 @@
     </style>
 </head>
 <body>
-<a href="/page1">Map... </a>
+<a href="./page1">Map... </a>
 <br/>
-<a href="/smp">SMP... </a>
+<a href="./smp">SMP... </a>
 <br/>
 </body>
