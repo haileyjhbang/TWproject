@@ -108,10 +108,10 @@ public class PageController {
         model.addAttribute("repayPeriod", request.getParameter("repayPeriod").replaceAll(",",""));
         model.addAttribute("drawingPolygon", request.getParameter("drawingPolygon"));
 
-        model.addAttribute("polyAreaMiterPeang", request.getParameter("polyAreaMiterPeang"));
-        model.addAttribute("polyAreaMiter", request.getParameter("polyAreaMiter"));
+        model.addAttribute("polyAreaMeterPeang", request.getParameter("polyAreaMeterPeang"));
+        model.addAttribute("polyAreaMeter", request.getParameter("polyAreaMeter"));
         model.addAttribute("polyPathPeang", request.getParameter("polyPathPeang"));
-        model.addAttribute("polyPathMiter", request.getParameter("polyPathMiter"));
+        model.addAttribute("polyPathMeter", request.getParameter("polyPathMeter"));
 
         model.addAttribute("address", request.getParameter("address"));
         model.addAttribute("type", request.getParameter("type"));

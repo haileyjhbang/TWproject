@@ -48,14 +48,14 @@
             <div class="areamp">
                 <ul>
                     <li>지번구역 면적</li>
-                    <li><input text="text" id="polyAreaMiterPeang" name="polyAreaMiterPeang" value="" onkeyup="calculatePolyAreaMiterPeang(this)">평</li>
-                    <li><input type="text" id="polyAreaMiter" name="polyAreaMiter" value="" onkeyup="calculatePolyAreaMiter(this)">㎡</li>
+                    <li><input text="text" id="polyAreaMeterPeang" name="polyAreaMeterPeang" value="" onkeyup="calculatePolyAreaMeterPeang(this)">평</li>
+                    <li><input type="text" id="polyAreaMeter" name="polyAreaMeter" value="" onkeyup="calculatePolyAreaMeter(this)">㎡</li>
                 </ul>
 
                 <ul>
                     <li>마우스선택 면적</li>
                     <li><input text="text" id="polyPathPeang" name="polyPathPeang" value="" onkeyup="calculatePolyPathPeang(this)">평</li>
-                    <li><input type="text" id="polyPathMiter" name="polyPathMiter" value="" onkeyup="calculatePolyPathMiter(this)">㎡</li>
+                    <li><input type="text" id="polyPathMeter" name="polyPathMeter" value="" onkeyup="calculatePolyPathMeter(this)">㎡</li>
                 </ul>
             </div>
 
@@ -188,14 +188,14 @@
         if(replaceAllComma($('#polyPathPeang').val()) > 0 ) {
             scale = Math.round(replaceAllComma($('#polyPathPeang').val()) / 5);  //마우스(평) polyPathPeang
         } else {
-            scale = Math.round(replaceAllComma($('#polyAreaMiterPeang').val()) / 5); //지역(평) polyAreaMiterPeang
+            scale = Math.round(replaceAllComma($('#polyAreaMeterPeang').val()) / 5); //지역(평) polyAreaMeterPeang
         }
         $('#scale').val(numberWithCommas(scale));
     }
 
     /////////////
-    $('#polyAreaMiter').val("");
-    $('#polyAreaMiterPeang').val("");
+    $('#polyAreaMeter').val("");
+    $('#polyAreaMeterPeang').val("");
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
             center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
@@ -272,8 +272,8 @@
                         marker.setPosition(coords)
                         marker.setMap(map);
 
-                        $('#polyAreaMiter').val("");
-                        $('#polyAreaMiterPeang').val("");
+                        $('#polyAreaMeter').val("");
+                        $('#polyAreaMeterPeang').val("");
                     }
                 });
             }
@@ -337,12 +337,12 @@
                 polygon.setMap(map);
                 getDrawingPolygon(polygon.getPath());
                 //마우스 면적 초기화
-                $('#polyPathMiter').val('');
+                $('#polyPathMeter').val('');
                 $('#polyPathPeang').val('');
                 //면적계산
                 var area = Math.round(polygon.getArea()).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 다각형의 총면적을 계산합니다
-                $('#polyAreaMiter').val(area);
-                $('#polyAreaMiterPeang').val((Math.round(polygon.getArea() * 30.25) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                $('#polyAreaMeter').val(area);
+                $('#polyAreaMeterPeang').val((Math.round(polygon.getArea() * 30.25) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 calculateScale();
                 initPolygonPath(map);
             },
@@ -458,10 +458,10 @@
                     // 지도에 다각형을 표시합니다
                     polygon.setMap(map);
                     var area = Math.round(polygon.getArea()); // 다각형의 총면적을 계산합니다
-                    var polyPathMiter = area.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                    var polyPathMeter = area.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                     var polyPathPeang = (Math.round(area * 30.25) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                    content = '<div class="info">총면적 <span class="number"> ' + polyPathMiter + '</span> m<sup>2</sup> / <span class="number"> ' + polyPathPeang + '</span>평</div>'; // 커스텀오버레이에 추가될 내용입니다
-                    $('#polyPathMiter').val(polyPathMiter);
+                    content = '<div class="info">총면적 <span class="number"> ' + polyPathMeter + '</span> m<sup>2</sup> / <span class="number"> ' + polyPathPeang + '</span>평</div>'; // 커스텀오버레이에 추가될 내용입니다
+                    $('#polyPathMeter').val(polyPathMeter);
                     $('#polyPathPeang').val(polyPathPeang);
                     calculateScale();
                     // 면적정보를 지도에 표시합니다
@@ -495,44 +495,44 @@
         $("#basicValues").submit();
     });
 
-    function calculatePolyAreaMiterPeang (that) {
+    function calculatePolyAreaMeterPeang (that) {
         // $('#polyPathPeang').val('');
-        // $('#polyPathMiter').val('');
+        // $('#polyPathMeter').val('');
         calculateScale();
 
         var value = replaceAllComma($(that).val());
-        $('#polyAreaMiter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
-        $('#polyAreaMiterPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('#polyAreaMeter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyAreaMeterPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
-    function calculatePolyAreaMiter (that) {
+    function calculatePolyAreaMeter (that) {
         // $('#polyPathPeang').val('');
-        // $('#polyPathMiter').val('');
+        // $('#polyPathMeter').val('');
         calculateScale();
 
         var value = replaceAllComma($(that).val());
-        $('#polyAreaMiterPeang').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
-        $('#polyAreaMiter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('#polyAreaMeterPeang').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyAreaMeter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
     function calculatePolyPathPeang (that) {
-        // $('#polyAreaMiterPeang').val('');
-        // $('#polyAreaMiter').val('');
+        // $('#polyAreaMeterPeang').val('');
+        // $('#polyAreaMeter').val('');
         calculateScale();
 
         var value = replaceAllComma($(that).val());
-        $('#polyPathMiter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyPathMeter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
         $('#polyPathPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
-    function calculatePolyPathMiter (that) {
-        // $('#polyAreaMiterPeang').val('');
-        // $('#polyAreaMiter').val('');
+    function calculatePolyPathMeter (that) {
+        // $('#polyAreaMeterPeang').val('');
+        // $('#polyAreaMeter').val('');
         calculateScale();
 
         var value = replaceAllComma($(that).val());
         $('#polyPathPeang').val((Math.round(value * 30.25) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //평
-        $('#polyPathMiter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('#polyPathMeter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 </script>
 </body>

@@ -39,14 +39,14 @@
             <div class="areamp">
                 <ul>
                     <li>지번구역 면적</li>
-                    <li><input text="text" id="polyAreaMiterPeang" value="${polyAreaMiterPeang}" onkeyup="calculatePolyAreaMiterPeang(this)">평</li>
-                    <li><input type="text" id="polyAreaMiter" value="${polyAreaMiter}" onkeyup="calculatePolyAreaMiter(this)">㎡</li>
+                    <li><input text="text" id="polyAreaMeterPeang" value="${polyAreaMeterPeang}" onkeyup="calculatePolyAreaMeterPeang(this)">평</li>
+                    <li><input type="text" id="polyAreaMeter" value="${polyAreaMeter}" onkeyup="calculatePolyAreaMeter(this)">㎡</li>
                 </ul>
 
                 <ul>
                     <li>마우스선택 면적</li>
                     <li><input text="text" id="polyPathPeang" value="${polyPathPeang}" onkeyup="calculatePolyPathPeang(this)">평</li>
-                    <li><input type="text" id="polyPathMiter" value="${polyPathMiter}" onkeyup="calculatePolyPathMiter(this)">㎡</li>
+                    <li><input type="text" id="polyPathMeter" value="${polyPathMeter}" onkeyup="calculatePolyPathMeter(this)">㎡</li>
                 </ul>
             </div>
 
@@ -539,40 +539,40 @@
         });
     }
 
-    function calculatePolyAreaMiterPeang (that) {
+    function calculatePolyAreaMeterPeang (that) {
         $('#polyPathPeang').val('');
-        $('#polyPathMiter').val('');
+        $('#polyPathMeter').val('');
 
         var value = replaceAllComma($(that).val());
-        $('#polyAreaMiter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
-        $('#polyAreaMiterPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('#polyAreaMeter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyAreaMeterPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
-    function calculatePolyAreaMiter (that) {
+    function calculatePolyAreaMeter (that) {
         $('#polyPathPeang').val('');
-        $('#polyPathMiter').val('');
+        $('#polyPathMeter').val('');
 
         var value = replaceAllComma($(that).val());
-        $('#polyAreaMiterPeang').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
-        $('#polyAreaMiter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('#polyAreaMeterPeang').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyAreaMeter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
     function calculatePolyPathPeang (that) {
-        $('#polyAreaMiterPeang').val('');
-        $('#polyAreaMiter').val('');
+        $('#polyAreaMeterPeang').val('');
+        $('#polyAreaMeter').val('');
 
         var value = replaceAllComma($(that).val());
-        $('#polyPathMiter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyPathMeter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
         $('#polyPathPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
-    function calculatePolyPathMiter (that) {
-        $('#polyAreaMiterPeang').val('');
-        $('#polyAreaMiter').val('');
+    function calculatePolyPathMeter (that) {
+        $('#polyAreaMeterPeang').val('');
+        $('#polyAreaMeter').val('');
 
         var value = replaceAllComma($(that).val());
         $('#polyPathPeang').val((Math.round(value * 30.25) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //평
-        $('#polyPathMiter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        $('#polyPathMeter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
     }
 
 </script>
