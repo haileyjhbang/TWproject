@@ -22,7 +22,7 @@
     <div class="top">
         <div class="area">
             <div id="inputtext">
-                <input type="text" name="address" id="address" value="" onclick="sample5_execDaumPostcode()" readonly=""></div>
+                <input type="text" name="address" id="address" value="" onclick="sample5_execDaumPostcode()" readonly></div>
             <div id="inputbutton">
                 <input type="button" onclick="sample5_execDaumPostcode()" value="주소 검색"></div>
         </div>
@@ -39,7 +39,7 @@
 
     <br/>
 
-    <div id="map" style="width:1200px;height:400px;"></div>
+    <div id="map" style="width:100%;height:400px;"></div>
 
     <br/>
 
@@ -48,53 +48,57 @@
             <div class="areamp">
                 <ul>
                     <li>지번구역 면적</li>
-                    <li><input text="text" id="polyAreaMiterPeang" name="polyAreaMiterPeang">평</li>
-                    <li><input type="text" id="polyAreaMiter" name="polyAreaMiter">㎡</li>
+                    <li><input text="text" id="polyAreaMiterPeang" name="polyAreaMiterPeang" value="" onkeyup="calculatePolyAreaMiterPeang(this)">평</li>
+                    <li><input type="text" id="polyAreaMiter" name="polyAreaMiter" value="" onkeyup="calculatePolyAreaMiter(this)">㎡</li>
                 </ul>
 
                 <ul>
-                    <li>마우스 선택 면적</li>
-                    <li><input text="text" id="polyPathPeang" name="polyPathPeang">평</li>
-                    <li><input type="text" id="polyPathMiter" name="polyPathMiter">㎡</li>
+                    <li>마우스선택 면적</li>
+                    <li><input text="text" id="polyPathPeang" name="polyPathPeang" value="" onkeyup="calculatePolyPathPeang(this)">평</li>
+                    <li><input type="text" id="polyPathMiter" name="polyPathMiter" value="" onkeyup="calculatePolyPathMiter(this)">㎡</li>
                 </ul>
             </div>
 
-            <div>
+            <div class="section02">
                 <ul class="field00">
                     <li>설치용량</li>
                     <li><input type="text" name="scale" id="scale" value="100" readonly>kw</li>
                 </ul>
+                <ul class="field00">
+                    <li>설치단가*</li>
+                    <li><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" onkeyup="calculateTable()">원</li>
+                </ul>
+
+                <ul class="field00">
+                    <li>금융대출(%)*</li>
+                    <li><input type="text" name="loanPercent" id="loanPercent" value="90" onkeyup="calculateTable()">%</li>
+                </ul>
+                 <ul class="field00">
+                     <li>대출이율*</li>
+                    <li><input type="text" name="profit" id="profit" value="4.7" onkeyup="calculateTable()">%</li>
+                </ul>
+
             </div>
 
-            <div>
+            <div class="section03">
                 <span class="field02">자금조건</span>
                 <ul class="field01">
                     <li>총투자비</li>
-                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000"readonly="">원</li>
+                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000">원</li>
                 </ul>
                 <ul class="field01">
                     <li>자기자본</li>
-                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000" readonly="">원</li>
+                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000">원</li>
                 </ul>
+
                 <ul class="field01">
                     <li>금융대출(원)</li>
-                    <li><input type="text" name="loan" id="loan" value="135,000,000" readonly="">원</li>
+                    <li><input type="text" name="loan" id="loan" value="135,000,000">원</li>
+
                 </ul>
                 <ul class="field01">
-                    <li>금융대출(%)</li>
-                    <li><input type="text" name="loanPercent" id="loanPercent" value="90" onchange="calculateTable()">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>설치단가</li>
-                    <li><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" onchange="calculateTable()">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>이율</li>
-                    <li><input type="text" name="profit" id="profit" value="4.7" onchange="calculateTable()">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>상환기간</li>
-                    <li><input type="text" name="repayPeriod" value="15" onchange="calculateTable()">년</li>
+                    <li>상환기간*</li>
+                    <li><input type="text" name="repayPeriod" value="15" onkeyup="calculateTable()">년</li>
                 </ul>
             </div>
 
@@ -105,28 +109,28 @@
                 <span class="field02">발전조건</span>
                 <ul class="field01">
                     <li>일평균 발전시간</li>
-                    <li><input type="text" name="powerTime" value="3.6" readonly>시간</li>
+                    <li><input type="text" name="powerTime" value="3.6">시간</li>
                 </ul>
 
                 <ul class="field01">
-                    <li>연간 효율저장률</li>
-                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="0.50" onchange="calculateTable()">%</li>
+                    <li>연간 효율저감률*</li>
+                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="0.50" onkeyup="calculateTable()">%</li>
                 </ul>
                 <ul class="field01">
-                    <li>SMP단가</li>
-                    <li><input type="text" name="smpUnit" value="95" onchange="calculateTable()">원</li>
+                    <li>SMP단가*</li>
+                    <li><input type="text" name="smpUnit" value="95" onkeyup="calculateTable()">원</li>
                 </ul>
                 <ul class="field01">
                     <li>SMP상승률</li>
-                    <li><input type="text" name="smpRate" value="1" readonly>%</li>
+                    <li><input type="text" name="smpRate" value="1">%</li>
                 </ul>
                 <ul class="field01">
-                    <li>REC단가</li>
-                    <li><input type="text" name="recUnit" value="115" onchange="calculateTable()">원</li>
+                    <li>REC단가*</li>
+                    <li><input type="text" name="recUnit" value="115" onkeyup="calculateTable()">원</li>
                 </ul>
                 <ul class="field01">
-                    <li>가중치</li>
-                    <li><input type="text" name="weight" value="1.5" onchange="calculateTable()">배</li>
+                    <li>가중치*</li>
+                    <li><input type="text" name="weight" value="1.5" onkeyup="calculateTable()">배</li>
                 </ul>
 
 
@@ -134,12 +138,12 @@
             <div>
                 <span class="field02">지출비용</span>
                 <ul class="field01">
-                    <li>보험료</li>
-                    <li><input type="text" name="insuranceRate" id="insuranceRate" value="0.23" onchange="calculateTable()">%</li>
+                    <li>보험료*</li>
+                    <li><input type="text" name="insuranceRate" id="insuranceRate" value="0.23" onkeyup="calculateTable()">%</li>
                 </ul>
                 <ul class="field01">
                     <li>유지보수비</li>
-                    <li><input type="text" name="maintenanceUnit" value="0.30" readonly>%</li>
+                    <li><input type="text" name="maintenanceUnit" value="0.30">%</li>
                 </ul>
 
             </div>
@@ -483,6 +487,46 @@
         //}
         $("#basicValues").submit();
     });
+
+    function calculatePolyAreaMiterPeang (that) {
+        // $('#polyPathPeang').val('');
+        // $('#polyPathMiter').val('');
+        calculateScale();
+
+        var value = replaceAllComma($(that).val());
+        $('#polyAreaMiter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyAreaMiterPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
+
+    function calculatePolyAreaMiter (that) {
+        // $('#polyPathPeang').val('');
+        // $('#polyPathMiter').val('');
+        calculateScale();
+
+        var value = replaceAllComma($(that).val());
+        $('#polyAreaMiterPeang').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyAreaMiter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
+
+    function calculatePolyPathPeang (that) {
+        // $('#polyAreaMiterPeang').val('');
+        // $('#polyAreaMiter').val('');
+        calculateScale();
+
+        var value = replaceAllComma($(that).val());
+        $('#polyPathMiter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyPathPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
+
+    function calculatePolyPathMiter (that) {
+        // $('#polyAreaMiterPeang').val('');
+        // $('#polyAreaMiter').val('');
+        calculateScale();
+
+        var value = replaceAllComma($(that).val());
+        $('#polyPathPeang').val((Math.round(value * 30.25) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //평
+        $('#polyPathMiter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
 </script>
 </body>
 </html>

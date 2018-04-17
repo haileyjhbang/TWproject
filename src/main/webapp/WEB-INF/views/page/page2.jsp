@@ -8,159 +8,204 @@
 </head>
 <body>
 
-<input type="hidden" id="powerDay" value="${powerDay}">
-<input type="hidden" id="drawingPolygon" value="${drawingPolygon}">
+<form>
+    <input type="hidden" id="powerDay" value="${powerDay}">
+    <input type="hidden" id="drawingPolygon" value="${drawingPolygon}">
 
- <div id="map" style="width:1200px;height:400px;"></div>
-    
-  <div class="contents">
-    <div class="contents1">
-    <div class="areamp">
-    <ul>
-        <li>지번구역 면적</li>
-        <li><input text="text" id="polyAreaMiterPeang" value="${polyAreaMiterPeang}">평</li>
-        <li><input type="text" id="polyAreaMiter" value="${polyAreaMiter}">㎡</li>
-    </ul>
-     
-    <ul>
-        <li>마우스 선택 면적</li>
-        <li><input text="text" id="polyPathPeang" value="${polyPathPeang}">평</li>
-        <li><input type="text" id="polyPathMiter" value="${polyPathMiter}">㎡</li>
-    </ul></div>
-    
-    <div >
-    <ul class="field00">
-        <li>설치용량(kw)</li>
-        <li><input type="text" name="scale" id="scale" value="${scale}" readonly>kw</li>
-    </ul></div>
-
-    <div>
-    <span class="field02">자금조건</span>
-        <ul class="field01"><li>총투자비</li>
-            <li><input type="text" name="totalInvestment" id="totalInvestment" value="${totalInvestment}" readonly>원</li></ul>
-       <ul class="field01"><li>자기자본</li>
-           <li><input type="text" name="myCapital" id="myCapital" value="${myCapital}" readonly>원</li></ul>
-        <ul class="field01">
-            <li>자기자본</li>
-            <li><input type="text" name="loan" id="loan" value="${loan}" readonly>원</li></ul>
-        <ul class="field01">
-            <li>금융대출</li>
-            <li><input type="text" name="loanPercent" id="loanPercent" value="${loanPercent}" onchange="calculateTable()">%</li></ul>
-        <ul class="field01">
-            <li>설치단가</li>
-            <li><input type="text" name="unitPrice" id="unitPrice" value="${unitPrice}" onchange="calculateTable()">원</li></ul>
-        <ul class="field01">
-            <li>이율</li>
-            <li><input type="text" name="profit" id="profit" value="${profit}" onchange="calculateTable()">%</li></ul>
-        <ul class="field01">
-            <li>상환기간</li>
-            <li><input type="text" name="repayPeriod" id="repayPeriod" value="${repayPeriod}" onchange="calculateTable()">년</li></ul>
-    </div>
-
-    </div>
-
-    <div class="contents2">
-    <div>
-        <span class="field02">발전조건</span>
-        <ul class="field01">
-            <li>일평균 발전시간</li>
-            <li><input type="text" name="powerTime" id="powerTime" value="${powerTime}" readonly>시간</li>
-        </ul>
-
-        <ul class="field01">
-            <li>연간 효율저장률</li>
-            <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}" onchange="calculateTable()">%</li>
-        </ul>
-        <ul class="field01">
-            <li>SMP단가</li>
-            <li><input type="text" name="smpUnit" id="smpUnit" value="${smpUnit}" onchange="calculateTable()">원</li>
-        </ul>
-        <ul class="field01">
-            <li>SMP상승률</li>
-            <li><input type="text" name="smpRate" id="smpRate" value="${smpRate}" readonly>%</li>
-        </ul>
-        <ul class="field01">
-            <li>REC단가</li>
-            <li><input type="text" name="recUnit" id="recUnit" value="${recUnit}" onchange="calculateTable()">원</li>
-        </ul>
-        <ul class="field01">
-            <li>가중치</li>
-            <li><input type="text" name="weight"  id="weight" value="${weight}" onchange="calculateTable()">배</li>
-        </ul>
-
-
+    <div class="top">
+        <div class="area">
+            <div id="inputtext">
+                <input type="text" name="address" id="address" value="${address}" readonly></div>
+            <div id="inputbutton">
+                <input type="button" value="주소"></div>
         </div>
-    <div>
-        <span class="field02">지출비용</span>
-        <ul class="field01">
-            <li>보험료</li>
-            <li><input type="text" name="insuranceRate" id="insuranceRate" value="${insuranceRate}" onchange="calculateTable()">%</li>
-        </ul>
-        <ul class="field01">
-            <li>유지보수비</li>
-            <li><input type="text" name="maintenanceUnit" id="maintenanceUnit" value="${maintenanceUnit}" readonly>%</li>
-        </ul>
-        
+
+        <div class="area2">
+            <div id="areatitle">면적기준</div>
+            <div id="arearadio">
+                &nbsp;&nbsp;${type == 'sgg' ? '시/군/구' : ''}${type == 'emd' ? '읍/면/동' : ''}${type == 'li' ? '리' : ''}
+            </div>
         </div>
     </div>
-    
+
+    <br/>
+
+    <div id="map" style="width:100%;height:400px;"></div>
+
+    <div class="contents">
+        <div class="contents1">
+            <div class="areamp">
+                <ul>
+                    <li>지번구역 면적</li>
+                    <li><input text="text" id="polyAreaMiterPeang" value="${polyAreaMiterPeang}" onkeyup="calculatePolyAreaMiterPeang(this)">평</li>
+                    <li><input type="text" id="polyAreaMiter" value="${polyAreaMiter}" onkeyup="calculatePolyAreaMiter(this)">㎡</li>
+                </ul>
+
+                <ul>
+                    <li>마우스선택 면적</li>
+                    <li><input text="text" id="polyPathPeang" value="${polyPathPeang}" onkeyup="calculatePolyPathPeang(this)">평</li>
+                    <li><input type="text" id="polyPathMiter" value="${polyPathMiter}" onkeyup="calculatePolyPathMiter(this)">㎡</li>
+                </ul>
+            </div>
+
+            <div class="section02">
+                <ul class="field00">
+                    <li>설치용량(kw)</li>
+                    <li><input type="text" name="scale" id="scale" value="${scale}" readonly>kw</li>
+                </ul>
+                <ul class="field00">
+                    <li>설치단가</li>
+                    <li><input type="text" name="unitPrice" id="unitPrice" value="${unitPrice}" onchange="calculateTable()">원</li>
+                </ul>
+                <ul class="field00">
+                    <li>금융대출(%)</li>
+                    <li><input type="text" name="loanPercent" id="loanPercent" value="90" onchange="calculateTable()">%</li>
+                </ul>
+                <ul class="field00">
+                    <li>대출이율</li>
+                    <li><input type="text" name="profit" id="profit" value="4.7" onchange="calculateTable()">%</li>
+                </ul>
+
+            </div>
+
+            <div class="section03">
+                <span class="field02">자금조건</span>
+                <ul class="field01">
+                    <li>총투자비</li>
+                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000" readonly="">원</li>
+                </ul>
+                <ul class="field01">
+                    <li>자기자본</li>
+                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000" readonly="">원</li>
+                </ul>
+
+                <ul class="field01">
+                    <li>금융대출(원)</li>
+                    <li><input type="text" name="loan" id="loan" value="135,000,000" readonly="">원</li>
+
+                </ul>
+                <ul class="field01">
+                    <li>상환기간</li>
+                    <li><input type="text" name="repayPeriod" id="repayPeriod" value="${repayPeriod}" onchange="calculateTable()">년</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="contents2">
+            <div>
+                <span class="field02">발전조건</span>
+                <ul class="field01">
+                    <li>일평균 발전시간</li>
+                    <li><input type="text" name="powerTime" id="powerTime" value="${powerTime}" readonly>시간</li>
+                </ul>
+
+                <ul class="field01">
+                    <li>연간 효율저감률</li>
+                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}" onchange="calculateTable()">%</li>
+                </ul>
+                <ul class="field01">
+                    <li>SMP단가</li>
+                    <li><input type="text" name="smpUnit" id="smpUnit" value="${smpUnit}" onchange="calculateTable()">원</li>
+                </ul>
+                <ul class="field01">
+                    <li>SMP상승률</li>
+                    <li><input type="text" name="smpRate" id="smpRate" value="${smpRate}" readonly>%</li>
+                </ul>
+                <ul class="field01">
+                    <li>REC단가</li>
+                    <li><input type="text" name="recUnit" id="recUnit" value="${recUnit}" onchange="calculateTable()">원</li>
+                </ul>
+                <ul class="field01">
+                    <li>가중치</li>
+                    <li><input type="text" name="weight" id="weight" value="${weight}" onchange="calculateTable()">배</li>
+                </ul>
+
+
+            </div>
+            <div>
+                <span class="field02">지출비용</span>
+                <ul class="field01">
+                    <li>보험료</li>
+                    <li><input type="text" name="insuranceRate" id="insuranceRate" value="${insuranceRate}" onchange="calculateTable()">%</li>
+                </ul>
+                <ul class="field01">
+                    <li>유지보수비</li>
+                    <li><input type="text" name="maintenanceUnit" id="maintenanceUnit" value="${maintenanceUnit}" readonly>%</li>
+                </ul>
+
+            </div>
+        </div>
+
     </div>
 
-<div class="layoutTable">
-  <div class="content3">
-   <div class="income"> 
-     <ul class="field03">  
-      <li>월평균 수익</li><li><input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly="">원</li></ul>
-      <ul class="field03">  <li>연평균 수익</li><li><input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly=""> 원</li></ul>
-      <ul class="field03">  <li>평균 수익율</li><li><input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly="">% </li></ul>
-   </div>     
-  <div class="incomebutton">    
-   <div class="buttonshow">
-       <button type="button" onclick="calculationBasis(this.value)" value="show">산출근거</button>
+    <div class="layoutTable">
+        <div class="content3">
+            <div class="income">
+                <ul class="field03">
+                    <li>월평균 수익</li>
+                    <li><input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly="">원</li>
+                </ul>
+                <ul class="field03">
+                    <li>연평균 수익</li>
+                    <li><input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly=""> 원</li>
+                </ul>
+                <ul class="field03">
+                    <li>평균 수익율</li>
+                    <li><input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly="">%</li>
+                </ul>
+            </div>
+            <div class="incomebutton">
+                <div class="buttonshow">
+                    <button type="button" onclick="calculationBasis(this.value)" value="show">산출근거</button>
+                </div>
+                <div class="buttonprint">
+                    <button type="button" onclick="window.print()">인쇄하기</button>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="chartjs-wrapper">
+            <canvas id="myChart"></canvas>
+        </div>
     </div>
-    <div class="buttonprint">
+
+    <br/>
+
+    <p/>
+
+    <table id="calculateCostTable" style="display:none ">
+        <tr class="tHead">
+            <th>구분</th>
+            <th colspan="3">수입</th>
+            <th colspan="4">지출</th>
+            <th></th>
+            <th colspan="2">수익총계</th>
+        </tr>
+        <tr class="tHead">
+            <th rowspan="2">연차</th>
+            <th rowspan="2">연간전력생산량</th>
+            <th>SMP</th>
+            <th rowspan="2">연수익</th>
+            <th rowspan="2">유지보수비</th>
+            <th rowspan="2">보험료</th>
+            <th rowspan="2">원금상환</th>
+            <th rowspan="2">이자</th>
+            <th rowspan="2">상환후잔액</th>
+            <th rowspan="2">순수익</th>
+            <th rowspan="2">수익률(%)</th>
+        </tr>
+        <tr class="tHead">
+            <th>REC</th>
+        </tr>
+    </table>
+
+
+    <div>
         <button type="button" onclick="window.print()">인쇄하기</button>
     </div>
-    </div>
-   </div>
-    
-        
-            <div class="chartjs-wrapper">
-                <canvas id="myChart"></canvas>
-            </div>
-    </div> 
-           
-<br/>
-
-<p/>
-
-<table id="calculateCostTable" style="display:none ">
-    <tr class="tHead">
-        <th>구분</th>
-        <th colspan="3">수입</th>
-        <th colspan="4">지출</th>
-        <th></th>
-        <th colspan="2">수익총계</th>
-    </tr>
-    <tr class="tHead">
-        <th rowspan="2">연차</th>
-        <th rowspan="2">연간전력생산량</th>
-        <th>SMP</th>
-        <th rowspan="2">연수익</th>
-        <th rowspan="2">유지보수비</th>
-        <th rowspan="2">보험료</th>
-        <th rowspan="2">원금상환</th>
-        <th rowspan="2">이자</th>
-        <th rowspan="2">상환후잔액</th>
-        <th rowspan="2">순수익</th>
-        <th rowspan="2">수익률(%)</th>
-    </tr>
-    <tr class="tHead">
-        <th>REC</th>
-    </tr>
-</table>
-
-
+</form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
@@ -176,7 +221,7 @@
     });
 
     function setMap() {
-        if(!$('#drawingPolygon').val()) $('#drawingPolygon').val('(36.503296, 127.271260)');
+        if (!$('#drawingPolygon').val()) $('#drawingPolygon').val('(36.503296, 127.271260)');
 
         var centerLat = 0;
         var centerLng = 0;
@@ -187,14 +232,14 @@
             point = drawingPolygonData[i].split(' ').join('').split('(').join('').split(')').join('').split(',');
 
             // 다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다
-            polygonPath[i] = new daum.maps.LatLng(point[0]*1, point[1]*1);
+            polygonPath[i] = new daum.maps.LatLng(point[0] * 1, point[1] * 1);
 
-            centerLat += point[0]*1;
-            centerLng += point[1]*1;
+            centerLat += point[0] * 1;
+            centerLng += point[1] * 1;
         });
 
-        centerLat = centerLat/drawingPolygonData.length;
-        centerLng = centerLng/drawingPolygonData.length;
+        centerLat = centerLat / drawingPolygonData.length;
+        centerLng = centerLng / drawingPolygonData.length;
 
         var mapContainer = document.getElementById('map'), // 지도를 표시할 div
             mapOption = {
@@ -249,7 +294,7 @@
         var totalInterest = 0;
         var netIncome = 0;
         var totalNetIncome = 0;
-        var totalInvestment = $('#totalInvestment').val();
+        var totalInvestment = replaceAllComma($('#totalInvestment').val());
         var profitRate = 0;
 
         for (var i = 0; i < duration; i++) {
@@ -272,6 +317,8 @@
                 netIncome = annualProfit - maintenance - interest;
                 totalNetIncome += netIncome;
                 profitRate = netIncome / totalInvestment * 100;
+                console.log("1 =" + netIncome);
+                console.log("2 =" + totalInvestment);
                 $("#calculateCostTable").append("<tr>" +
                     "<th rowspan='2'>" + (i + 1) + "</th>" +
                     "<td rowspan='2'>" + numberWithCommas(annualPower) + "</td>" +
@@ -401,7 +448,7 @@
             "<td></td>" +
             "<td>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
             "</tr>");
-        $('#netIncomeYearDisplay').val(numberWithCommas(Math.floor(totalNetIncome / duration / 1000) * 1000 ));
+        $('#netIncomeYearDisplay').val(numberWithCommas(Math.floor(totalNetIncome / duration / 1000) * 1000));
         $("#calculateCostTable").append("<tr>" +
             "<th>20년</th>" +
             "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
@@ -458,11 +505,13 @@
                 tooltips: {
                     mode: 'label',
                     callbacks: {
-                        label: function(tooltipItem, data) {
-                            return tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }, },
+                        label: function (tooltipItem, data) {
+                            return tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        },
+                    },
                 },
                 "scales": {
-                    "xAxes":[{
+                    "xAxes": [{
                         scaleLabel: {
                             display: true,
                             labelString: '연차(년)'
@@ -474,8 +523,8 @@
                             labelString: '매출액(원)'
                         },
                         ticks: {
-                            beginAtZero:true,
-                            userCallback: function(value, index, values) {
+                            beginAtZero: true,
+                            userCallback: function (value, index, values) {
                                 value = value.toString();
                                 value = value.split(/(?=(?:...)*$)/);
                                 value = value.join(',');
@@ -487,6 +536,43 @@
             }
         });
     }
+
+    function calculatePolyAreaMiterPeang (that) {
+        $('#polyPathPeang').val('');
+        $('#polyPathMiter').val('');
+
+        var value = replaceAllComma($(that).val());
+        $('#polyAreaMiter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyAreaMiterPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
+
+    function calculatePolyAreaMiter (that) {
+        $('#polyPathPeang').val('');
+        $('#polyPathMiter').val('');
+
+        var value = replaceAllComma($(that).val());
+        $('#polyAreaMiterPeang').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyAreaMiter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
+
+    function calculatePolyPathPeang (that) {
+        $('#polyAreaMiterPeang').val('');
+        $('#polyAreaMiter').val('');
+
+        var value = replaceAllComma($(that).val());
+        $('#polyPathMiter').val((Math.round((value * 1000) / 30.25) / 10).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //㎡
+        $('#polyPathPeang').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
+
+    function calculatePolyPathMiter (that) {
+        $('#polyAreaMiterPeang').val('');
+        $('#polyAreaMiter').val('');
+
+        var value = replaceAllComma($(that).val());
+        $('#polyPathPeang').val((Math.round(value * 30.25) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")); //평
+        $('#polyPathMiter').val(value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+    }
+
 </script>
 </body>
 </html>

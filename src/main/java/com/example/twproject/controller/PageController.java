@@ -113,6 +113,9 @@ public class PageController {
         model.addAttribute("polyPathPeang", request.getParameter("polyPathPeang"));
         model.addAttribute("polyPathMiter", request.getParameter("polyPathMiter"));
 
+        model.addAttribute("address", request.getParameter("address"));
+        model.addAttribute("type", request.getParameter("type"));
+
         return "page/page2";
     }
 
@@ -137,6 +140,11 @@ public class PageController {
         }
     return itemList;
 
+    }
+    
+    @GetMapping("/naver01")
+    public String naver01(Model model) {
+        return "page/naver01";
     }
 
 }
