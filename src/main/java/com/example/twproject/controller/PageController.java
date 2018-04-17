@@ -89,7 +89,7 @@ public class PageController {
         model.addAttribute("apiKeyDaum", "e12af9afb1526adcd0f898407bb25bfb");
         model.addAttribute("apiKeyVworld", "E60BEDC5-C3EE-3B5F-98D5-9166F94EB492");
 
-        model.addAttribute("scale", request.getParameter("scale"));
+        model.addAttribute("scale", request.getParameter("scale").replaceAll(",",""));
         model.addAttribute("efficiencyRate", request.getParameter("efficiencyRate").replaceAll(",",""));
         model.addAttribute("powerTime", request.getParameter("powerTime").replaceAll(",",""));
         model.addAttribute("powerDay", request.getParameter("powerDay").replaceAll(",",""));
@@ -102,8 +102,8 @@ public class PageController {
         model.addAttribute("profit", request.getParameter("profit").replaceAll(",",""));
         model.addAttribute("unitPrice", request.getParameter("unitPrice").replaceAll(",",""));
         model.addAttribute("totalInvestment", request.getParameter("totalInvestment").replaceAll(",",""));
-        model.addAttribute("myCapital", request.getParameter("myCapital"));
-        model.addAttribute("loan", request.getParameter("loan"));
+        model.addAttribute("myCapital", request.getParameter("myCapital").replaceAll(",",""));
+        model.addAttribute("loan", request.getParameter("loan").replaceAll(",",""));
         model.addAttribute("loanPercent", request.getParameter("loanPercent").replaceAll(",",""));
         model.addAttribute("repayPeriod", request.getParameter("repayPeriod").replaceAll(",",""));
         model.addAttribute("drawingPolygon", request.getParameter("drawingPolygon"));

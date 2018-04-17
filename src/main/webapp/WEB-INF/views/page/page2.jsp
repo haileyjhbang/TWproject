@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,19 +53,19 @@
             <div class="section02">
                 <ul class="field00">
                     <li>설치용량(kw)</li>
-                    <li><input type="text" name="scale" id="scale" value="${scale}" readonly>kw</li>
+                    <li><input type="text" name="scale" id="scale" value="<fmt:formatNumber value="${scale}" type="number"/>" readonly>kw</li>
                 </ul>
                 <ul class="field00">
                     <li>설치단가</li>
-                    <li><input type="text" name="unitPrice" id="unitPrice" value="${unitPrice}" onchange="calculateTable()">원</li>
+                    <li><input type="text" name="unitPrice" id="unitPrice" value="<fmt:formatNumber value="${unitPrice}" type="number"/>" >원</li>
                 </ul>
                 <ul class="field00">
                     <li>금융대출(%)</li>
-                    <li><input type="text" name="loanPercent" id="loanPercent" value="90" onchange="calculateTable()">%</li>
+                    <li><input type="text" name="loanPercent" id="loanPercent" value="${loanPercent}">%</li>
                 </ul>
                 <ul class="field00">
                     <li>대출이율</li>
-                    <li><input type="text" name="profit" id="profit" value="4.7" onchange="calculateTable()">%</li>
+                    <li><input type="text" name="profit" id="profit" value="${profit}">%</li>
                 </ul>
 
             </div>
@@ -72,21 +74,21 @@
                 <span class="field02">자금조건</span>
                 <ul class="field01">
                     <li>총투자비</li>
-                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000" readonly="">원</li>
+                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="<fmt:formatNumber value="${totalInvestment}" type="number"/>" readonly>원</li>
                 </ul>
                 <ul class="field01">
                     <li>자기자본</li>
-                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000" readonly="">원</li>
+                    <li><input type="text" name="myCapital" id="myCapital" value="<fmt:formatNumber value="${myCapital}" type="number"/>" readonly>원</li>
                 </ul>
 
                 <ul class="field01">
                     <li>금융대출(원)</li>
-                    <li><input type="text" name="loan" id="loan" value="135,000,000" readonly="">원</li>
+                    <li><input type="text" name="loan" id="loan" value="<fmt:formatNumber value="${loan}" type="number"/>" readonly>원</li>
 
                 </ul>
                 <ul class="field01">
                     <li>상환기간</li>
-                    <li><input type="text" name="repayPeriod" id="repayPeriod" value="${repayPeriod}" onchange="calculateTable()">년</li>
+                    <li><input type="text" name="repayPeriod" id="repayPeriod" value="${repayPeriod}" readonly>년</li>
                 </ul>
             </div>
 
@@ -102,11 +104,11 @@
 
                 <ul class="field01">
                     <li>연간 효율저감률</li>
-                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}" onchange="calculateTable()">%</li>
+                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}">%</li>
                 </ul>
                 <ul class="field01">
                     <li>SMP단가</li>
-                    <li><input type="text" name="smpUnit" id="smpUnit" value="${smpUnit}" onchange="calculateTable()">원</li>
+                    <li><input type="text" name="smpUnit" id="smpUnit" value="<fmt:formatNumber value="${smpUnit}" type="number"/>">원</li>
                 </ul>
                 <ul class="field01">
                     <li>SMP상승률</li>
@@ -114,11 +116,11 @@
                 </ul>
                 <ul class="field01">
                     <li>REC단가</li>
-                    <li><input type="text" name="recUnit" id="recUnit" value="${recUnit}" onchange="calculateTable()">원</li>
+                    <li><input type="text" name="recUnit" id="recUnit" value="<fmt:formatNumber value="${recUnit}" type="number"/>" readonly>원</li>
                 </ul>
                 <ul class="field01">
                     <li>가중치</li>
-                    <li><input type="text" name="weight" id="weight" value="${weight}" onchange="calculateTable()">배</li>
+                    <li><input type="text" name="weight" id="weight" value="${weight}" readonly>배</li>
                 </ul>
 
 
@@ -127,7 +129,7 @@
                 <span class="field02">지출비용</span>
                 <ul class="field01">
                     <li>보험료</li>
-                    <li><input type="text" name="insuranceRate" id="insuranceRate" value="${insuranceRate}" onchange="calculateTable()">%</li>
+                    <li><input type="text" name="insuranceRate" id="insuranceRate" value="${insuranceRate}" readonly>%</li>
                 </ul>
                 <ul class="field01">
                     <li>유지보수비</li>
@@ -159,9 +161,9 @@
                 <div class="buttonshow">
                     <button type="button" onclick="calculationBasis(this.value)" value="show">산출근거</button>
                 </div>
-                <div class="buttonprint">
-                    <button type="button" onclick="window.print()">인쇄하기</button>
-                </div>
+                <%--<div class="buttonprint">--%>
+                    <%--<button type="button" onclick="window.print()">인쇄하기</button>--%>
+                <%--</div>--%>
             </div>
         </div>
 
@@ -202,7 +204,7 @@
     </table>
 
 
-    <div>
+    <div class="buttonprint">
         <button type="button" onclick="window.print()">인쇄하기</button>
     </div>
 </form>
@@ -271,25 +273,25 @@
         var totalAnnualPower = 0;
         var smpUnit = 0;
         var smp = 0;
-        var recUnit = $('#recUnit').val();
-        var weight = $('#weight').val();
+        var recUnit = replaceAllComma($('#recUnit').val());
+        var weight = replaceAllComma($('#weight').val());
         var rec = 0;
         var annualProfit = 0;
         var totalAnnualProfit = 0;
-        var maintenanceUnit = $('#maintenanceUnit').val();
+        var maintenanceUnit = replaceAllComma($('#maintenanceUnit').val());
         var maintenance = 0;
         var totalMaintenance = 0;
-        var insuranceRate = $('#insuranceRate').val();
+        var insuranceRate = replaceAllComma($('#insuranceRate').val());
         var insuranceFee = 0;
         var totalInsuranceFee = 0;
         var loan = replaceAllComma($('#loan').val());
-        var repayPeriod = $('#repayPeriod').val();
+        var repayPeriod = replaceAllComma($('#repayPeriod').val());
         var repayPeriod2 = repayPeriod;
         var payback = 0;
         var totalPayback = loan;
         var interestCount = 1;
         var leftBalance = loan;
-        var profit = $('#profit').val();
+        var profit = replaceAllComma($('#profit').val());
         var interest = 0;
         var totalInterest = 0;
         var netIncome = 0;
@@ -300,9 +302,9 @@
         for (var i = 0; i < duration; i++) {
             labels[i] = i + 1;
             if (i == 0) {
-                annualPower = replaceAllComma($('#scale').val()) * $('#powerTime').val() * $('#powerDay').val();
+                annualPower = replaceAllComma($('#scale').val()) * replaceAllComma($('#powerTime').val()) * replaceAllComma($('#powerDay').val());
                 totalAnnualPower += annualPower;
-                smpUnit = $('#smpUnit').val() * 1;
+                smpUnit = replaceAllComma($('#smpUnit').val()) * 1;
                 smp = annualPower * smpUnit;
                 rec = recUnit * weight * annualPower;
                 annualProfit = smp + rec;
@@ -340,7 +342,7 @@
             } else {
                 annualPower = annualPower * 0.995;
                 totalAnnualPower += annualPower;
-                smpUnit = smpUnit + (smpUnit * $('#smpRate').val() / 100);
+                smpUnit = smpUnit + (smpUnit * replaceAllComma($('#smpRate').val()) / 100);
                 smp = annualPower * smpUnit;
                 rec = recUnit * weight * annualPower;
                 annualProfit = smp + rec;

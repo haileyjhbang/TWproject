@@ -65,16 +65,16 @@
                     <li><input type="text" name="scale" id="scale" value="100" readonly>kw</li>
                 </ul>
                 <ul class="field00">
-                    <li>설치단가*</li>
-                    <li><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" onkeyup="calculateTable()">원</li>
+                    <li>설치단가</li>
+                    <li><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" onkeyup="calculateTable();calculateComma(this)">원</li>
                 </ul>
 
                 <ul class="field00">
-                    <li>금융대출(%)*</li>
+                    <li>금융대출(%)</li>
                     <li><input type="text" name="loanPercent" id="loanPercent" value="90" onkeyup="calculateTable()">%</li>
                 </ul>
                  <ul class="field00">
-                     <li>대출이율*</li>
+                     <li>대출이율</li>
                     <li><input type="text" name="profit" id="profit" value="4.7" onkeyup="calculateTable()">%</li>
                 </ul>
 
@@ -84,20 +84,20 @@
                 <span class="field02">자금조건</span>
                 <ul class="field01">
                     <li>총투자비</li>
-                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000">원</li>
+                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000" onkeyup="calculateComma(this)">원</li>
                 </ul>
                 <ul class="field01">
                     <li>자기자본</li>
-                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000">원</li>
+                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000" onkeyup="calculateComma(this)">원</li>
                 </ul>
 
                 <ul class="field01">
                     <li>금융대출(원)</li>
-                    <li><input type="text" name="loan" id="loan" value="135,000,000">원</li>
+                    <li><input type="text" name="loan" id="loan" value="135,000,000" onkeyup="calculateComma(this)">원</li>
 
                 </ul>
                 <ul class="field01">
-                    <li>상환기간*</li>
+                    <li>상환기간</li>
                     <li><input type="text" name="repayPeriod" value="15" onkeyup="calculateTable()">년</li>
                 </ul>
             </div>
@@ -113,23 +113,23 @@
                 </ul>
 
                 <ul class="field01">
-                    <li>연간 효율저감률*</li>
+                    <li>연간 효율저감률</li>
                     <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="0.50" onkeyup="calculateTable()">%</li>
                 </ul>
                 <ul class="field01">
-                    <li>SMP단가*</li>
-                    <li><input type="text" name="smpUnit" value="95" onkeyup="calculateTable()">원</li>
+                    <li>SMP단가</li>
+                    <li><input type="text" name="smpUnit" id="smpUnit" value="95" onkeyup="calculateTable()">원</li>
                 </ul>
                 <ul class="field01">
                     <li>SMP상승률</li>
                     <li><input type="text" name="smpRate" value="1">%</li>
                 </ul>
                 <ul class="field01">
-                    <li>REC단가*</li>
-                    <li><input type="text" name="recUnit" value="115" onkeyup="calculateTable()">원</li>
+                    <li>REC단가</li>
+                    <li><input type="text" name="recUnit" id="recUnit" value="115" onkeyup="calculateTable()">원</li>
                 </ul>
                 <ul class="field01">
-                    <li>가중치*</li>
+                    <li>가중치</li>
                     <li><input type="text" name="weight" value="1.5" onkeyup="calculateTable()">배</li>
                 </ul>
 
@@ -138,7 +138,7 @@
             <div>
                 <span class="field02">지출비용</span>
                 <ul class="field01">
-                    <li>보험료*</li>
+                    <li>보험료</li>
                     <li><input type="text" name="insuranceRate" id="insuranceRate" value="0.23" onkeyup="calculateTable()">%</li>
                 </ul>
                 <ul class="field01">
@@ -173,7 +173,14 @@
         $('#loan').val(numberWithCommas(replaceAllComma($('#totalInvestment').val()) * replaceAllComma($('#loanPercent').val()) / 100));
         //금융대출 = 총투자비 * 대출비율
         $('#myCapital').val(numberWithCommas(replaceAllComma($('#totalInvestment').val()) - replaceAllComma($('#loan').val())));
+
+        $('#smpUnit').val(numberWithCommas(replaceAllComma($('#smpUnit').val())));
+        $('#recUnit').val(numberWithCommas(replaceAllComma($('#recUnit').val())));
     };
+
+    function calculateComma(that) {
+        $(that).val(numberWithCommas(replaceAllComma($(that).val())));
+    }
 
     function calculateScale() {
         //설치용량 계산
