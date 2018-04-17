@@ -18,8 +18,6 @@
     <input type="hidden" name="long" id="long">
     <input type="hidden" name="drawingPolygon" id="drawingPolygon">
     <input type="hidden" name="powerDay" value="365">
-    <input type="hidden" name="profit" value="4.1" onchange="calculateTable()">
-    <input type="hidden" name="totalInvestment" id="totalInvestment" value="150,000,000">
 
     <div class="top">
         <div class="area">
@@ -72,19 +70,27 @@
                 <span class="field02">자금조건</span>
                 <ul class="field01">
                     <li>총투자비</li>
-                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000" readonly="">원</li>
+                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000"readonly="">원</li>
                 </ul>
                 <ul class="field01">
                     <li>자기자본</li>
+                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000" readonly="">원</li>
+                </ul>
+                <ul class="field01">
+                    <li>금융대출(원)</li>
                     <li><input type="text" name="loan" id="loan" value="135,000,000" readonly="">원</li>
                 </ul>
                 <ul class="field01">
-                    <li>금융대출</li>
+                    <li>금융대출(%)</li>
                     <li><input type="text" name="loanPercent" id="loanPercent" value="90" onchange="calculateTable()">%</li>
                 </ul>
                 <ul class="field01">
+                    <li>설치단가</li>
+                    <li><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" onchange="calculateTable()">원</li>
+                </ul>
+                <ul class="field01">
                     <li>이율</li>
-                    <li><input type="text" name="unitPrice" id="unitPrice" value="4.7" onchange="calculateTable()">%</li>
+                    <li><input type="text" name="profit" id="profit" value="4.7" onchange="calculateTable()">%</li>
                 </ul>
                 <ul class="field01">
                     <li>상환기간</li>
@@ -99,7 +105,7 @@
                 <span class="field02">발전조건</span>
                 <ul class="field01">
                     <li>일평균 발전시간</li>
-                    <li><input type="text" name="powerTime" value="3.6" readonly="">시간</li>
+                    <li><input type="text" name="powerTime" value="3.6" readonly>시간</li>
                 </ul>
 
                 <ul class="field01">
@@ -112,7 +118,7 @@
                 </ul>
                 <ul class="field01">
                     <li>SMP상승률</li>
-                    <li><input type="text" name="smpRate" value="1" readonly="">%</li>
+                    <li><input type="text" name="smpRate" value="1" readonly>%</li>
                 </ul>
                 <ul class="field01">
                     <li>REC단가</li>
@@ -133,7 +139,7 @@
                 </ul>
                 <ul class="field01">
                     <li>유지보수비</li>
-                    <li><input type="text" name="maintenanceUnit" value="0.30" readonly="">%</li>
+                    <li><input type="text" name="maintenanceUnit" value="0.30" readonly>%</li>
                 </ul>
 
             </div>

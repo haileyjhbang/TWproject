@@ -8,21 +8,12 @@
 </head>
 <body>
 
-<input type="hidden" id="powerTime" value="${powerTime}">
 <input type="hidden" id="powerDay" value="${powerDay}">
-<input type="hidden" id="smpUnit" value="${smpUnit}">
-<input type="hidden" id="recUnit" value="${recUnit}">
-<input type="hidden" id="weight" value="${weight}">
-<input type="hidden" id="smpRate" value="${smpRate}">
-<input type="hidden" id="maintenanceUnit" value="${maintenanceUnit}">
-<input type="hidden" id="profit" value="${profit}">
-<input type="hidden" id="totalInvestment" value="${totalInvestment}">
-<input type="hidden" id="repayPeriod" value="${repayPeriod}">
 <input type="hidden" id="drawingPolygon" value="${drawingPolygon}">
 
  <div id="map" style="width:1200px;height:400px;"></div>
     
-      <div class="contents">
+  <div class="contents">
     <div class="contents1">
     <div class="areamp">
     <ul>
@@ -45,20 +36,25 @@
 
     <div>
     <span class="field02">자금조건</span>
-       <ul class="field01"><li>총투자비</li>
+        <ul class="field01"><li>총투자비</li>
+            <li><input type="text" name="totalInvestment" id="totalInvestment" value="${totalInvestment}" readonly>원</li></ul>
+       <ul class="field01"><li>자기자본</li>
            <li><input type="text" name="myCapital" id="myCapital" value="${myCapital}" readonly>원</li></ul>
         <ul class="field01">
             <li>자기자본</li>
-            <li><input type="text" name="loan" id="loan" value="${loan}">원</li></ul>
+            <li><input type="text" name="loan" id="loan" value="${loan}" readonly>원</li></ul>
         <ul class="field01">
             <li>금융대출</li>
-            <li><input type="text" name="loanPercent" id="loanPercent" value="${loanPercent}" readonly">%</li></ul>
+            <li><input type="text" name="loanPercent" id="loanPercent" value="${loanPercent}" onchange="calculateTable()">%</li></ul>
+        <ul class="field01">
+            <li>설치단가</li>
+            <li><input type="text" name="unitPrice" id="unitPrice" value="${unitPrice}" onchange="calculateTable()">원</li></ul>
         <ul class="field01">
             <li>이율</li>
-            <li><input type="text" name="unitPrice" id="unitPrice" value="${unitPrice}" readonly>%</li></ul>
+            <li><input type="text" name="profit" id="profit" value="${profit}" onchange="calculateTable()">%</li></ul>
         <ul class="field01">
             <li>상환기간</li>
-            <li><input type="text" name="repayPeriod" value="15" onchange="calculateTable()">년</li></ul>
+            <li><input type="text" name="repayPeriod" id="repayPeriod" value="${repayPeriod}" onchange="calculateTable()">년</li></ul>
     </div>
 
     </div>
@@ -68,28 +64,28 @@
         <span class="field02">발전조건</span>
         <ul class="field01">
             <li>일평균 발전시간</li>
-            <li><input type="text" name="powerTime" value="3.6" readonly="">시간</li>
+            <li><input type="text" name="powerTime" id="powerTime" value="${powerTime}" readonly>시간</li>
         </ul>
 
         <ul class="field01">
             <li>연간 효율저장률</li>
-            <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}" readonly>%</li>
+            <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}" onchange="calculateTable()">%</li>
         </ul>
         <ul class="field01">
             <li>SMP단가</li>
-            <li><input type="text" name="smpUnit" value="95" onchange="calculateTable()">원</li>
+            <li><input type="text" name="smpUnit" id="smpUnit" value="${smpUnit}" onchange="calculateTable()">원</li>
         </ul>
         <ul class="field01">
             <li>SMP상승률</li>
-            <li><input type="text" name="smpRate" value="1" readonly="">%</li>
+            <li><input type="text" name="smpRate" id="smpRate" value="${smpRate}" readonly>%</li>
         </ul>
         <ul class="field01">
             <li>REC단가</li>
-            <li><input type="text" name="recUnit" value="115" onchange="calculateTable()">원</li>
+            <li><input type="text" name="recUnit" id="recUnit" value="${recUnit}" onchange="calculateTable()">원</li>
         </ul>
         <ul class="field01">
             <li>가중치</li>
-            <li><input type="text" name="weight" value="1.2" onchange="calculateTable()">배</li>
+            <li><input type="text" name="weight"  id="weight" value="${weight}" onchange="calculateTable()">배</li>
         </ul>
 
 
@@ -98,11 +94,11 @@
         <span class="field02">지출비용</span>
         <ul class="field01">
             <li>보험료</li>
-            <li><input type="text" name="insuranceRate" id="insuranceRate" value="${insuranceRate}">%</li>
+            <li><input type="text" name="insuranceRate" id="insuranceRate" value="${insuranceRate}" onchange="calculateTable()">%</li>
         </ul>
         <ul class="field01">
             <li>유지보수비</li>
-            <li><input type="text" name="maintenanceUnit" value="0.30" readonly="">%</li>
+            <li><input type="text" name="maintenanceUnit" id="maintenanceUnit" value="${maintenanceUnit}" readonly>%</li>
         </ul>
         
         </div>
@@ -115,7 +111,7 @@
    <div class="income"> 
      <ul class="field03">  
       <li>월평균 수익</li><li><input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly="">원</li></ul>
-      <ul class="field03">  <li>년평균 수익</li><li><input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly=""> 원</li></ul>
+      <ul class="field03">  <li>연평균 수익</li><li><input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly=""> 원</li></ul>
       <ul class="field03">  <li>평균 수익율</li><li><input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly="">% </li></ul>
    </div>     
   <div class="incomebutton">    
