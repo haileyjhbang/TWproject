@@ -126,9 +126,9 @@
         
         </div>
     <br>
-    <div class="chartjs-wrapper"  style="display:none ">
-            <canvas id="myChart"></canvas>
-        </div>
+    <%--<div class="chartjs-wrapper"  style="display:none ">--%>
+            <%--<canvas id="myChart"></canvas>--%>
+        <%--</div>--%>
     <div class="chartjs-wrapper"  style="display:none ">
         <canvas id="myChart2"></canvas>
     </div>
@@ -202,7 +202,7 @@
     $(document).ready(function () {
         setMap();
         calculateCostTable();
-        drawChart();
+        // drawChart();
         drawChart2();
         $('input').prop('readonly', true);
     });

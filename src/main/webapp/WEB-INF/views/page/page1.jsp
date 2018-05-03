@@ -147,6 +147,7 @@
         calculateTable();
     }
 
+
     function calculateSmpUnit() {
         if($('#smpUnit').val()>180) $('#smpUnit').val(179);
         $('#recUnit').val(180-$('#smpUnit').val());
