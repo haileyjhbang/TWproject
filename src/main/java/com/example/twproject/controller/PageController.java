@@ -31,6 +31,22 @@ public class PageController {
 
     @GetMapping("/page1")
     public String page1(Model model) {
+        JSONObject xmlJSONObjLand = null;
+        try {
+            String resLand = externalAPIService.smp1hToday("1");
+
+            System.out.println("externalAPIService.smp1hToday: " + resLand);
+
+            try {
+                xmlJSONObjLand = XML.toJSONObject(resLand);
+            } catch (Exception e) {
+                return "redirect:page1";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("smpUnitBefore", formatSmp(xmlJSONObjLand));
         model.addAttribute("apiKeyDaum", "e12af9afb1526adcd0f898407bb25bfb");
         model.addAttribute("apiKeyVworld", "E60BEDC5-C3EE-3B5F-98D5-9166F94EB492");
         return "page/page1";

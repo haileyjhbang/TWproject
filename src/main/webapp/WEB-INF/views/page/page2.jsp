@@ -129,6 +129,9 @@
     <div class="chartjs-wrapper"  style="display:none ">
             <canvas id="myChart"></canvas>
         </div>
+    <div class="chartjs-wrapper"  style="display:none ">
+        <canvas id="myChart2"></canvas>
+    </div>
     <br>
     <div id="page2button">
    <div class="button show">
@@ -186,10 +189,21 @@
     var barDataset = new Array();
     var lineDataset = new Array();
 
+    var labels2 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+    var capaDataset = [
+        [2.03, 2.79, 3.52, 4.38, 4.73, 4.47, 3.32, 3.59, 3.58, 3.10, 2.07, 1.76],
+        [2.26, 2.98, 3.73, 4.64, 5.06, 4.89, 4.03, 4.07, 3.77, 3.20, 2.26, 1.99],
+        [2.28, 3.06, 3.84, 4.78, 5.16, 4.91, 4.09, 4.24, 3.88, 3.38, 2.34, 1.98],
+        [2.24, 2.97, 3.82, 4.77, 5.11, 4.70, 4.11, 4.27, 3.90, 3.49, 2.42, 1.99],
+        [2.51, 3.17, 3.87, 4.74, 5.06, 4.70, 4.17, 4.17, 3.70, 3.44, 2.57, 2.30],
+        [1.45, 2.34, 3.44, 4.63, 5.13, 4.71, 4.91, 4.61, 3.80, 3.38, 2.21, 1.51]
+    ];
+
     $(document).ready(function () {
         setMap();
         calculateCostTable();
         drawChart();
+        drawChart2();
         $('input').prop('readonly', true);
     });
 
@@ -496,6 +510,93 @@
                         scaleLabel: {
                             display: true,
                             labelString: '매출액(원)'
+                        },
+                        ticks: {
+                            beginAtZero: true,
+                            userCallback: function (value, index, values) {
+                                value = value.toString();
+                                value = value.split(/(?=(?:...)*$)/);
+                                value = value.join(',');
+                                return value;
+                            }
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+    function drawChart2() {
+        var scale = replaceAllComma($('#scale').val());
+        for (var i = 0; i < capaDataset.length; i++) {
+            for (var j = 0; j < capaDataset[i].length; j++) {
+                capaDataset[i][j] = capaDataset[i][j] * scale;
+            }
+        }
+
+        new Chart($("#myChart2"), {
+            "type": "line",
+            "data": {
+                "labels": labels2, // x-axis
+                "datasets": [{
+                    "label": "서울/경기",
+                    "data": capaDataset[0],
+                    "type": "line",
+                    "fill": false,
+                    "borderColor": "rgb(110, 10, 110)"
+                }, {
+                    "label": "강원도",
+                    "data": capaDataset[1],
+                    "type": "line",
+                    "fill": false,
+                    "borderColor": "rgb(20, 120, 120)"
+                }, {
+                    "label": "충청도",
+                    "data": capaDataset[2],
+                    "type": "line",
+                    "fill": false,
+                    "borderColor": "rgb(130, 130, 30)"
+                }, {
+                    "label": "전라도",
+                    "data": capaDataset[3],
+                    "type": "line",
+                    "fill": false,
+                    "borderColor": "rgb(140, 40, 40)"
+                }, {
+                    "label": "경상도",
+                    "data": capaDataset[4],
+                    "type": "line",
+                    "fill": false,
+                    "borderColor": "rgb(50, 150, 50)"
+                }, {
+                    "label": "제주도",
+                    "data": capaDataset[5],
+                    "type": "line",
+                    "fill": false,
+                    "borderColor": "rgb(60, 60, 160)"
+                }
+                ]
+            },
+            "options": {
+                tooltips: {
+                    mode: 'label',
+                    callbacks: {
+                        label: function (tooltipItem, data) {
+                            return tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                        },
+                    },
+                },
+                "scales": {
+                    "xAxes": [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '월'
+                        }
+                    }],
+                    "yAxes": [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: '발전용량(kw)'
                         },
                         ticks: {
                             beginAtZero: true,

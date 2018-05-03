@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +21,15 @@
     <input type="hidden" name="long" id="long">
     <input type="hidden" name="drawingPolygon" id="drawingPolygon">
     <input type="hidden" name="powerDay" value="365">
+    <c:set var="smp_total" value="0"/>
+    <c:forEach items='${smpUnitBefore}' var='itemList'>
+        <input type="hidden" value="${itemList.smp}" >
+        <c:set var="smp_total" value="${smp_total + itemList.smp}"/>
+    </c:forEach>
+    <c:set var="meanSmp" value="${smp_total / fn:length(smpUnitBefore)}"/>
+    <fmt:formatNumber var="meanSmp"
+                      value="${meanSmp}"
+                      maxFractionDigits="0"/>
 
     <div class="top">
         <div class="area">
@@ -66,9 +78,9 @@
                 <ul class="inputtext">
                     <li></li>
                     <li><input type="text" name="scale" id="scale" value="" onkeyup="calculateTable();calculateComma(this)">kw</li>
-                    <li><input type="text" name="recUnit" id="recUnit" value="115" onkeyup="calculateTable()">원</li>
+                    <li><input type="text" name="recUnit" id="recUnit" value="" onkeyup="calculateRecUnit()">원</li>
                     <li><input type="text" name="weight" value="1.5" onkeyup="calculateTable()">배</li>
-                    <li><input type="text" name="smpUnit" id="smpUnit" value="95" onkeyup="calculateTable()">원</li>
+                    <li><input type="text" name="smpUnit" id="smpUnit" value="${meanSmp}" onkeyup="calculateSmpUnit()">원</li>
                             
                 </ul>
                 
@@ -117,6 +129,8 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
 <script>
+    $('#recUnit').val(180-$('#smpUnit').val());
+
     function replaceAllComma(value) {
         return value.split(',').join('');
     }
@@ -124,6 +138,19 @@
     function numberWithCommas(cellValue) {
         if (cellValue == null || cellValue === '' || cellValue === 'undefined') return 0;
         return cellValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+
+    function calculateRecUnit() {
+        if($('#recUnit').val()>180) $('#recUnit').val(179);
+        $('#smpUnit').val(180-$('#recUnit').val());
+        calculateTable();
+    }
+
+    function calculateSmpUnit() {
+        if($('#smpUnit').val()>180) $('#smpUnit').val(179);
+        $('#recUnit').val(180-$('#smpUnit').val());
+        calculateTable();
     }
 
     function calculateTable() {
