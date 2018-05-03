@@ -37,39 +37,46 @@ html, body {
 }
 
 table {
-    width: 100%;
+    width: 90%;
+    margin: 0 auto;
     border-collapse: separate;
     border-spacing: 0px;
-    border-top: 1px solid lightgray;
+    border-bottom: 2px solid #cfe3ff;
+    border-top: 2px solid #39587a;
 }
+.chartjs-wrapper {
+    width: 90%;
+    margin: 0 auto;}
+
 
 .tHead {
-    background: lightgrey;
+    background: #fff;  height: 25px;
+    border-top: 2px solid #39587a;
 }
 
-.tHead td, .tHead th {
-    border-top: 1px solid black;
-}
-
-
+/* 
 tr:hover {
-    background: lightgrey;
-}
+    background: #c1dbfe;
+    z-index: 1;
+} */
 
 td {
-    padding: 2px;
+    padding-right: 10px;
     text-align: right;
+    border-right: 1px solid #d2d2d2;
+    border-bottom: 1px solid #d2d2d2;
 }
 
-td, th {
-    border-bottom: 1px solid lightgray;
+th {
+   border-right: 1px solid #d2d2d2;
+   border-bottom: 1px solid #d2d2d2; 
 }
 
 
 
 .wDisplay {
     width: 100px;
-    height: 100% !important;
+    
     border: none;
     background-color: transparent;
 }
@@ -84,7 +91,7 @@ table.layoutTable td {
     display: none !important
 }
 .show {
-    display: block !important
+    display: block 
 }
 .chartjs-wrapper {
 
@@ -92,38 +99,61 @@ table.layoutTable td {
 
 url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 ul, li, input { font-family: 'Nanum Gothic', sans-serif; list-style: none; border-style: none;}
-*{font-size: 14px;color: #505050;}
-#map {width: 1200px ;}
+*{font-size: 14px;color: #505050; font-family: 'Nanum Gothic', sans-serif;}
+h1{font-size: 25px; text-align: center;}
+
 ul {padding: 0;}
-form .top{width: 1200px; height: 50px; margin: 15px 0 5px 0 ; }
-.area {display: block; float: left; width: 52%; height:40px;  }
+form {margin: 20px;}
+
+.area {display: block; float: left; width: 48%; height:40px;  }
 #inputtext input {display: block; float: left; width: 60%; height: 40px; border-radius: 5px 0 0 5px; border: 1px solid #a0a0a0; padding: 10px;
     box-sizing: border-box;}
 #inputbutton input {display: block; float: left; width: 30%; height: 40px; background-color:#113359; color: #fff; 
     border-radius:0 5px 5px 0 ; border: 1px solid #113359 ; text-align:center;}
-.area2 {display: block; float: right; width: 45%; height:40px; border: 1px solid #a0a0a0 ; border-radius: 5px; }
-
+.area2 {display: block; float: right; margin-bottom: 10px; width: 50%; height:40px; border: 1px solid #a0a0a0 ; border-radius: 5px; }
 #areatitle {display: block; float: left; width: 130px; height: 40px; line-height: 40px; text-align: center; background-color:#dedede; }
 #arearadio { height: 40px; line-height: 40px;}
 #arearadio input{margin-left: 40px;}
-#map {width: 1220px; height: 400px; position: relative; overflow: hidden; background: url(&quot;http://i1.daumcdn.net/dmaps/apis/loading_n.png&quot;);}
-.contents  {width: 1200px; height:700px; background:#f5f5f5;   border-top: 2px solid #7d7d7d ; }
-.contents1 {width: 49%; display: block; float: left; padding-left: 20px; height: 500px;}
-.contents1 .areamp { width: 100%; height: 100px; font-weight: 600;}
-.contents1 .areamp li {display:block;  float: left; padding-bottom: 5px;}
-.contents1 .areamp li:first-child {width: 150px; margin-left: -5px; }
-.contents1 .areamp li:first-child:before {content: "|"; font-weight: bold; font-size: 20px; color:#00a0e9; padding-right: 5px;}
-.contents1 .areamp li {margin: 0 10px;}
-.contents1 .areamp ul input {text-align: right; width: 140px; height: 34px; border: 1px solid #00a0e9 ; border-radius: 5px; box-sizing: border-box;
-    padding: 5px;}
-.contents1 .field00 {border: 1px solid #a0a0a0 ; border-radius: 5px; width: 500px; height: 30px; background: #e8f1fe; }
-.contents1 .field01 , .contents2 .field01 {border: 1px solid #a0a0a0 ; border-radius: 5px; width: 500px; height: 30px; background: #fff; }
-.contents1 .field01 li:nth-child(1) ,.contents2 .field01 li:nth-child(1),.contents1 .field00 li:nth-child(1) {display: block; float: left; margin-left: 10px; height: 30px; margin-top: 5px; }
-.contents1 .field01 li:nth-child(2) ,.contents2 .field01 li:nth-child(2),.contents1 .field00 li:nth-child(2) {display: block; float: right; margin-right: 10px; height: 30px; margin-top: 5px; }
-.contents1 .field01 input,.contents2 .field01 input ,.contents1 .field00 input { border: none; text-align:right; background:none;}
-.contents1 .field02, .contents2 .field02 {display: block; border-bottom: 2px solid #7d7d7d ; height: 25px; width: 500px; font-weight: 600; }
+.contents {margin: 20px;}
+.sec1 { width: 100%; height: 40px;  border-top: 2px solid #39587a; border: 1px solid #032448; font-weight: 600;}
+.sec1 ul {margin: 5px; width: 100%;}
+.sec1 ul input {text-align: right;  height: 30px; width: 82%; border: 1px solid #fff; margin-right: 10px; }
+.sec1 ul li {border-left: 1px solid #a0a0a0 ; margin-top: -5px; line-height: 40px; height: 40px;}
+.sec1 ul li:first-child {text-align: center; border-left: none; width: 10%;}
+.sec1 ul:nth-child(2) li:first-child {border-left: 2px solid #032448 ;}
+.sec1 li {display:block; float: left; width:18%; line-height: 30px; margin-right: 5px; margin-left: 5px;}
 
-.contents2{width: 49%; height: 500px; display: block; float:right; margin-top: 10px;}
+.sectitle {display: block; height: 25px; width: 100%; font-weight: 600; margin-top: 15px; font-size: 15px; }
+.field00 {border-top: 2px solid #39587a; border-bottom: 1px solid #d2d2d2; width: 100%; height: 30px; margin: 0px; background-color: #e6effa; font-weight: 600; }
+.field00 li {display:block;  float: left; text-align: center; width: 20%; box-sizing: border-box; height: 30px;  padding-top: 5px; border-right: 1px solid #a0a0a0 ; }
+.field00 li:first-child {border-left: 1px solid #a0a0a0 ;}
+.inputtext li:first-child {border-left: 1px solid #a0a0a0 ;}
+/*.field00 li:nth-child(5), .inputtext li:nth-child(5) {border-style: none;} */
+.inputtext{border-bottom: 1px solid #d2d2d2; width: 100%; height: 40px; margin: 0px; }
+.inputtext li {font-weight: 600;display:block;  float: left; text-align: center; width: 20%; box-sizing: border-box; height: 40px;  padding-top: 0px; border-right: 1px solid #a0a0a0 ;}
+.inputtext li input {text-align: right;  border:none; margin-right: 10px; height: 30px; }
+
+.sec4 .field00 {border-top: 2px solid #39587a; border-bottom: 1px solid #d2d2d2; width: 100%; height: 30px; margin: 0px; background-color: #e6effa;font-weight: 600;}
+.sec4 .field00 li {display:block;  float: left; text-align: center; width: 20%; box-sizing: border-box; height: 30px;  padding-top: 5px; border-right: 1px solid #a0a0a0 ; }
+.sec4 .field00 li:nth-child(5),.sec4 .field00 li:nth-child(6) {width: 10%;}
+.sec4 .inputtext li{display:block;  float: left; text-align: center; width: 20%; box-sizing: border-box; height: 40px;  padding-top: 5px; border-right: 1px solid #a0a0a0 ; }
+.sec4 .inputtext li:nth-child(3) input:nth-child(1) {width: 20%;}
+.sec4 .inputtext li:nth-child(3) input {width: 50%; }
+.sec4 .inputtext li:nth-child(5) ,.sec4 .inputtext li:nth-child(6) {width: 10%;}
+/* .sec4 .field00 li:nth-child(6), .sec4 .inputtext li:nth-child(6) {border-style: none;} */
+.sec4 .inputtext{border-bottom: 1px solid #d2d2d2; width: 100%; height:40px; margin: 0px; }
+.sec4 .inputtext li {font-weight: 600;}
+.sec4 .inputtext li input {text-align: right;  border:none; margin: 0;  width: 80%; height: 30px; }
+
+.sec5 {border:3px solid #d9eafc; height:120px; }
+.sec5 .field00 {width: 100%; height: 50px; margin-top: 20px; font-weight: 600; border:none; background: none; }
+.sec5 .field00 li {border: none; color: #39587a ; margin-top: 10pxl display:block;  float: left; text-align: center; width: 25%; box-sizing: border-box; height: 35px; line-height: 25px;}
+.sec5 .field00 li span {border-bottom: 2px solid #39587a; font-size: 18px; font-weight: normal; padding: 10px 20px;}
+
+.sec5 .inputtext{ width: 100%; height:50px; margin: 0px; border:none;}
+.sec5 .inputtext li { font-size: 25px; color: #39587a; font-weight: 600; display:block; float: left; text-align: center; width: 25%; box-sizing: border-box; border:none;}
+.sec5 .inputtext li input {font-size: 25px;  border:none; margin-right: 7px; width: 60%; }
+
 .nextpage {width: 300px; height: 40px;margin: 0px auto;}
 .nextpage input {width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#113359; color: #fff;  display: block; border-style: none;}
 
@@ -134,22 +164,143 @@ background: -webkit-linear-gradient(28deg, rgb(0, 111, 182), rgb(74, 165, 77));
 background: linear-gradient(28deg, rgb(0, 111, 182), rgb(74, 165, 77)); border: 2px solid #fff; border-radius: 5px; box-sizing: border-box;overflow: hidden;
  }
 .smp ul {margin: 0;}
-.smp li {color: #fff; font-family: 'Nanum Gothic', sans-serif; }
-        .smp ul .todaysmp {font-weight: 600; width: 102px; height: 61px;  text-align: center; line-height: 61px; border-right: 1px solid #fff; }
+.smp li {color: #fff; font-family: 'Nanum Gothic', sans-serif;  overflow: hidden;}
+        .smp ul .todaysmp {font-weight: 600; width: 102px; height: 61px;  text-align: center; line-height: 27px; border-right: 1px solid #fff; }
         .smp ul .data {width: 120px; height: 31px; border-bottom: 1px solid #fff; text-align: center; line-height: 31px; position: relative; top: -63px; left: 103px;}
         
         .smp ul .title1,.smp ul .title2 {height: 30px; line-height: 30px; text-align: left; display: block; float: left; margin-left: 5px;}
         .smp ul .data1,.smp ul .data2 {height: 30px; line-height: 30px; text-align: right; display: block; float: right; margin-right: 5px;}
-   
-.layoutTable {width: 1200px; background:#f5f5f5;  border-bottom: 2px solid #7d7d7d ; display: block;position: relative; top: -130px;}
-.layoutTable .content3 {width:800px; margin: 0 auto; }
-.content3 {height: 200px;}
-.income {display: block; float: left; }
-.income .field03 { margin: 5px 0 ; border: 1px solid #a0a0a0 ; border-radius: 5px; width: 400px; height: 30px; background: #e8f1fe;}
-.income .field03 li:nth-child(1) {display: block; float: left; margin-left: 10px; height: 30px; margin-top: 5px; }
-.income .field03 li:nth-child(2) {display: block; float: right; margin-right: 10px; height: 30px; margin-top: 5px; }
-.income .field03 input { border: none; text-align:right; background:none; }
 
-.incomebutton {display: block; float: left; width: 300px; height:85px; margin: 20px 20px; }
-.incomebutton .buttonshow button {width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#39587a; color: #fff; border-style: none; margin-bottom: 5px;}
-.incomebutton .buttonprint button {width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#76965f; color: #fff; border-style: none;}
+.button.show button {display:inline-block; float: left; margin-right: 10px; width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#39587a; color: #fff; border-style: none; margin-bottom: 5px;}
+.button.print button {float: left; margin-right: 10px;width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#76965f; color: #fff; border-style: none; margin-bottom: 5px;}
+.button.back button {float: left;width: 300px; height: 40px; border-radius: 5px; text-align: center;background-color:#6b6b6b; color: #fff; border-style: none; margin-right: 10px;}
+#page2button {margin:auto; text-align:center; margin: 10px; }
+#page2button .button {vertical-align:middle; display:inline-block;}
+
+.data1.animated.infinite.flash {
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
+.data2.animated.infinite.flash {
+  animation-duration: 3s;
+  animation-delay: 2s;
+  animation-iteration-count: infinite;
+}
+
+.area3 {display: block; float: right; width: 40%; height:40px; border: 1px solid #a0a0a0 ; border-radius: 5px; margin-bottom: 20px; }
+#areatitle3 {display: block; float: left; width: 130px; height: 40px; line-height: 40px; text-align: center; background-color:#e6effa; }
+#address {display: block; float: left; width: 60%; height: 40px; border-radius: 5px 0 0 5px; padding: 10px;
+    box-sizing: border-box; border: none; }
+
+
+
+
+/***** 테블릿 *****/
+@media only screen and (max-width: 980px) {
+    
+* {font-size: 11px;}
+    .sec1 ul li:first-child { width:14%; }
+    .sec1 li {width: 15%;}
+    .sec1 ul input {margin-right: 0px; width: 64%; }
+    .area2{width: 51%px;}
+    #address { width: 48%; }
+
+    
+}
+
+@media only screen and (max-width: 768px) {
+    
+* {font-size: 11px;}
+    .sec1 ul li:first-child { width:14%; }
+    .sec1 li {width: 15%;}
+    .area2{width: 51%px;}
+    .inputtext li input {width: 60%; margin-right: 0px;}
+    .sec5 .inputtext li {font-size: 18px; }
+    .sec5 .inputtext li input {font-size: 14px;}
+
+}
+
+ 
+@media print {
+        * {font-size: 11px;}
+    .area {width: 720px; height:100px; margin-bottom: -40px; }
+    .area2{width: 648px; margin-bottom: 10px; }
+    .sec1 ul li:first-child {width: 8%; line-height: 19px; }
+    .sec1 ul input {width: 78%;}
+    .inputtext li input {width: 70%;}
+    .sec5 .inputtext li input {font-size: 14px;}
+}
+}
+@media only screen and (max-width: 1143px){ 
+    * {font-size: 11px;}
+    .area {width: 720px; height:100px; margin-bottom: -40px; }
+    .area2{width: 648px; margin-bottom: 10px; }
+    .sec1 ul li:first-child {width: 8%; line-height: 19px; }
+    .sec1 ul input {width: 78%;}
+    .inputtext li input {width: 70%;}
+    .sec5 .inputtext li input {font-size: 14px;}
+}
+ 
+
+/***** 모바일 *****/
+@media only screen and (max-width: 700px) {
+    input {overflow-y: auto;}
+    .area {display: block; float: left; width: 100%; height:100px; margin-bottom: -45px; }
+    #inputtext input {width: 70%;}
+    #inputbutton input {width: 30%;}
+    .area2{display: block; float: left; width: 100%; margin-right: 20px;}
+    #areatitle {width: 80px;}
+    #arearadio input {margin-left: 20px;}
+    .sec1 { width: 100%; height:230px; margin: 0px;  }
+    .sec1 ul {width: 100%;  }
+    .sec1 ul li { margin-left: -5px; border-left: none; height: 40px;line-height: 40px;}
+    .sec1 ul input { height: 25px; width: 80%; }
+    .sec1 li {width:100%; height:45px; margin: 0px; ;} 
+    .sec1 ul li:first-child {width:100%; border-bottom: 1px solid #a0a0a0; }
+    .sec1 ul:nth-child(1) li:first-child,.sec1 ul:nth-child(2) li:first-child {border-top: 2px solid #39587a;}
+    .sec1 ul:nth-child(2) li:first-child {border-left: none ;}
+    
+    .sec2, .sec3 {height:250px;}
+    .field00 {width: 100%; height: 0px;  border-bottom:none; }
+    .field00 li {width: 50%; display:block; float: none; height: 40px; border-top:none; border-bottom: 1px solid #d2d2d2; background-color: #e6effa;}
+    .inputtext{ display:block; float: none; width: 50%; height: 40px; margin-left: 50%; }
+    .inputtext li {width: 100%; height: 40px; border-bottom: 1px solid #a0a0a0 ;}
+    .inputtext li input {text-align: right;  border:none; margin-right: 10px; height: 30px; width: 70%; }
+    .field00 li:first-child {border-left:none; }
+    .inputtext li:first-child {border-left:none; }
+    
+    .sec4  {height:280px;}
+    .sec4 .field00 {width: 100%;  height: 0px; border-bottom:none; }
+    .sec4 .field00 li {width: 50%; display:block; float: none; height: 40px; border-top:none; border-bottom: 1px solid #d2d2d2; background-color: #e6effa;}
+    .sec4 .field00 li:nth-child(5),.sec4 .field00 li:nth-child(6) {width: 50%;}
+    .sec4 .inputtext li{display:block; float: none; width: 50%; height: 40px; margin-left: 50%; padding: 0px;}
+    .sec4 .inputtext li input {width: 80%;}
+    .sec4 .inputtext li:nth-child(2) input {margin-top: 1px;}
+    .sec4 .inputtext li:nth-child(3) input:nth-child(1) {width: 20%;}
+    .sec4 .inputtext li:nth-child(3) input {width: 40%; }
+    .sec4 .inputtext li:nth-child(5) ,.sec4 .inputtext li:nth-child(6) {width: 50%;}
+
+    .sec5 {height:530px; border:none; border-top: 2px solid #39587a; border: 1px solid #a0a0a0; }
+    .sec5 .field00 {width: 100%; height: 0px;margin: 0px;  background-color: #e6effa; border-bottom:none; }
+    .sec5 .field00 li { width: 100%; height: 60px; line-height: 40px; display:block; float: none; margin-bottom: 70px;}
+    .sec5 .field00 li span {border-bottom: none; padding: 0;}
+    .sec5 .inputtext li:nth-child(2) input {margin-top: 1px;}
+    .sec5 .inputtext{display:block; float: none; width: 100%; height: 60px; margin-top: 60px; padding: 0px;}
+    .sec5 .inputtext li { width: 100%; height: 128px; margin-bottom: 10px;}
+    .sec5 .inputtext li input { height: 40px; width:80%; display:block; float:left;}
+
+    
+.area3 {width: 100%; }
+#areatitle3 { width: 20%; }
+#address { width: 80%; }
+form {margin: 2px;}    
+.nextpage {width: 100%;}
+.nextpage input {width: 100%;}
+.button {width: 100%;}
+.button.show button {width: 100%;}
+.button.print button {width: 100%; }
+.button.back button {width: 100%; } 
+.contents {margin: 10px 0px;}
+}
+
