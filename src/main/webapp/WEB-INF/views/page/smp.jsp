@@ -39,9 +39,42 @@
             position: relative;
         }
     </style>
-    <script>
-    </script>
+
         <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="animate.min.css">
+<script>
+    
+    $.fn.extend({
+  animateCss: function(animationName, callback) {
+    var animationEnd = (function(el) {
+      var animations = {
+        animation: 'animationend',
+        OAnimation: 'oAnimationEnd',
+        MozAnimation: 'mozAnimationEnd',
+        WebkitAnimation: 'webkitAnimationEnd',
+      };
+
+      for (var t in animations) {
+        if (el.style[t] !== undefined) {
+          return animations[t];
+        }
+      }
+    })(document.createElement('div'));
+
+    this.addClass('animated ' + animationName).one(animationEnd, function() {
+      $(this).removeClass('animated ' + animationName);
+
+      if (typeof callback === 'function') callback();
+    });
+
+    return this;
+  },
+});
+    
+    
+  
+    </script>
+
 
 </head>
 <body>
@@ -106,9 +139,9 @@
     
     <div class="smp">
     <ul>       
-        <li class="todaysmp">오늘의 SMP</li>    
-        <ul class="data"><li class="title1">육지</li> <li class="data1">${meanLand}</li></ul>
-        <ul class="data"><li class="title2">제주</li> <li class="data2">${meanJeju}</li></ul>
+        <li class="todaysmp">오늘의 SMP<br>${modelJeju[0].tradeDay}</li>    
+        <ul class="data"><li class="title1">육지</li> <li class="data1 animated infinite flash">${meanLand}</li></ul>
+        <ul class="data"><li class="title2">제주</li> <li class="data2 animated infinite flash">${meanJeju}</li></ul>
     </ul></div>
 
 </body>

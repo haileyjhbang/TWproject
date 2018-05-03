@@ -7,207 +7,177 @@
     <meta charset="utf-8">
     <title>주소 검색 / 면적 확인</title>
     <link rel="stylesheet" href="common.css">
+    <style type="text/css">
+
+	@media print {
+
+		@page {
+
+			size:auto;
+
+			margin-top:2.5cm;
+
+			margin-right:2cm;
+
+			margin-bottom:1.5cm;
+
+			margin-left:2cm;
+
+		}
+
+		html, body { border:0; margin:0; padding:0; }
+
+		#printable { display:block; }
+
+		#non-printable { display:none; }
+
+		div .breakhere { width:auto;height;0px;page-break-before:always;line-height:0px; }
+
+	}
+
+</style>
 </head>
 <body>
-
+    
+<h1>태양광 발전소 수익성 시뮬레이션</h1>
 <form>
+    
+     <div class="area3">
+        <div id="areatitle3">주소</div>
+         <input id="address" value="${address}"> </div>
     <input type="hidden" id="powerDay" value="${powerDay}">
     <input type="hidden" id="drawingPolygon" value="${drawingPolygon}">
 
-    <div class="top">
-        <div class="area">
-            <div id="inputtext">
-                <input type="text" name="address" id="address" value="${address}" readonly></div>
-            <div id="inputbutton">
-                <input type="button" value="주소"></div>
-        </div>
-
-        <div class="area2">
-            <div id="areatitle">면적기준</div>
-            <div id="arearadio">
-                &nbsp;&nbsp;${type == 'sgg' ? '시/군/구' : ''}${type == 'emd' ? '읍/면/동' : ''}${type == 'li' ? '리' : ''}
-            </div>
-        </div>
-    </div>
-
-    <br/>
-
-    <div id="map" style="width:100%;height:400px;"></div>
-
-    <div class="contents">
-        <div class="contents1">
-            <div class="areamp">
+    <div id="map" style="width:100%;height:300px;"></div>
+<div class="contents">
+        
+            <div class="sec1">
                 <ul>
                     <li>지번구역 면적</li>
-                    <li><input text="text" id="polyAreaMeterPeang" value="${polyAreaMeterPeang}" onkeyup="calculatePolyAreaMeterPeang(this)">평</li>
-                    <li><input type="text" id="polyAreaMeter" value="${polyAreaMeter}" onkeyup="calculatePolyAreaMeter(this)">㎡</li>
+                    <li><input text="text" id="polyAreaMeterPeang" name="polyAreaMeterPeang" value="${polyAreaMeterPeang}" onkeyup="calculatePolyAreaMeterPeang(this)">평</li>
+                    <li><input type="text" id="polyAreaMeter" name="polyAreaMeter" value="${polyAreaMeter}" onkeyup="calculatePolyAreaMeter(this)">㎡</li>
                 </ul>
 
                 <ul>
                     <li>마우스선택 면적</li>
-                    <li><input text="text" id="polyPathPeang" value="${polyPathPeang}" onkeyup="calculatePolyPathPeang(this)">평</li>
-                    <li><input type="text" id="polyPathMeter" value="${polyPathMeter}" onkeyup="calculatePolyPathMeter(this)">㎡</li>
+                    <li><input text="text" id="polyPathPeang" name="polyPathPeang" value="${polyPathPeang}" onkeyup="calculatePolyPathPeang(this)">평</li>
+                    <li><input type="text" id="polyPathMeter" name="polyPathMeter" value="${polyPathMeter}" onkeyup="calculatePolyPathMeter(this)">㎡</li>
                 </ul>
             </div>
-
-            <div class="section02">
+            <span class="sectitle">기본조건</span>
+            <div class="sec2">                
                 <ul class="field00">
-                    <li>설치용량(kw)</li>
+                    <li>총면적</li><li>설치용량</li><li>REC단가</li><li>REC가중치</li><li>SMP단가</li>
+                </ul>
+                <ul class="inputtext">
+                    <li><input type="text" id="polyPathMeter" name="polyPathMeter" value="" onkeyup="calculatePolyPathMeter(this)">㎡</li>
                     <li><input type="text" name="scale" id="scale" value="<fmt:formatNumber value="${scale}" type="number"/>" readonly>kw</li>
-                </ul>
-                <ul class="field00">
-                    <li>설치단가</li>
-                    <li><input type="text" name="unitPrice" id="unitPrice" value="<fmt:formatNumber value="${unitPrice}" type="number"/>" >원</li>
-                </ul>
-                <ul class="field00">
-                    <li>금융대출(%)</li>
-                    <li><input type="text" name="loanPercent" id="loanPercent" value="${loanPercent}">%</li>
-                </ul>
-                <ul class="field00">
-                    <li>대출이율</li>
-                    <li><input type="text" name="profit" id="profit" value="${profit}">%</li>
-                </ul>
-
-            </div>
-
-            <div class="section03">
-                <span class="field02">자금조건</span>
-                <ul class="field01">
-                    <li>총투자비</li>
-                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="<fmt:formatNumber value="${totalInvestment}" type="number"/>" readonly>원</li>
-                </ul>
-                <ul class="field01">
-                    <li>자기자본</li>
-                    <li><input type="text" name="myCapital" id="myCapital" value="<fmt:formatNumber value="${myCapital}" type="number"/>" readonly>원</li>
-                </ul>
-
-                <ul class="field01">
-                    <li>금융대출(원)</li>
-                    <li><input type="text" name="loan" id="loan" value="<fmt:formatNumber value="${loan}" type="number"/>" readonly>원</li>
-
-                </ul>
-                <ul class="field01">
-                    <li>상환기간</li>
-                    <li><input type="text" name="repayPeriod" id="repayPeriod" value="${repayPeriod}" readonly>년</li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="contents2">
-            <div>
-                <span class="field02">발전조건</span>
-                <ul class="field01">
-                    <li>일평균 발전시간</li>
-                    <li><input type="text" name="powerTime" id="powerTime" value="${powerTime}" readonly>시간</li>
-                </ul>
-
-                <ul class="field01">
-                    <li>연간 효율저감률</li>
-                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>SMP단가</li>
-                    <li><input type="text" name="smpUnit" id="smpUnit" value="<fmt:formatNumber value="${smpUnit}" type="number"/>">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>SMP상승률</li>
-                    <li><input type="text" name="smpRate" id="smpRate" value="${smpRate}" readonly>%</li>
-                </ul>
-                <ul class="field01">
-                    <li>REC단가</li>
                     <li><input type="text" name="recUnit" id="recUnit" value="<fmt:formatNumber value="${recUnit}" type="number"/>" readonly>원</li>
-                </ul>
-                <ul class="field01">
-                    <li>가중치</li>
                     <li><input type="text" name="weight" id="weight" value="${weight}" readonly>배</li>
+                    <li><input type="text" name="smpUnit" id="smpUnit" value="<fmt:formatNumber value="${smpUnit}" type="number"/>">원</li>
+                            
                 </ul>
-
+                
 
             </div>
-            <div>
-                <span class="field02">지출비용</span>
-                <ul class="field01">
-                    <li>보험료</li>
+            <span class="sectitle">발전조건</span>
+            <div class="sec3">                
+                <ul class="field00">
+                    <li>일평균 발전시간</li><li>연간 효율저감률</li><li>SMP상승률</li><li>유지보수</li><li>보험료</li>                
+                </ul>
+                <ul class="inputtext">
+                    <li><input type="text" name="powerTime" id="powerTime" value="${powerTime}" readonly>시간</li>
+                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="${efficiencyRate}">%</li>
+                    <li><input type="text" name="smpRate" id="smpRate" value="${smpRate}" readonly>%</li>
+                    <li><input type="text" name="maintenanceUnit" id="maintenanceUnit" value="${maintenanceUnit}" readonly>%</li>
                     <li><input type="text" name="insuranceRate" id="insuranceRate" value="${insuranceRate}" readonly>%</li>
                 </ul>
-                <ul class="field01">
-                    <li>유지보수비</li>
-                    <li><input type="text" name="maintenanceUnit" id="maintenanceUnit" value="${maintenanceUnit}" readonly>%</li>
-                </ul>
-
+               
             </div>
+            <span class="sectitle">자금조건</span>
+            <div class="sec4">                
+                <ul class="field00">
+                    <li>총공사비</li><li>설치단가</li><li>금융대출</li><li>자기자본</li><li>금융이율</li><li>상환기간</li>                
+                </ul>
+                <ul class="inputtext">
+                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="<fmt:formatNumber value="${totalInvestment}" type="number"/>" readonly>원</li>
+                    <li><input type="text" name="unitPrice" id="unitPrice" value="<fmt:formatNumber value="${unitPrice}" type="number"/>" >원</li>
+                    <li><input type="text" name="loanPercent" id="loanPercent" value="${loanPercent}">%
+                        <input type="text" name="loan" id="loan" value="<fmt:formatNumber value="${loan}" type="number"/>" readonly>원</li>
+                    <li><input type="text" name="myCapital" id="myCapital" value="<fmt:formatNumber value="${myCapital}" type="number"/>" readonly>원</li>
+                    <li><input type="text" name="profit" id="profit" value="${profit}">%</li>
+                    <li><input type="text" name="repayPeriod" id="repayPeriod" value="${repayPeriod}" readonly>년</li>
+                </ul>
+               
+            </div>
+    
+    <span class="sectitle">수익성 검토</span>
+        <div class="sec5">
+            <ul class="field00">
+                 <li><span>설치용량</span></li><li><span>연평균 수익</span></li><li><span>월평균 수익</span></li><li><span>수익률</span></li>
+            </ul>
+            <ul class="inputtext">
+                <li><input type="text" name="scale" id="scale" value="<fmt:formatNumber value="${scale}" type="number"/>" readonly>kw</li>
+                <li><input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly="">원</li>
+                <li><input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly="">원</li>
+                <li><input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly="">%</li>
+                
+            </ul>
+        
         </div>
-
-    </div>
-
-    <div class="layoutTable">
-        <div class="content3">
-            <div class="income">
-                <ul class="field03">
-                    <li>월평균 수익</li>
-                    <li><input type="text" name="netIncomeMonthDisplay" id="netIncomeMonthDisplay" value="" class="wDisplay" readonly="">원</li>
-                </ul>
-                <ul class="field03">
-                    <li>연평균 수익</li>
-                    <li><input type="text" name="netIncomeYearDisplay" id="netIncomeYearDisplay" value="" class="wDisplay" readonly=""> 원</li>
-                </ul>
-                <ul class="field03">
-                    <li>평균 수익율</li>
-                    <li><input type="text" name="netIncomeRaiteDisplay" id="netIncomeRaiteDisplay" value="" class="wDisplay" readonly="">%</li>
-                </ul>
-            </div>
-            <div class="incomebutton">
-                <div class="buttonshow">
-                    <button type="button" onclick="calculationBasis(this.value)" value="show">산출근거</button>
-                </div>
-                <%--<div class="buttonprint">--%>
-                    <%--<button type="button" onclick="window.print()">인쇄하기</button>--%>
-                <%--</div>--%>
-            </div>
-        </div>
-
-
-        <div class="chartjs-wrapper">
+    <br>
+    <div class="chartjs-wrapper"  style="display:none ">
             <canvas id="myChart"></canvas>
         </div>
+    <br>
+    <div id="page2button">
+   <div class="button show">
+     <button type="button" onclick="calculationBasis(this.value)" value="show">산출근거</button>
+   </div> 
+   <div class="button print">
+      <button type="button" onclick="window.print()">인쇄하기</button>
     </div>
-
-    <br/>
-
-    <p/>
-
-    <table id="calculateCostTable" style="display:none ">
+    <div class="button back">
+      <button type="button" onclick="history.back(-1)">뒤로가기</button>
+    </div>
+    </div>
+        </div>
+<br>
+            
+     <div style="page-break-before: always;" >           
+     <table id="calculateCostTable" style="display:none ">
         <tr class="tHead">
             <th>구분</th>
-            <th colspan="3">수입</th>
-            <th colspan="4">지출</th>
-            <th></th>
-            <th colspan="2">수익총계</th>
+            <th colspan="3" style="background-color: #d6eaff">수입</th>
+            <th colspan="4" style="background-color: #ffd6d6">지출</th>
+            <th rowspan="3">상환후잔액</th>
+            <th colspan="2" style="background-color: #fffed6">수익총계</th>
         </tr>
         <tr class="tHead">
             <th rowspan="2">연차</th>
-            <th rowspan="2">연간전력생산량</th>
-            <th>SMP</th>
-            <th rowspan="2">연수익</th>
-            <th rowspan="2">유지보수비</th>
-            <th rowspan="2">보험료</th>
-            <th rowspan="2">원금상환</th>
-            <th rowspan="2">이자</th>
-            <th rowspan="2">상환후잔액</th>
-            <th rowspan="2">순수익</th>
-            <th rowspan="2">수익률(%)</th>
+            <th rowspan="2" style="background-color: #d6eaff">연간전력생산량</th>
+            <th style="background-color: #d6eaff">SMP</th>
+            <th rowspan="2" style="background-color: #d6eaff">연수익</th>
+            <th rowspan="2" style="background-color: #ffd6d6">유지보수비</th>
+            <th rowspan="2" style="background-color: #ffd6d6">보험료</th>
+            <th rowspan="2" style="background-color: #ffd6d6">원금상환</th>
+            <th rowspan="2" style="background-color: #ffd6d6">이자</th>            
+            <th rowspan="2" style="background-color: #fffed6">순수익</th>
+            <th rowspan="2" style="background-color: #fffed6">수익률(%)</th>
         </tr>
         <tr class="tHead">
-            <th>REC</th>
+            <th style="background-color:#d6eaff">REC</th>
         </tr>
     </table>
+</div>
+    <br/>
+    <p/>
 
 
-    <div class="buttonprint">
-        <button type="button" onclick="window.print()">인쇄하기</button>
-    </div>
+
 </form>
+    
+    
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
@@ -220,6 +190,7 @@
         setMap();
         calculateCostTable();
         drawChart();
+        $('input').prop('readonly', true);
     });
 
     function setMap() {
@@ -323,19 +294,19 @@
                 console.log("2 =" + totalInvestment);
                 $("#calculateCostTable").append("<tr>" +
                     "<th rowspan='2'>" + (i + 1) + "</th>" +
-                    "<td rowspan='2'>" + numberWithCommas(annualPower) + "</td>" +
-                    "<td>" + numberWithCommas(smp) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(annualProfit) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(maintenance) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(insuranceFee) + "</td>" +
-                    "<td rowspan='2'></td>" +
-                    "<td rowspan='2'>" + numberWithCommas(interest) + "</td>" +
+                    "<td rowspan='2' style='background-color: #d6eaff' >" + numberWithCommas(annualPower) + "</td>" +
+                    "<td style='background-color: #d6eaff'>" + numberWithCommas(smp) + "</td>" +
+                    "<td rowspan='2' style='background-color: #d6eaff'>" + numberWithCommas(annualProfit) + "</td>" +
+                    "<td rowspan='2' style='background-color: #ffd6d6'>" + numberWithCommas(maintenance) + "</td>" +
+                    "<td rowspan='2' style='background-color: #ffd6d6'>" + numberWithCommas(insuranceFee) + "</td>" +
+                    "<td rowspan='2' style='background-color: #ffd6d6'></td>" +
+                    "<td rowspan='2' style='background-color: #ffd6d6'>" + numberWithCommas(interest) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(leftBalance) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(netIncome) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(profitRate) + "%</td>" +
+                    "<td rowspan='2' style='background-color: #fffed6'>" + numberWithCommas(netIncome) + "</td>" +
+                    "<td rowspan='2' style='background-color: #fffed6'>" + numberWithCommas(profitRate) + "%</td>" +
                     "</tr>");
                 $("#calculateCostTable").append("<tr>" +
-                    "<td>" + numberWithCommas(rec) + "</td>" +
+                    "<td style='background-color: #d6eaff'>" + numberWithCommas(rec) + "</td>" +
                     "</tr>");
                 barDataset[i] = Math.round(netIncome); //순수익
                 lineDataset[i] = Math.round(annualProfit); //연수익
@@ -363,19 +334,19 @@
                 profitRate = netIncome / totalInvestment * 100;
                 $("#calculateCostTable").append("<tr>" +
                     "<th rowspan='2'>" + (i + 1) + "</th>" +
-                    "<td rowspan='2'>" + numberWithCommas(annualPower) + "</td>" +
-                    "<td>" + numberWithCommas(smp) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(annualProfit) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(maintenance) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(insuranceFee) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(payback) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(interest) + "</td>" +
+                    "<td rowspan='2' style='background-color: #d6eaff'>" + numberWithCommas(annualPower) + "</td>" +
+                    "<td style='background-color: #d6eaff'>" + numberWithCommas(smp) + "</td>" +
+                    "<td rowspan='2' style='background-color: #d6eaff'>" + numberWithCommas(annualProfit) + "</td>" +
+                    "<td rowspan='2' style='background-color: #ffd6d6'>" + numberWithCommas(maintenance) + "</td>" +
+                    "<td rowspan='2' style='background-color: #ffd6d6'>" + numberWithCommas(insuranceFee) + "</td>" +
+                    "<td rowspan='2' style='background-color: #ffd6d6'>" + numberWithCommas(payback) + "</td>" +
+                    "<td rowspan='2' style='background-color: #ffd6d6'>" + numberWithCommas(interest) + "</td>" +
                     "<td rowspan='2'>" + numberWithCommas(leftBalance) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(netIncome) + "</td>" +
-                    "<td rowspan='2'>" + numberWithCommas(profitRate) + "%</td>" +
+                    "<td rowspan='2' style='background-color: #fffed6'>" + numberWithCommas(netIncome) + "</td>" +
+                    "<td rowspan='2' style='background-color: #fffed6'>" + numberWithCommas(profitRate) + "%</td>" +
                     "</tr>");
                 $("#calculateCostTable").append("<tr>" +
-                    "<td>" + numberWithCommas(rec) + "</td>" +
+                    "<td style='background-color: #d6eaff'>" + numberWithCommas(rec) + "</td>" +
                     "</tr>");
                 barDataset[i] = Math.round(netIncome);
                 lineDataset[i] = Math.round(annualProfit);
@@ -383,45 +354,45 @@
         }
         $("#calculateCostTable").append("<tr class='tHead'>" +
             "<th>연평균</th>" +
-            "<td>" + numberWithCommas(totalAnnualPower / duration) + "</td>" +
-            "<td>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
-            "<td>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
-            "<td>" + numberWithCommas(totalMaintenance / duration) + "</td>" +
-            "<td>" + numberWithCommas(totalInsuranceFee / duration) + "</td>" +
-            "<td>" + numberWithCommas(totalPayback / repayPeriod2) + "</td>" +
-            "<td>" + numberWithCommas(totalInterest / interestCount) + "</td>" +
+            "<td style='background-color: #d6eaff'>" + numberWithCommas(totalAnnualPower / duration) + "</td>" +
+            "<td style='background-color: #d6eaff'>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
+            "<td style='background-color: #d6eaff'>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
+            "<td style='background-color: #ffd6d6'>" + numberWithCommas(totalMaintenance / duration) + "</td>" +
+            "<td style='background-color: #ffd6d6'>" + numberWithCommas(totalInsuranceFee / duration) + "</td>" +
+            "<td style='background-color: #ffd6d6'>" + numberWithCommas(totalPayback / repayPeriod2) + "</td>" +
+            "<td style='background-color: #ffd6d6'>" + numberWithCommas(totalInterest / interestCount) + "</td>" +
             "<td></td>" +
-            "<td>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
-            "<td>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) + "%</td>" +
+            "<td style='background-color: #fffed6'>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
+            "<td style='background-color: #fffed6'>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) + "%</td>" +
             "</tr>");
         $("#calculateCostTable").append("<tr class='tHead'>" +
             "<th>누계합계</th>" +
-            "<td>" + numberWithCommas(totalAnnualPower) + "</td>" +
-            "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
-            "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
-            "<td>" + numberWithCommas(totalMaintenance) + "</td>" +
-            "<td>" + numberWithCommas(totalInsuranceFee) + "</td>" +
-            "<td>" + numberWithCommas(totalPayback) + "</td>" +
-            "<td>" + numberWithCommas(totalInterest) + "</td>" +
+            "<td style='background-color: #d6eaff'>" + numberWithCommas(totalAnnualPower) + "</td>" +
+            "<td style='background-color: #d6eaff'>" + numberWithCommas(totalAnnualProfit) + "</td>" +
+            "<td style='background-color: #d6eaff'>" + numberWithCommas(totalAnnualProfit) + "</td>" +
+            "<td style='background-color: #ffd6d6'>" + numberWithCommas(totalMaintenance) + "</td>" +
+            "<td style='background-color: #ffd6d6'>" + numberWithCommas(totalInsuranceFee) + "</td>" +
+            "<td style='background-color: #ffd6d6'>" + numberWithCommas(totalPayback) + "</td>" +
+            "<td style='background-color: #ffd6d6'>" + numberWithCommas(totalInterest) + "</td>" +
             "<td></td>" +
-            "<td>" + numberWithCommas(totalNetIncome) + "</td>" +
-            "<td></td>" +
+            "<td style='background-color: #fffed6'>" + numberWithCommas(totalNetIncome) + "</td>" +
+            "<td style='background-color: #fffed6'></td>" +
             "</tr>");
 
         $("#calculateCostTable").append("<tr><td colspan='11'>&nbsp;</td></tr>");
 
-        $("#calculateCostTable").append("<tr class='tHead'>" +
+        $("#calculateCostTable").append("<tr class='tHead' style='background: #39587a;' >" +
             "<th>&nbsp;</th>" +
-            "<th>매출액</th>" +
-            "<th>원금상환</th>" +
+            "<th style='color:#fff;'>매출액</th>" +
+            "<th style='color:#fff;'>원금상환</th>" +
             "<th>&nbsp;</th>" +
-            "<th>유지보수비</th>" +
-            "<th>보험료</th>" +
+            "<th style='color:#fff;'>유지보수비</th>" +
+            "<th style='color:#fff;'>보험료</th>" +
             "<th>&nbsp;</th>" +
-            "<th>이자</th>" +
+            "<th style='color:#fff;'>이자</th>" +
             "<th>&nbsp;</th>" +
-            "<th>순수익</th>" +
-            "<th>수익율</th>" +
+            "<th style='color:#fff;'>순수익</th>" +
+            "<th style='color:#fff;'>수익율</th>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
             "<th>1달</th>" +
@@ -482,6 +453,8 @@
 
     function calculationBasis(type) {
         $('#calculateCostTable').toggle();
+        $('.chartjs-wrapper').toggle();
+        
     }
 
     // 그래프

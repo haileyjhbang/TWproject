@@ -44,8 +44,8 @@
     <br/>
 
     <div class="contents">
-        <div class="contents1">
-            <div class="areamp">
+        
+            <div class="sec1">
                 <ul>
                     <li>지번구역 면적</li>
                     <li><input text="text" id="polyAreaMeterPeang" name="polyAreaMeterPeang" value="" onkeyup="calculatePolyAreaMeterPeang(this)">평</li>
@@ -58,99 +58,59 @@
                     <li><input type="text" id="polyPathMeter" name="polyPathMeter" value="" onkeyup="calculatePolyPathMeter(this)">㎡</li>
                 </ul>
             </div>
-
-            <div class="section02">
+            <span class="sectitle">기본조건</span>
+            <div class="sec2">                
                 <ul class="field00">
-                    <li>설치용량</li>
-                    <li><input type="text" name="scale" id="scale" value="100" readonly>kw</li>
+                    <li>총면적</li><li>설치용량</li><li>REC단가</li><li>REC가중치</li><li class="lastli">SMP단가</li>
                 </ul>
-                <ul class="field00">
-                    <li>설치단가</li>
-                    <li><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" onkeyup="calculateTable();calculateComma(this)">원</li>
-                </ul>
-
-                <ul class="field00">
-                    <li>금융대출(%)</li>
-                    <li><input type="text" name="loanPercent" id="loanPercent" value="90" onkeyup="calculateTable()">%</li>
-                </ul>
-                 <ul class="field00">
-                     <li>대출이율</li>
-                    <li><input type="text" name="profit" id="profit" value="4.7" onkeyup="calculateTable()">%</li>
-                </ul>
-
-            </div>
-
-            <div class="section03">
-                <span class="field02">자금조건</span>
-                <ul class="field01">
-                    <li>총투자비</li>
-                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="150,000,000" onkeyup="calculateComma(this)">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>자기자본</li>
-                    <li><input type="text" name="myCapital" id="myCapital" value="15,000,000" onkeyup="calculateComma(this)">원</li>
-                </ul>
-
-                <ul class="field01">
-                    <li>금융대출(원)</li>
-                    <li><input type="text" name="loan" id="loan" value="135,000,000" onkeyup="calculateComma(this)">원</li>
-
-                </ul>
-                <ul class="field01">
-                    <li>상환기간</li>
-                    <li><input type="text" name="repayPeriod" value="15" onkeyup="calculateTable()">년</li>
-                </ul>
-            </div>
-
-        </div>
-
-        <div class="contents2">
-            <div>
-                <span class="field02">발전조건</span>
-                <ul class="field01">
-                    <li>일평균 발전시간</li>
-                    <li><input type="text" name="powerTime" value="3.6">시간</li>
-                </ul>
-
-                <ul class="field01">
-                    <li>연간 효율저감률</li>
-                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="0.50" onkeyup="calculateTable()">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>SMP단가</li>
-                    <li><input type="text" name="smpUnit" id="smpUnit" value="95" onkeyup="calculateTable()">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>SMP상승률</li>
-                    <li><input type="text" name="smpRate" value="1">%</li>
-                </ul>
-                <ul class="field01">
-                    <li>REC단가</li>
+                <ul class="inputtext">
+                    <li></li>
+                    <li><input type="text" name="scale" id="scale" value="" onkeyup="calculateTable();calculateComma(this)">kw</li>
                     <li><input type="text" name="recUnit" id="recUnit" value="115" onkeyup="calculateTable()">원</li>
-                </ul>
-                <ul class="field01">
-                    <li>가중치</li>
                     <li><input type="text" name="weight" value="1.5" onkeyup="calculateTable()">배</li>
+                    <li><input type="text" name="smpUnit" id="smpUnit" value="95" onkeyup="calculateTable()">원</li>
+                            
                 </ul>
-
+                
 
             </div>
-            <div>
-                <span class="field02">지출비용</span>
-                <ul class="field01">
-                    <li>보험료</li>
+            <span class="sectitle">발전조건</span>
+            <div class="sec3">                
+                <ul class="field00">
+                    <li>일평균 발전시간</li><li>연간 효율저감률</li><li>SMP상승률</li><li>유지보수</li><li>보험료</li>                
+                </ul>
+                <ul class="inputtext">
+                    <li><input type="text" name="powerTime" value="3.6">시간</li>
+                    <li><input type="text" name="efficiencyRate" id="efficiencyRate" value="0.50" onkeyup="calculateTable()">%</li>
+                    <li><input type="text" name="smpRate" value="1">%</li>
+                    <li><input type="text" name="maintenanceUnit" value="0.30">%</li>
                     <li><input type="text" name="insuranceRate" id="insuranceRate" value="0.23" onkeyup="calculateTable()">%</li>
                 </ul>
-                <ul class="field01">
-                    <li>유지보수비</li>
-                    <li><input type="text" name="maintenanceUnit" value="0.30">%</li>
-                </ul>
-
+               
             </div>
+            <span class="sectitle">자금조건</span>
+            <div class="sec4">                
+                <ul class="field00">
+                    <li>총공사비</li><li>설치단가</li><li>금융대출</li><li>자기자본</li><li>금융이율</li><li>상환기간</li>                
+                </ul>
+                <ul class="inputtext">
+                    <li><input type="text" name="totalInvestment" id="totalInvestment" value="0" onkeyup="calculateComma(this)">원</li>
+                    <li><input type="text" name="unitPrice" id="unitPrice" value="1,500,000" onkeyup="calculateTable();calculateComma(this)">원</li>
+                    <li><input type="text" name="loanPercent" id="loanPercent" value="90" onkeyup="calculateTable()">%
+                        <input type="text" name="loan" id="loan" value="0" onkeyup="calculateComma(this)">원</li>
+                    <li><input type="text" name="myCapital" id="myCapital" value="0" onkeyup="calculateComma(this)">원</li>
+                    <li><input type="text" name="profit" id="profit" value="4.7" onkeyup="calculateTable()">%</li>
+                    <li><input type="text" name="repayPeriod" value="15" onkeyup="calculateTable()">년</li>
+                </ul>
+               
+            </div>
+
         </div>
 
+       
+
         <div class="nextpage"><input type="button" id="nextPage" value="수익성 계산"></div>
-    </div>
+    
 
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -167,6 +127,7 @@
     }
 
     function calculateTable() {
+    	
         //총투자비 = 설치용량 * 설치단가
         $('#totalInvestment').val(numberWithCommas(replaceAllComma($('#scale').val()) * replaceAllComma($('#unitPrice').val())));
         //자기자본 = 총투자비 - 금융대출
@@ -191,6 +152,7 @@
             scale = Math.round(replaceAllComma($('#polyAreaMeterPeang').val()) / 5); //지역(평) polyAreaMeterPeang
         }
         $('#scale').val(numberWithCommas(scale));
+        calculateTable();
     }
 
     /////////////
@@ -492,6 +454,18 @@
         //    alert( "마우스로 구역을 선택해주세요." );
         //    return;
         //}
+        
+         
+        if($("#polyAreaMeterPeang").val() == "" && $("#polyAreaMeter").val() == "" && $("#polyPathPeang").val() == "" && $("#polyPathMeter").val() == ""){
+        	alert('면적을 입력 또는 선택해 주세요');
+        	return false;
+        	
+        }
+        
+        if($("#scale").val() == "" || $("#scale").val() == "0"){
+        	alert('설치용량값이 존재하지 않습니다. 다시 확인해 주세요');
+        	return false;
+        }
         $("#basicValues").submit();
     });
 
