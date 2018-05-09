@@ -397,56 +397,44 @@
 
         $("#calculateCostTable").append("<tr class='tHead' style='background: #39587a;' >" +
             "<th>&nbsp;</th>" +
-            "<th style='color:#fff;'>매출액</th>" +
+            "<th style='color:#fff;' colspan='2'>매출액</th>" +
             "<th style='color:#fff;'>원금상환</th>" +
-            "<th>&nbsp;</th>" +
             "<th style='color:#fff;'>유지보수비</th>" +
             "<th style='color:#fff;'>보험료</th>" +
-            "<th>&nbsp;</th>" +
             "<th style='color:#fff;'>이자</th>" +
-            "<th>&nbsp;</th>" +
-            "<th style='color:#fff;'>순수익</th>" +
-            "<th style='color:#fff;'>수익율</th>" +
+            "<th style='color:#fff;' colspan='2'>순수익</th>" +
+            "<th style='color:#fff;' colspan='2'>수익율</th>" +
             "</tr>");
         $("#calculateCostTable").append("<tr>" +
             "<th>1달</th>" +
-            "<td>" + numberWithCommas(totalAnnualProfit / duration / 12) + "</td>" +
+            "<td colspan='2'>" + numberWithCommas(totalAnnualProfit / duration / 12) + "</td>" +
             "<td>" + numberWithCommas(totalPayback / duration / 12) + "</td>" +
-            "<td></td>" +
             "<td>" + numberWithCommas(totalMaintenance / duration / 12) + "</td>" +
             "<td>" + numberWithCommas(totalInsuranceFee / duration / 12) + "</td>" +
-            "<td></td>" +
             "<td>" + numberWithCommas(totalInterest / duration / 12) + "</td>" +
-            "<td></td>" +
-            "<td>" + numberWithCommas(totalNetIncome / duration / 12) + "</td>" +
-            "<td rowspan='3'>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) + "%</td>" +
+            "<td colspan='2'>" + numberWithCommas(totalNetIncome / duration / 12) + "</td>" +
+            "<td rowspan='3' colspan='2'>" + numberWithCommas(totalNetIncome / duration / totalInvestment * 100) + "%</td>" +
             "</tr>");
         $('#netIncomeMonthDisplay').val(numberWithCommas(Math.floor(totalNetIncome / duration / 12 / 1000) * 1000));
         $('#netIncomeRaiteDisplay').val(numberWithCommas(totalNetIncome / duration / totalInvestment * 100));
         $("#calculateCostTable").append("<tr>" +
             "<th>1년</th>" +
-            "<td>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
+            "<td colspan='2'>" + numberWithCommas(totalAnnualProfit / duration) + "</td>" +
             "<td>" + numberWithCommas(totalPayback / duration) + "</td>" +
-            "<td></td>" +
             "<td>" + numberWithCommas(totalMaintenance / duration) + "</td>" +
             "<td>" + numberWithCommas(totalInsuranceFee / duration) + "</td>" +
-            "<td></td>" +
             "<td>" + numberWithCommas(totalInterest / duration) + "</td>" +
-            "<td></td>" +
-            "<td>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
+            "<td colspan='2'>" + numberWithCommas(totalNetIncome / duration) + "</td>" +
             "</tr>");
         $('#netIncomeYearDisplay').val(numberWithCommas(Math.floor(totalNetIncome / duration / 1000) * 1000));
         $("#calculateCostTable").append("<tr>" +
             "<th>20년</th>" +
-            "<td>" + numberWithCommas(totalAnnualProfit) + "</td>" +
+            "<td colspan='2'>" + numberWithCommas(totalAnnualProfit) + "</td>" +
             "<td>" + numberWithCommas(totalPayback) + "</td>" +
-            "<td></td>" +
             "<td>" + numberWithCommas(totalMaintenance) + "</td>" +
             "<td>" + numberWithCommas(totalInsuranceFee) + "</td>" +
-            "<td></td>" +
             "<td>" + numberWithCommas(totalInterest) + "</td>" +
-            "<td></td>" +
-            "<td>" + numberWithCommas(totalNetIncome) + "</td>" +
+            "<td colspan='2'>" + numberWithCommas(totalNetIncome) + "</td>" +
             "</tr>");
     }
 
