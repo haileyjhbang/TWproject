@@ -42,9 +42,6 @@
         </div>
 
         <div class="area2">
-        <%--    선택한 구역 정보:
-            <input type="text" id="selectedX">
-            <input type="text" id="selectedY">--%>
         </div>
     </div>
 
@@ -147,9 +144,10 @@
     }
 
     var addrPopup;
+
     function getAddress() {
         var query = $('#inputAddress').val();
-        console.log(query)
+        // console.log(query)
         if (query.length == 0) {
             alert('주소를 입력해주세요.');
             return false;
@@ -157,7 +155,7 @@
         var url = "/address";
         var page = 1;
         var size = 10;
-        addrPopup = window.open(encodeURI(url + "?query=" + query + "&page=" + page + "&size=" + size), 'search', 'width=700,height=400,toolbar=0,menubar=0,location=0');
+        addrPopup = window.open(encodeURI(url + "?query=" + query + "&page=" + page + "&size=" + size), 'search_mini_win', 'width=700,height=400,toolbar=0,menubar=0,location=0');
     }
 
     function calculateRecUnit() {

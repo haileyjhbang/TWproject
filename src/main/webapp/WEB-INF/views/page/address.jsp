@@ -26,7 +26,7 @@
             ${i}
         </c:if>
         <c:if test="${i != curPage}">
-            <a href="javascript:void()" onclick="getAddress(${i})">${i}</a>
+            <a href="javascript:void(0)" onclick="getAddress(${i})">${i}</a>
         </c:if>
         <c:if test="${i != total_count+1}">
             |
@@ -42,18 +42,14 @@
         var addr = $('#addr_' + ind)[0].innerText;
 
         window.opener.document.getElementById('inputAddress').value = addr;
-
-        //window.opener.setArea(x, y);
         window.opener.setArea(x, y);
         // window.close();
-
     }
 
     function getAddress(pgae) {
         var query = $('#query').val();
         var url = "/address";
         var size = 10;
-        // addrPopup = window.open(encodeURI(url + "?query=" + query + "&page=" + pgae + "&size=" + size), 'search', 'width=700,height=400,toolbar=0,menubar=0,location=0');
         location.href = encodeURI(url + "?query=" + query + "&page=" + pgae + "&size=" + size);
     }
 </script>
