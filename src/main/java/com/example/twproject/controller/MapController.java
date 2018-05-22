@@ -1,16 +1,10 @@
 package com.example.twproject.controller;
 
 import com.example.twproject.Service.MapService;
-import com.example.twproject.Util.HttpUtil;
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 import java.util.Map;
 @RestController
 public class MapController {
@@ -18,14 +12,20 @@ public class MapController {
     private MapService mapService;
 
     @GetMapping("/address")
-    public ModelAndView getAddress(@RequestParam String query) throws Exception{
+    public ModelAndView getAddress(@RequestParam String query, @RequestParam String page, @RequestParam String size) throws Exception{
         String appKey = "c3a90c7e6e6a3797a6f5a2959d446066";
         ModelAndView mv = new ModelAndView("page/address");
 
-        Map<String, Object> result = mapService.getAddress(query, appKey);
+        Map<String, Object> result = mapService.getAddress(query, appKey, page, size);
+        Map<String, Object> meta = (Map<String, Object>) result.get("meta");
+        Integer totalCount = (Integer) meta.get("total_count");
 
         mv.addObject("result", result.get("documents"));
         mv.addObject("meta", result.get("meta"));
+        mv.addObject("query", query);
+        mv.addObject("curPage", page);
+        mv.addObject("total_count", Math.ceil(totalCount/ Integer.parseInt(size)));
+
         return mv;
     }
     @GetMapping("/coordinates")

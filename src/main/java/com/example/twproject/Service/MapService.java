@@ -10,11 +10,13 @@ import java.util.List;
 import java.util.Map;
 @Service
 public class MapService {
-    public Map<String, Object> getAddress(String query, String appKey) throws Exception{
+    public Map<String, Object> getAddress(String query, String appKey, String page, String size) throws Exception{
         Map<String, Object> resultMap = null;
         String url = "https://dapi.kakao.com/v2/local/search/address.json".trim();
-        List<NameValuePair> listParam = new ArrayList<NameValuePair>(); ;
+        List<NameValuePair> listParam = new ArrayList<NameValuePair>();
         listParam.add(new BasicNameValuePair("query", query));
+        listParam.add(new BasicNameValuePair("page", page));
+        listParam.add(new BasicNameValuePair("size", size));
         try{
             resultMap = HttpUtil.getHttpWithHeaders(url, listParam, appKey);
         }catch (Exception e){

@@ -128,6 +128,12 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
 <script>
+    $("#inputAddress").keypress(function(event){
+        if(event.which == 13){
+            getAddress();
+        }
+    });
+
     $('#recUnit').val(180-$('#smpUnit').val());
 
     function replaceAllComma(value) {
@@ -148,7 +154,9 @@
             return false;
         }
         var url = "/address";
-        addrPopup = window.open(encodeURI(url + "?query=" + query), 'search', 'width=700,height=350,toolbar=0,menubar=0,location=0');
+        var page = 1;
+        var size = 10;
+        addrPopup = window.open(encodeURI(url + "?query=" + query + "&page=" + page + "&size=" + size), 'search', 'width=700,height=400,toolbar=0,menubar=0,location=0');
     }
 
     function calculateRecUnit() {
