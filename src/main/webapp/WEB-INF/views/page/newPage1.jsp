@@ -128,6 +128,7 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
 <script>
+    $("#inputAddress").focus();
     $("#inputAddress").keypress(function(event){
         if(event.which == 13){
             getAddress();
