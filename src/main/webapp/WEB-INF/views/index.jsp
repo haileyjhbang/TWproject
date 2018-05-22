@@ -12,4 +12,5 @@
 <br/>
 <a href="./smp">SMP... </a>
 <br/>
+<a href="./newPage1">new Map... </a>
 </body>

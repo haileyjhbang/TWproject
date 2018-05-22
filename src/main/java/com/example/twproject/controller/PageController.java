@@ -1,6 +1,7 @@
 package com.example.twproject.controller;
 
 import com.example.twproject.Service.ExternalAPIService;
+import com.example.twproject.Service.MapService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
@@ -11,6 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -23,6 +26,9 @@ public class PageController {
 
     @Autowired
     private ExternalAPIService externalAPIService;
+
+    @Autowired
+    private MapService mapService;
 
     @GetMapping("/")
     public String main(Model model) {
@@ -50,6 +56,29 @@ public class PageController {
         model.addAttribute("apiKeyDaum", "e12af9afb1526adcd0f898407bb25bfb");
         model.addAttribute("apiKeyVworld", "E60BEDC5-C3EE-3B5F-98D5-9166F94EB492");
         return "page/page1";
+    }
+
+    @GetMapping("/newPage1")
+    public String newPage1(Model model) {
+        JSONObject xmlJSONObjLand = null;
+        try {
+            String resLand = externalAPIService.smp1hToday("1");
+
+            System.out.println("externalAPIService.smp1hToday: " + resLand);
+
+            try {
+                xmlJSONObjLand = XML.toJSONObject(resLand);
+            } catch (Exception e) {
+                return "redirect:page1";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        model.addAttribute("smpUnitBefore", formatSmp(xmlJSONObjLand));
+        model.addAttribute("apiKeyDaum", "e12af9afb1526adcd0f898407bb25bfb");
+        model.addAttribute("apiKeyVworld", "E60BEDC5-C3EE-3B5F-98D5-9166F94EB492");
+        return "page/newPage1";
     }
 
     @GetMapping("/smp")
