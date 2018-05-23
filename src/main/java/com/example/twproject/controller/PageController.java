@@ -1,7 +1,6 @@
 package com.example.twproject.controller;
 
 import com.example.twproject.Service.ExternalAPIService;
-import com.example.twproject.Service.MapService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
@@ -23,10 +22,6 @@ public class PageController {
 
     @Autowired
     private ExternalAPIService externalAPIService;
-
-    @Autowired
-    private MapService mapService;
-
     @GetMapping("/")
     public String main(Model model) {
         return "index";
@@ -66,7 +61,7 @@ public class PageController {
             try {
                 xmlJSONObjLand = XML.toJSONObject(resLand);
             } catch (Exception e) {
-                return "redirect:page1";
+                return "redirect:newPage1";
             }
         } catch (IOException e) {
             e.printStackTrace();
