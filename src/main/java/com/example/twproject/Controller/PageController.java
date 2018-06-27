@@ -1,4 +1,4 @@
-package com.example.twproject.controller;
+package com.example.twproject.Controller;
 
 import com.example.twproject.Service.ExternalAPIService;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -55,7 +55,6 @@ public class PageController {
         JSONObject xmlJSONObjLand = null;
         try {
             String resLand = externalAPIService.smp1hToday("1");
-
             System.out.println("externalAPIService.smp1hToday: " + resLand);
 
             try {

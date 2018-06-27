@@ -110,12 +110,8 @@
                     <li><input type="text" name="profit" id="profit" value="4.7" onkeyup="calculateTable()">%</li>
                     <li><input type="text" name="repayPeriod" value="15" onkeyup="calculateTable()">년</li>
                 </ul>
-               
             </div>
-
         </div>
-
-       
 
         <div class="nextpage"><input type="button" id="nextPage" value="수익성 계산"></div>
     
@@ -123,7 +119,7 @@
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
+<script type="text/javascript" src="http://dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKeyDaum}&libraries=services"></script>
 <script>
     $("#inputAddress").focus();
     $("#inputAddress").keypress(function(event){
@@ -214,7 +210,7 @@
     var geocoder = new daum.maps.services.Geocoder();
     //마커를 미리 생성
     var marker = new daum.maps.Marker({
-        //       position: new daum.maps.LatLng(37.537187, 127.005476),
+         // position: new daum.maps.LatLng(37.537187, 127.005476),
         map: map
     });
     initPolygonPath(map);
@@ -223,7 +219,6 @@
     var domain = "http://localhost";
 
     function setArea(x, y){
-        $('#map').html('');
         var map = new daum.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
         // 해당 주소에 대한 좌표를 받아서
         var coords = new daum.maps.LatLng(y, x);
@@ -237,13 +232,15 @@
         // 지도 중심을 변경한다.
         map.setCenter(coords);
         // 마커를 결과값으로 받은 위치로 옮긴다.
-        marker.setPosition(coords)
+        marker.setPosition(coords);
+
         marker.setMap(map);
 
         $('#polyAreaMeter').val("");
         $('#polyAreaMeterPeang').val("");
         getArea(x, y);
     }
+
     // 다각형을 구성하는 좌표 배열입니다. 이 좌표들을 이어서 다각형을 표시합니다
     function getArea(x, y) {
         var url = "http://api.vworld.kr/req/data?key=" + key + "&domain=localhost&service=data&version=2.0&request=getfeature&format=json&size=100&page=1&data=LP_PA_CBND_BUBUN&geometry=true&attribute=true&crs=EPSG:4326&geomfilter=POINT("+x+"%20"+y+")"

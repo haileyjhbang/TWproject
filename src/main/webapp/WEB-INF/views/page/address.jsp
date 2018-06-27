@@ -41,9 +41,8 @@
         var y = $('#y_' + ind).val();
         var addr = $('#addr_' + ind)[0].innerText;
 
-        window.opener.document.getElementById('inputAddress').value = addr;
-        window.opener.setArea(x, y);
-        // window.close();
+        $("#inputAddress", opener.document).val(addr);
+        $(opener.location).attr("href", "javascript:setArea(" + x + ", " + y + ");");
     }
 
     function getAddress(pgae) {

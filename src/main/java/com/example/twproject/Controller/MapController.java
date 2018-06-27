@@ -1,4 +1,4 @@
-package com.example.twproject.controller;
+package com.example.twproject.Controller;
 
 import com.example.twproject.Service.MapService;
 import org.springframework.beans.factory.annotation.Autowired;

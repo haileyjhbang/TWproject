@@ -304,8 +304,7 @@
                 netIncome = annualProfit - maintenance - interest;
                 totalNetIncome += netIncome;
                 profitRate = netIncome / totalInvestment * 100;
-                console.log("1 =" + netIncome);
-                console.log("2 =" + totalInvestment);
+
                 $("#calculateCostTable").append("<tr>" +
                     "<th rowspan='2'>" + (i + 1) + "</th>" +
                     "<td rowspan='2' style='background-color: #d6eaff' >" + numberWithCommas(annualPower) + "</td>" +
